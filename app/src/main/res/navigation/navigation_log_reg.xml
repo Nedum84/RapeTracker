@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_log_reg"
+    app:startDestination="@id/fragmentPromptToLogin">
+
+    <fragment
+        android:id="@+id/fragmentPromptToLogin"
+        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentPromptToLogin"
+        android:label="fragment_prompt_to_login"
+        tools:layout="@layout/fragment_prompt_to_login" >
+        <action
+            android:id="@+id/action_fragmentPromptToLogin_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentPromptToLogin_to_fragmentChooseRegType"
+            app:destination="@id/fragmentChooseRegType" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentLogin"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentChooseRegType"
+            app:destination="@id/fragmentChooseRegType" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentPromptToLogin"
+            app:destination="@id/fragmentPromptToLogin" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentPromptToLogin2"
+            app:destination="@id/fragmentPromptToLogin" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegisterVictim"
+        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterVictim"
+        android:label="fragment_register_victim"
+        tools:layout="@layout/fragment_register_victim" >
+        <action
+            android:id="@+id/action_fragmentRegisterVictim_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentRegisterVictim_to_fragmentRegisterOrgSupportType"
+            app:destination="@id/fragmentRegisterOrgSupportType" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegisterOrgSupportType"
+        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgSupportType"
+        android:label="fragment_register_org_support_type"
+        tools:layout="@layout/fragment_register_org_support_type" >
+        <action
+            android:id="@+id/action_fragmentRegisterOrgSupportType_to_fragmentRegisterOrgDetail"
+            app:destination="@id/fragmentRegisterOrgDetail" />
+        <action
+            android:id="@+id/action_fragmentRegisterOrgSupportType_to_fragmentChooseRegType"
+            app:destination="@id/fragmentChooseRegType" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegisterOrgDetail"
+        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgDetail"
+        android:label="fragment_register_org_detail"
+        tools:layout="@layout/fragment_register_org_detail" >
+        <argument
+            android:name="rapeSupportType"
+            app:argType="com.ng.rapetracker.model.RapeSupportType" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentChooseRegType"
+        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentChooseRegType"
+        android:label="fragment_choose_reg_type"
+        tools:layout="@layout/fragment_choose_reg_type" >
+        <action
+            android:id="@+id/action_fragmentChooseRegType_to_fragmentRegisterOrgSupportType"
+            app:destination="@id/fragmentRegisterOrgSupportType" />
+        <action
+            android:id="@+id/action_fragmentChooseRegType_to_fragmentRegisterOrgSupportType2"
+            app:destination="@id/fragmentRegisterOrgSupportType" />
+        <action
+            android:id="@+id/action_fragmentChooseRegType_to_fragmentRegisterVictim"
+            app:destination="@id/fragmentRegisterVictim" />
+        <action
+            android:id="@+id/action_fragmentChooseRegType_to_fragmentPromptToLogin"
+            app:destination="@id/fragmentPromptToLogin" />
+    </fragment>
+</navigation>

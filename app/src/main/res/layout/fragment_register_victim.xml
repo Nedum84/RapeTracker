@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.act_login.FragmentLogin"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="50dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register as a Rape Victim/Witness"
+            android:layout_marginBottom="40dp" />
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Full name" />
+
+        <EditText
+            android:id="@+id/user_mobile_no"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Phone number" />
+
+        <EditText
+            android:id="@+id/user_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Email" />
+
+
+
+        <Spinner
+            android:id="@+id/user_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/user_age"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Age" />
+
+        <Spinner
+            android:id="@+id/user_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/user_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+        <EditText
+            android:id="@+id/user_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Address" />
+
+        <EditText
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Password" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+
+
+        <TextView
+            android:id="@+id/reg_as_rape_support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register as Rape helping Organization"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/go_to_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login"
+            android:layout_margin="12dp"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="rape_detail"
+            type="com.ng.rapetracker.model.RapeDetail" />
+
+        <variable
+            name="clickListener"
+            type="com.ng.rapetracker.adapter.RapeDetailClickListener" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/rapeDetailContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:onClick="@{() -> clickListener.onClick(rape_detail)}">
+
+        <TextView
+            android:id="@+id/rapeDetailItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Revenge Porn complain created on 12 sept 2020"
+            android:textSize="18sp"/>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.act_login.FragmentLogin"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="50dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your details"
+            android:layout_marginBottom="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Litigation Support"
+            android:textSize="24sp"
+            android:layout_marginBottom="40dp" />
+
+        <EditText
+            android:id="@+id/org_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Name of Organization" />
+
+        <EditText
+            android:id="@+id/org_type"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Type of Organization" />
+
+        <EditText
+            android:id="@+id/org_mobile_no"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Telephone number" />
+
+        <EditText
+            android:id="@+id/org_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Email address" />
+
+        <EditText
+            android:id="@+id/org_country"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Country" />
+
+        <EditText
+            android:id="@+id/org_state"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="State" />
+
+        <EditText
+            android:id="@+id/org_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Operational Address" />
+
+        <EditText
+            android:id="@+id/org_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Setup Password" />
+
+        <Button
+            android:id="@+id/org_reg_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+
+
+
+    </LinearLayout>
+</layout>
