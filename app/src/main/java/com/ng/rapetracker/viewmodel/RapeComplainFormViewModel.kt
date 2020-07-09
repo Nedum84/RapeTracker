@@ -29,10 +29,10 @@ class RapeComplainFormViewModel(rapeDetail: RapeDetail, application: Application
 
 
     //next button in the form
-    val formNextBtn: LiveData<Event<Boolean>> get() = _formNextBtn
-    private val _formNextBtn = MutableLiveData<Event<Boolean>>()
-    fun nextBtnClicked(data: Boolean) {
-        _formNextBtn.value = Event(data)
+    val rapeComplainLogSuccessful: LiveData<Event<Boolean>> get() = _rapeComplainLogSuccessful
+    private val _rapeComplainLogSuccessful = MutableLiveData<Event<Boolean>>()
+    fun setRapeComplainLogSuccessful(data: Boolean) {
+        _rapeComplainLogSuccessful.value = Event(data)
     }
 
     //Prev button in the form

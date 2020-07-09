@@ -1,60 +1,108 @@
 package com.ng.rapetracker.ui.fragment.act_main
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.happinesstonic.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.R
+import com.ng.rapetracker.adapter.AdapterRapeSupportOrgType
+import com.ng.rapetracker.adapter.RapeSupportOrgClickListener
+import com.ng.rapetracker.databinding.FragmentLogComplainForm4SelectSupportBinding
+import com.ng.rapetracker.databinding.FragmentLogComplainForm5RapeDetailBinding
+import com.ng.rapetracker.model.RapeDetail
+import com.ng.rapetracker.network.*
+import com.ng.rapetracker.network.RetrofitConstant.Companion.retrofitWithJsonRes
+import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.toast
+import com.ng.rapetracker.viewmodel.RapeComplainFormViewModel
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentLogComplainForm5RapeDetail.newInstance] factory method to
- * create an instance of this fragment.
- */
-class FragmentLogComplainForm5RapeDetail : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class FragmentLogComplainForm5RapeDetail : BaseFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    lateinit var rapeComplainFormViewModel: RapeComplainFormViewModel
+    lateinit var binding: FragmentLogComplainForm5RapeDetailBinding
+    lateinit var rapeDetail: RapeDetail
+
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        binding.rapeCancelLogBtn.setOnClickListener {
+            this.findNavController().navigate(FragmentLogComplainForm5RapeDetailDirections.actionFragmentLogComplainForm5RapeDetailToFragmentLogComplainForm1RapeVictim())
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_complain_form5_rape_detail, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+        binding = FragmentLogComplainForm5RapeDetailBinding.inflate(inflater)
+
+        val application = requireNotNull(activity).application
+        binding.lifecycleOwner = this
+        rapeDetail = arguments.let { FragmentLogComplainForm4SelectSupportArgs.fromBundle(it!!).updatedRapeDetail}
+        val viewModelFactory = RapeComplainFormViewModel.Factory(rapeDetail, application)
+        rapeComplainFormViewModel = ViewModelProvider(this, viewModelFactory).get(
+            RapeComplainFormViewModel::class.java)
+
+        binding.rapeLogComplainBtn.setOnClickListener {
+
+            launch {
+                logComplain()
+            }
+        }
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentLogComplainForm5RapeDetails.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentLogComplainForm5RapeDetail().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private suspend fun logComplain(){
+        val rapeAddress = binding.rapeAddress.text.trim().toString()
+        val rapeDetails = binding.rapeDetails.text.trim().toString()
+
+        if (TextUtils.isEmpty(rapeAddress) || TextUtils.isEmpty(rapeDetails)){
+            context.let {it!!.toast("Enter the address and the details of the sexual abuse")}
+        }else{
+
+            val logComplainService = retrofitWithJsonRes.create(LogRapeComplainService::class.java)
+            logComplainService.rapeComplainRequest(
+                "log_rape_complain",
+                Gson().toJson(rapeDetail)
+            ).enqueue(object: Callback<ServerResponse> {
+                override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
+                    requireContext().toast("No internet connect!")
                 }
-            }
+
+                override fun onResponse(call: Call<ServerResponse>, response: Response<ServerResponse>) {
+                    if (response.isSuccessful) {
+                        if (response.body() != null) {
+
+                            val serverResponse = response.body()
+
+
+                            if (!(serverResponse!!.success as Boolean)){
+                                context!!.toast(serverResponse.respMessage!!)
+                            }else{
+                                //Redirect...
+                                rapeComplainFormViewModel.setRapeComplainLogSuccessful(true)
+                            }
+                        }
+                    } else {
+                        context!!.toast("An error occurred, Try again")
+                    }
+                }
+
+            })
+        }
     }
+
 }

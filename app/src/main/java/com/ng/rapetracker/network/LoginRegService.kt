@@ -1,6 +1,7 @@
 package com.ng.rapetracker.network
 
 import com.google.gson.annotations.SerializedName
+import com.ng.rapetracker.model.RapeDetail
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -28,7 +29,7 @@ interface LoginRegService {
     fun loginRequest(
         @Part("request_type") request_type:String,
         @Part("email_mobile_no") email_mobile_no:String,
-        @Part("password") password:String,
+        @Part("password") password:String
     ): Call<ServerResponse>
 
 
@@ -56,38 +57,17 @@ interface LoginRegService {
         @Part("org_country") org_country:String,
         @Part("org_state") org_state:String,
         @Part("org_address") org_address:String,
-        @Part("org_password") org_password:String,
+        @Part("org_password") org_password:String
     ): Call<ServerResponse>
-
 
 
 }
 
-
-
-
-
-
-
-interface ApiConfig {
-    @Multipart
-    @POST("add_question_with_image.php")
-    fun upload(
-        @Header("Authorization") authorization:String,
-        @PartMap map:Map<String, RequestBody>,
-        @Part("request_type") request_type:String,
-        @Part("message_body") message_body:String,
-        @Part("youtube_link") youtube_link:String,
-        @Part("option_a") option_a:String,
-        @Part("option_b") option_b:String,
-        @Part("option_c") option_c:String,
-        @Part("option_d") option_d:String,
-        @Part("subject_id") subject_id:String,
-        @Part("topic_id") topic_id:String,
-        @Part("question_id") question_id:String, //for answer upload
-        @Part("question_type") question_type:String,
-        @Part("exam_type") exam_type:String,
-        @Part("school_id") school_id:String,
-        @Part("poster_id") poster_id:String
+interface LogRapeComplainService {
+    @POST("log_complain.php")
+    fun rapeComplainRequest(
+        @Part("request_type") request_type: String,
+        @Part("rape_detail") rape_detail: String
     ): Call<ServerResponse>
 }
+
