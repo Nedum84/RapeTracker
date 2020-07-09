@@ -52,7 +52,7 @@ class FragmentLogComplainForm3TypeOfRape : Fragment() {
 
 
         ADAPTER = AdapterRapeType(RapeTypeClickListener {
-            rapeDetail.typeOfRape = it._id
+            rapeDetail.typeOfRape = it.id
             this.findNavController().navigate(FragmentLogComplainForm3TypeOfRapeDirections.actionFragmentLogComplainForm3TypeOfRapeToFragmentLogComplainForm4SelectSupport(rapeDetail))
         })
         binding.recyclerRapeType.apply {

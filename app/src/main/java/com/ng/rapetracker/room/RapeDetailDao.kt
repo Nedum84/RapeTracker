@@ -46,8 +46,8 @@ interface RapeDetailDao {
      *
      * @param key startTimeMilli to match
      */
-    @Query("SELECT * from $RAPE_DETAIL_TABLE WHERE id = :_id")
-    fun getRapeDetailById(_id: Long): RapeDetail?
+    @Query("SELECT * from $RAPE_DETAIL_TABLE WHERE id = :id")
+    fun getRapeDetailById(id: Long): RapeDetail?
 
     /**
      * Selects and returns the latest night.

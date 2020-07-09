@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="rape_support_type"
-            type="com.ng.rapetracker.model.RapeSupportType" />
+            name="rape_type"
+            type="com.ng.rapetracker.model.RapeType" />
 
         <variable
             name="clickListener"
@@ -17,14 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:onClick="@{() -> clickListener.onClick(rape_support_type)}">
+        android:onClick="@{() -> clickListener.onClick(rape_type)}">
 
         <TextView
             android:id="@+id/rapeType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Molestation"
-            android:text="@{rape_support_type.rapeSupportType}"
+            android:text="@{rape_type.rapeType}"
             android:textSize="20sp"/>
     </LinearLayout>
 </layout>

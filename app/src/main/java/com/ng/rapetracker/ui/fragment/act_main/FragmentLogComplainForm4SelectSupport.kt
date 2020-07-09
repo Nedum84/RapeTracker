@@ -51,7 +51,7 @@ class FragmentLogComplainForm4SelectSupport : Fragment() {
 
 
         ADAPTER = AdapterRapeSupportOrgType(RapeSupportOrgClickListener {
-            rapeDetail.rapeSupportType = it._id
+            rapeDetail.rapeSupportType = it.id
             this.findNavController().navigate(FragmentLogComplainForm4SelectSupportDirections.actionFragmentLogComplainForm4SelectSupportToFragmentLogComplainForm5RapeDetail(rapeDetail))
         })
         binding.recyclerRapeSupport.apply {

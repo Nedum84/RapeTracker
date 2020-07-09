@@ -10,8 +10,8 @@ interface CountryDao {
     fun upSertCountry(vararg country: Country)
 
 
-    @Query("SELECT * from ${TableNames.COUNTRY} WHERE id = :_id")
-    fun getCountryById(_id: Long): Country?
+    @Query("SELECT * from ${TableNames.COUNTRY} WHERE id = :id")
+    fun getCountryById(id: Long): Country?
 
 
     @Query("SELECT * FROM ${TableNames.COUNTRY} ORDER BY id DESC")

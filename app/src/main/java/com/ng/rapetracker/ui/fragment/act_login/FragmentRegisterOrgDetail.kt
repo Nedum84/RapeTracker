@@ -72,7 +72,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
 
     private suspend fun registerOrg(){
         val orgName = binding.orgName.text.trim().toString()
-        val orgType = rapeSupportType._id.toString()
+        val orgType = rapeSupportType.id.toString()
         val orgMobileNo = binding.orgMobileNo.text.trim().toString()
         val orgEmail = binding.orgEmail.text.trim().toString()
         val orgCountry = selectedCountryId
@@ -137,7 +137,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
         countryIdArray.add("-1")
         for (element in countryList) {
             countryNameArray.add(element.name)
-            countryIdArray.add("${element._id}")
+            countryIdArray.add("${element.id}")
 
         }
         val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, countryNameArray)
@@ -166,7 +166,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
         stateIdArray.add("-1")
         for (element in stateList) {
             stateNameArray.add(element.name)
-            stateIdArray.add("${element._id}")
+            stateIdArray.add("${element.id}")
 
         }
         val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, stateNameArray)

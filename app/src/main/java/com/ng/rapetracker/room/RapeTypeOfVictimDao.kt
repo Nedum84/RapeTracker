@@ -17,8 +17,8 @@ interface RapeTypeOfVictimDao {
     @Update
     fun updateRapeTypeOfVictim(rapeType: RapeTypeOfVictim)
 
-    @Query("SELECT * from $RAPE_TYPE_OF_VICTIM WHERE id = :_id")
-    fun getRapeTypeOfVictimById(_id: Long): RapeTypeOfVictim?
+    @Query("SELECT * from $RAPE_TYPE_OF_VICTIM WHERE id = :id")
+    fun getRapeTypeOfVictimById(id: Long): RapeTypeOfVictim?
 
 
     @Query("SELECT * FROM $RAPE_TYPE_OF_VICTIM ORDER BY id DESC")
