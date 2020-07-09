@@ -34,13 +34,6 @@ class FragmentLogComplainForm2TypeOfVictim : Fragment() {
         })
 
 
-        rapeComplainFormViewModel.formNextBtn.observe(viewLifecycleOwner, Observer {
-            it?.getContentIfNotHandled()?.let { data ->
-                if(data){
-                    //redirect to the next
-                }
-            }
-        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {

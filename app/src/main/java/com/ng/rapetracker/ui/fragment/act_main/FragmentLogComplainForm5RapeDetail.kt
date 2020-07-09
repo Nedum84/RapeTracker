@@ -39,6 +39,16 @@ class FragmentLogComplainForm5RapeDetail : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        rapeComplainFormViewModel.rapeComplainLogSuccessful.observe(viewLifecycleOwner, Observer {
+            it?.getContentIfNotHandled()?.let { data ->
+                if(data){
+                    //redirect to home
+                    this.findNavController().navigate(FragmentLogComplainForm5RapeDetailDirections.actionFragmentLogComplainForm5RapeDetailToFragmentLogComplainForm1RapeVictim())
+                }
+            }
+        })
+
         binding.rapeCancelLogBtn.setOnClickListener {
             this.findNavController().navigate(FragmentLogComplainForm5RapeDetailDirections.actionFragmentLogComplainForm5RapeDetailToFragmentLogComplainForm1RapeVictim())
         }
@@ -72,6 +82,11 @@ class FragmentLogComplainForm5RapeDetail : BaseFragment() {
         if (TextUtils.isEmpty(rapeAddress) || TextUtils.isEmpty(rapeDetails)){
             context.let {it!!.toast("Enter the address and the details of the sexual abuse")}
         }else{
+//            rapeDetail.userId =
+//            rapeDetail.userName =
+//            rapeDetail.userAge =
+            rapeDetail.rapeAddress = rapeAddress
+            rapeDetail.rapeDescription = rapeDetails
 
             val logComplainService = retrofitWithJsonRes.create(LogRapeComplainService::class.java)
             logComplainService.rapeComplainRequest(
