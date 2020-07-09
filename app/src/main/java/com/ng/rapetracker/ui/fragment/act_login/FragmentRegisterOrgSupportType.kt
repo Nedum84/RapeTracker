@@ -2,24 +2,22 @@ package com.ng.rapetracker.ui.fragment.act_login
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.happinesstonic.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.R
 import com.ng.rapetracker.adapter.AdapterRapeSupportOrgType
-import com.ng.rapetracker.adapter.AdapterRapeType
 import com.ng.rapetracker.adapter.RapeSupportOrgClickListener
-import com.ng.rapetracker.adapter.RapeTypeClickListener
 import com.ng.rapetracker.databinding.FragmentRegisterOrgSupportTypeBinding
-import com.ng.rapetracker.databinding.FragmentRegisterVictimBinding
 import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.toast
 import com.ng.rapetracker.viewmodel.RapeComplainFormViewModel
-import kotlinx.android.synthetic.main.item_rape_support_type_form.*
 
 
 class FragmentRegisterOrgSupportType : BaseFragment() {
@@ -60,4 +58,22 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
         })
         binding.rapeSupportTypeFormRecycler.adapter = ADAPTER
     }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // This callback will only be called when MyFragment is at least Started.
+
+        // This callback will only be called when MyFragment is at least Started.
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    // Handle the back button event
+                    context?.toast("Back button pressed...")
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
+
 }

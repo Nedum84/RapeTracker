@@ -8,7 +8,7 @@ import com.ng.rapetracker.room.TableNames
 @Entity(tableName = TableNames.STATE)
 class State (
     @PrimaryKey
-    val  _id:Int,
+    val  id:Int,
     val name: String,
     @ColumnInfo(name = "country_id")
     val countryId:Int

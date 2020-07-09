@@ -3,15 +3,11 @@ package com.ng.rapetracker.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ng.rapetracker.R
 import com.ng.rapetracker.databinding.ItemRapeDetailBinding
-import com.ng.rapetracker.databinding.ItemRapeTypeFormBinding
 import com.ng.rapetracker.model.RapeDetail
-import com.ng.rapetracker.model.RapeType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,7 +41,7 @@ class AdapterRapeDetail(val clickListener: RapeDetailClickListener) : ListAdapte
     class ViewHolder private constructor(val binding: ItemRapeDetailBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: RapeDetailClickListener, rapeDetail: RapeDetail) {
 
-            binding.rapeDetailItem.text = "Hellow World!!! ${rapeDetail._id}"
+            binding.rapeDetailItem.text = "Hellow World!!! ${rapeDetail.id}"
 
             binding.rapeDetail = rapeDetail
             binding.clickListener = clickListener
@@ -78,7 +74,7 @@ class RapeDetailClickListener(val clickListener: (RapeDetail) -> Unit) {
  */
 class RapeDetailDiffCallback : DiffUtil.ItemCallback<RapeDetail>() {
     override fun areItemsTheSame(oldItem: RapeDetail, newItem: RapeDetail): Boolean {
-        return oldItem._id == newItem._id
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: RapeDetail, newItem: RapeDetail): Boolean {

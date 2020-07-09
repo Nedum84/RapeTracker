@@ -12,10 +12,10 @@ interface StateDao {
     fun upSertState(vararg state: State)
 
 
-    @Query("SELECT * from ${TableNames.STATE} WHERE _id = :_id")
+    @Query("SELECT * from ${TableNames.STATE} WHERE id = :_id")
     fun getStateById(_id: Long): State?
 
 
-    @Query("SELECT * FROM ${TableNames.STATE} ORDER BY _id DESC")
+    @Query("SELECT * FROM ${TableNames.STATE} ORDER BY id DESC")
     fun getAllState(): List<State>
 }

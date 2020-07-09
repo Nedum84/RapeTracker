@@ -38,7 +38,7 @@ interface RapeDetailDao {
      *
      * sorted by start time in descending order.
      */
-    @Query("SELECT * FROM $RAPE_DETAIL_TABLE ORDER BY _id DESC")
+    @Query("SELECT * FROM $RAPE_DETAIL_TABLE ORDER BY id DESC")
     fun getAllRapeDetail(): LiveData<List<RapeDetail>>
 
     /**
@@ -46,13 +46,13 @@ interface RapeDetailDao {
      *
      * @param key startTimeMilli to match
      */
-    @Query("SELECT * from $RAPE_DETAIL_TABLE WHERE _id = :_id")
+    @Query("SELECT * from $RAPE_DETAIL_TABLE WHERE id = :_id")
     fun getRapeDetailById(_id: Long): RapeDetail?
 
     /**
      * Selects and returns the latest night.
      */
-    @Query("SELECT * FROM $RAPE_DETAIL_TABLE ORDER BY _id DESC LIMIT 1")
+    @Query("SELECT * FROM $RAPE_DETAIL_TABLE ORDER BY id DESC LIMIT 1")
     fun getRecentRapeDetail(): RapeDetail?
 
 }

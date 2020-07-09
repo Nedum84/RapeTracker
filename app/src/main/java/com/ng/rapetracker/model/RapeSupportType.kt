@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = RAPE_SUPPORT_TYPE)
 class RapeSupportType (
     @PrimaryKey
-    val _id:Int,
+    val id:Int,
     @ColumnInfo(name = "rape_support_type")
     val rapeSupportType: String
 ):Parcelable

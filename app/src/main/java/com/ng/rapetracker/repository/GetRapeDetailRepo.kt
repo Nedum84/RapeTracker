@@ -1,19 +1,14 @@
 package com.ng.rapetracker.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.ng.rapetracker.model.RapeDetail
 import com.ng.rapetracker.network.*
 import com.ng.rapetracker.room.DatabaseRoom
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 class GetRapeDetailRepo(private val database: DatabaseRoom) {
 
@@ -33,7 +28,7 @@ class GetRapeDetailRepo(private val database: DatabaseRoom) {
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
-        val rapeDetailService = retrofit.create(GetRapeDetailService::class.java).getRapeDetail("12", "${lastInsertId!!._id}")
+        val rapeDetailService = retrofit.create(GetRapeDetailService::class.java).getRapeDetail("12", "${lastInsertId!!.id}")
 
         withContext(Dispatchers.IO) {
             try {

@@ -8,6 +8,6 @@ import com.ng.rapetracker.room.TableNames
 @Entity(tableName = TableNames.COUNTRY)
 class Country (
     @PrimaryKey
-    val  _id:Int,
+    val  id:Int,
     val name: String
 )

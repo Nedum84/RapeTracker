@@ -15,11 +15,11 @@ interface RapeTypeDao {
     @Update
     fun updateRapeType(rapeType: RapeType)
 
-    @Query("SELECT * from $RAPE_TYPE WHERE _id = :_id")
+    @Query("SELECT * from $RAPE_TYPE WHERE id = :_id")
     fun getRapeTypeById(_id: Long): RapeType?
 
 
-    @Query("SELECT * FROM $RAPE_TYPE ORDER BY _id DESC")
+    @Query("SELECT * FROM $RAPE_TYPE ORDER BY id DESC")
     fun getAllRapeType(): LiveData<List<RapeType>>
 
     @Query("DELETE FROM $RAPE_TYPE")

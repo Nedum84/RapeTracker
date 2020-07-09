@@ -9,7 +9,7 @@ import com.ng.rapetracker.room.TableNames.Companion.RAPE_TYPE
 @Entity(tableName = RAPE_TYPE)
 class RapeType (
     @PrimaryKey
-    val  _id:Int,
+    val  id:Int,
     @ColumnInfo(name = "rape_type")
     val rapeType: String
 )

@@ -5,10 +5,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ng.rapetracker.model.RapeDetail
-import com.ng.rapetracker.model.RapeSupportType
-import com.ng.rapetracker.model.RapeType
-import com.ng.rapetracker.model.RapeTypeOfVictim
+import com.ng.rapetracker.model.*
 import com.ng.rapetracker.room.TableNames.Companion.DATABASE_NAME
 
 /**
@@ -18,7 +15,7 @@ import com.ng.rapetracker.room.TableNames.Companion.DATABASE_NAME
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [RapeType::class, RapeDetail::class, RapeSupportType::class, RapeTypeOfVictim::class], version = 1, exportSchema = false)
+@Database(entities = [RapeType::class, RapeDetail::class, RapeSupportType::class, RapeTypeOfVictim::class, Country::class, State::class], version = 1, exportSchema = false)
 abstract class DatabaseRoom : RoomDatabase() {
 
     /**

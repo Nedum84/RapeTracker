@@ -4,8 +4,6 @@ package com.ng.rapetracker.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.rapetracker.R
 import com.ng.rapetracker.databinding.ItemRapeTypeFormBinding
@@ -41,7 +39,7 @@ class AdapterRapeType(private val clickListener: RapeTypeClickListener) : Recycl
 
         fun bind(clickListener: RapeTypeClickListener, rapeType: RapeType) {
 
-            binding.textView.text = "Hellow World2!!! ${rapeType._id}"
+            binding.textView.text = "Hellow World2!!! ${rapeType.id}"
 
             binding.rapeType = rapeType
             binding.clickListener = clickListener

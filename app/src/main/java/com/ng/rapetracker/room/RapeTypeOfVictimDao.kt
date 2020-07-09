@@ -17,11 +17,11 @@ interface RapeTypeOfVictimDao {
     @Update
     fun updateRapeTypeOfVictim(rapeType: RapeTypeOfVictim)
 
-    @Query("SELECT * from $RAPE_TYPE_OF_VICTIM WHERE _id = :_id")
+    @Query("SELECT * from $RAPE_TYPE_OF_VICTIM WHERE id = :_id")
     fun getRapeTypeOfVictimById(_id: Long): RapeTypeOfVictim?
 
 
-    @Query("SELECT * FROM $RAPE_TYPE_OF_VICTIM ORDER BY _id DESC")
+    @Query("SELECT * FROM $RAPE_TYPE_OF_VICTIM ORDER BY id DESC")
     fun getAllRapeOfVictimType(): LiveData<List<RapeTypeOfVictim>>
 
     @Query("DELETE FROM $RAPE_TYPE_OF_VICTIM")

@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = RAPE_DETAIL_TABLE)
 class RapeDetail (
     @PrimaryKey
-    val _id:Int,
+    val id:Int,
     var rapeAgainstYou:Boolean,
     var typeOfVictim: Int,
     var typeOfRape: Int,
