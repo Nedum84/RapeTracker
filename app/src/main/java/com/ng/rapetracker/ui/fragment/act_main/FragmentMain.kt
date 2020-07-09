@@ -8,77 +8,71 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.happinesstonic.viewmodel.ModelHomeActivity
 import com.ng.rapetracker.R
 import com.ng.rapetracker.adapter.AdapterRapeDetail
 import com.ng.rapetracker.adapter.RapeDetailClickListener
-import com.ng.rapetracker.model.RapeDetail
+import com.ng.rapetracker.databinding.FragmentMainBinding
 import com.ng.rapetracker.utils.ClassAlertDialog
 import com.ng.rapetracker.viewmodel.GetRapeDetailViewModel
-import com.ng.rapetracker.viewmodel.RapeComplainFormViewModel
 import com.ng.rapetracker.viewmodel.factory.GetRapeDetailViewModelFactory
 
 
 class FragmentMain : Fragment() {
-
     val linearLayoutManager by lazy {
         LinearLayoutManager(activity)
     }
 
-    lateinit var ADAPTER : AdapterTextJoke
+    lateinit var ADAPTER : AdapterRapeDetail
+    lateinit var binding:FragmentMainBinding
+    lateinit var getRapeViewModel:GetRapeDetailViewModel
 
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_sleep_tracker, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
         val application = requireNotNull(this.activity).application
-
         val viewModelFactory = GetRapeDetailViewModelFactory(application)
+        getRapeViewModel = ViewModelProvider(this, viewModelFactory).get(GetRapeDetailViewModel::class.java)
 
-        val getRapeViewModel = ViewModelProvider(this, viewModelFactory).get(GetRapeDetailViewModel::class.java)
-
-        binding.sleepTrackerViewModel = getRapeViewModel
-
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
 
-        val adapter = AdapterRapeDetail(RapeDetailClickListener {
+        ADAPTER = AdapterRapeDetail(RapeDetailClickListener {
             ClassAlertDialog(application).toast("Rape Detail Clicked...!!!")
         })
-        binding.sleepList.adapter = adapter
+        binding.rapeDetailList.apply {
+            adapter = ADAPTER
+            layoutManager=linearLayoutManager
+        }
 
-
-        getRapeViewModel.allRapeDetails.observe(this, Observer {
+        getRapeViewModel.allRapeDetails.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.addNewItems(it)
+                if (it.isEmpty()){
+                    binding.noComplainWrapper.visibility = View.VISIBLE
+                }else{
+                    ADAPTER.addNewItems(it)
+                }
+                ClassAlertDialog(application).toast("refresh from Main Frag ... 1st observer...!!!")
             }
         })
 
 
-        getRapeViewModel.allRapeDetails2.observe(this, Observer {
+        getRapeViewModel.allRapeDetails2.observe(viewLifecycleOwner, Observer {
             ClassAlertDialog(application).toast("refresh from Main Frag ... second observer...!!!")
         })
 
 
+        binding.logComplainBtn.setOnClickListener {
+            this.findNavController().navigate(FragmentMainDirections.actionFragmentMainToFragmentLogComplainForm1RapeVictim())
+        }
 
 
 
 
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return binding.root
     }
 
 

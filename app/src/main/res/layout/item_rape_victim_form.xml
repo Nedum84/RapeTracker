@@ -3,8 +3,12 @@
 
     <data>
         <variable
-            name="rapeVictim"
+            name="rape_victim"
             type="com.ng.rapetracker.model.RapeTypeOfVictim" />
+
+        <variable
+            name="clickListener"
+            type="com.ng.rapetracker.adapter.RapeTypeOfVictimClickListener" />
     </data>
 
     <LinearLayout
@@ -12,13 +16,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/rapeVictimContainer"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:onClick="@{()->clickListener.onClick(rape_victim)}">
 
         <TextView
-            android:id="@+id/rapeVictim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{rapeVictim.typeOfVictim}"
+            android:text="@{rape_victim.typeOfVictim}"
             android:hint="Girls Under 18 years"
             android:textSize="18sp" />
 

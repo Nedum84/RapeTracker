@@ -35,12 +35,6 @@
             android:hint="Name of Organization" />
 
         <EditText
-            android:id="@+id/org_type"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Type of Organization" />
-
-        <EditText
             android:id="@+id/org_mobile_no"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -52,17 +46,16 @@
             android:layout_height="40dp"
             android:hint="Email address" />
 
-        <EditText
+        <Spinner
             android:id="@+id/org_country"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Country" />
+            android:layout_height="wrap_content"/>
 
-        <EditText
+        <Spinner
             android:id="@+id/org_state"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="State" />
+            android:layout_height="wrap_content"/>
+
 
         <EditText
             android:id="@+id/org_address"

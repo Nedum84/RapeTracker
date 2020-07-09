@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.happinesstonic.Event
 import com.ng.rapetracker.model.RapeDetail
 import com.ng.rapetracker.model.RapeType
+import com.ng.rapetracker.model.RapeTypeOfVictim
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.room.DatabaseRoom.Companion.getDatabaseInstance
 import kotlinx.coroutines.CoroutineScope
@@ -19,6 +20,7 @@ class RapeComplainFormViewModel(rapeDetail: RapeDetail, application: Application
 
     private val database = DatabaseRoom.getDatabaseInstance(application)
     val allRapeType: LiveData<List<RapeType>> = database.rapeTypeDao.getAllRapeType()
+    val allRapeTypeOfVictim: LiveData<List<RapeTypeOfVictim>> = database.rapeTypeOfVictimDao.getAllRapeOfVictimType()
     val allRapeSupportType  = database.rapeSupportTypeDao.getAllRapeSupport()
 
 

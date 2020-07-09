@@ -25,7 +25,7 @@ abstract class DatabaseRoom : RoomDatabase() {
      * Connects the database to the DAO.
      */
     abstract val rapeTypeDao: RapeTypeDao
-    abstract val rapeTypeOfVictimDao:RapeSupportTypeDao
+    abstract val rapeTypeOfVictimDao:RapeTypeOfVictimDao
     abstract val rapeSupportTypeDao: RapeSupportTypeDao
     abstract val rapeDetailDao: RapeDetailDao
     abstract fun getStateDao():StateDao
