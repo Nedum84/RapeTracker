@@ -2,12 +2,13 @@ package com.ng.rapetracker.room
 
 import androidx.room.*
 import com.ng.rapetracker.model.Country
+import com.ng.rapetracker.model.RapeType
 
 @Dao
 interface CountryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upSertCountry(vararg country: Country)
+    suspend fun upSertCountry(list: List<Country>)
 
 
     @Query("SELECT * from ${TableNames.COUNTRY} WHERE id = :id")
@@ -15,6 +16,6 @@ interface CountryDao {
 
 
     @Query("SELECT * FROM ${TableNames.COUNTRY} ORDER BY id DESC")
-    fun getAllCountry(): List<Country>
+    suspend fun getAllCountry(): List<Country>
 
 }

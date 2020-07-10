@@ -7,21 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.happinesstonic.viewmodel.ModelLoginActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ng.rapetracker.R
 import com.ng.rapetracker.adapter.AdapterRapeSupportOrgType
 import com.ng.rapetracker.adapter.RapeSupportOrgClickListener
 import com.ng.rapetracker.databinding.FragmentRegisterOrgSupportTypeBinding
 import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.ClassAlertDialog
 import com.ng.rapetracker.utils.toast
+import com.ng.rapetracker.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.viewmodel.RapeComplainFormViewModel
 
 
 class FragmentRegisterOrgSupportType : BaseFragment() {
-    lateinit var rapeComplainFormViewModel: RapeComplainFormViewModel
     lateinit var ADAPTER : AdapterRapeSupportOrgType
 
     lateinit var binding: FragmentRegisterOrgSupportTypeBinding
@@ -45,9 +47,10 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
 
         val application = requireNotNull(activity).application
         binding.lifecycleOwner = this
-        rapeComplainFormViewModel = ViewModelProvider(this).get(RapeComplainFormViewModel::class.java)
 
-        val viewModelLoginActivity = ViewModelProvider(this).get(ModelLoginActivity::class.java)
+
+        val viewModelFactory = ModelLoginActivity.Factory(application)
+        val viewModelLoginActivity = ViewModelProvider(this,viewModelFactory).get(ModelLoginActivity::class.java)
         viewModelLoginActivity.setGotoMainActivity(true)
 
 
@@ -56,7 +59,17 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
             // Must find the NavController from the Fragment
             this.findNavController().navigate(FragmentRegisterOrgSupportTypeDirections.actionFragmentRegisterOrgSupportTypeToFragmentRegisterOrgDetail(it))
         })
+        binding.rapeSupportTypeFormRecycler.apply {
+            adapter = ADAPTER
+            layoutManager= LinearLayoutManager(requireActivity())
+        }
         binding.rapeSupportTypeFormRecycler.adapter = ADAPTER
+
+        viewModelLoginActivity.allRapeSupportType.observe(viewLifecycleOwner, Observer {
+            ADAPTER.apply {
+                rapeSupportTypes = it
+            }
+        })
     }
 
 
@@ -68,12 +81,14 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true /* enabled by default */) {
                 override fun handleOnBackPressed() {
-                    // Handle the back button event
-                    context?.toast("Back button pressed...")
+                    goBack()
                 }
             }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
 
+    }
+    fun goBack(){
+        this@FragmentRegisterOrgSupportType.findNavController().navigate(FragmentRegisterOrgSupportTypeDirections.actionFragmentRegisterOrgSupportTypeToFragmentChooseRegType())
     }
 
 }

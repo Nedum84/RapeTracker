@@ -47,7 +47,7 @@ interface GetRapeDetailService {
      * HTTP method
      */
     @GET("get_rape_detail.php")
-    fun getRapeDetail(@Query("user_id") user_id: String, @Query("last_id") last_inserted_id: String):
+    fun getRapeDetail(@Query("type") type: String, @Query("user_id_org_type") user_id_org_type: String, @Query("last_id") last_inserted_id: String):
     // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
             Deferred<List<RapeDetail>>
 }

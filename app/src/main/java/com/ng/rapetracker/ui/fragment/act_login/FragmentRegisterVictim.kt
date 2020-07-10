@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.happinesstonic.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.R
 import com.ng.rapetracker.databinding.FragmentRegisterVictimBinding
 import com.ng.rapetracker.network.LoginRegService
@@ -21,16 +21,20 @@ import com.ng.rapetracker.network.RetrofitConstant
 import com.ng.rapetracker.network.ServerResponse
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
+import com.ng.rapetracker.viewmodel.ModelLoginActivity
 import kotlinx.coroutines.*
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FragmentRegisterVictim : BaseFragment() {
-    private lateinit var selectedStateId: String
-    private lateinit var selectedCountryId: String
-    private lateinit var selectedGenderId: String
+    private var selectedStateId: String = "-1"
+    private var selectedCountryId: String = "-1"
+    private var selectedGenderId: String = "-1"
     lateinit var binding: FragmentRegisterVictimBinding
     private lateinit var thisContext:Activity
 
@@ -43,18 +47,10 @@ class FragmentRegisterVictim : BaseFragment() {
         databaseRoom = DatabaseRoom.getDatabaseInstance(thisContext)
 
 
-
-
-        return binding.root
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
         binding.userPassword.transformationMethod = PasswordTransformationMethod()
+        genderSpinnerInitialize()
+        countrySpinnerInitialize()
         launch {
-            genderSpinnerInitialize()
-            countrySpinnerInitialize()
             stateSpinnerInitialize()
         }
 
@@ -67,79 +63,96 @@ class FragmentRegisterVictim : BaseFragment() {
 
 
         binding.registerBtn.setOnClickListener {
-
-            launch {
-                registerUser(this)
-            }
+            registerUser()
         }
+
+
+        return binding.root
     }
 
-    private suspend fun registerUser(coroutine: CoroutineScope){
-        val userName = binding.userName.text.trim().toString()
-        val userMobileNo = binding.userMobileNo.text.trim().toString()
-        val userEmail = binding.userEmail.text.trim().toString()
-        val userAge = binding.userAge.text.trim().toString()
-        val userCountry = selectedCountryId
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+    }
+
+    private fun registerUser(){
+
+            val userName = binding.userName.text.trim().toString()
+            val userMobileNo = binding.userMobileNo.text.trim().toString()
+            val userEmail = binding.userEmail.text.trim().toString()
+            val userAge = binding.userAge.text.trim().toString()
+            val userCountry = selectedCountryId
 //        val userGender = binding.userGender.text.trim().toString()
-        val userGender = selectedGenderId
-        val userState = selectedStateId
-        val userAddress = binding.userAddress.text.trim().toString()
-        val userPassword = binding.userPassword.text.trim().toString()
+            val userGender = selectedGenderId
+            val userState = selectedStateId
+            val userAddress = binding.userAddress.text.trim().toString()
+            val userPassword = binding.userPassword.text.trim().toString()
 
-        if (isEmpty(userName) ||isEmpty(userMobileNo) ||isEmpty(userEmail) ||isEmpty(userAge) || (userGender=="-1")|| (userCountry=="-1") || (userState == "-1") ||isEmpty(userAddress) ||isEmpty(userPassword)){
-            context.let {it!!.toast("All the fields are required")}
-        }else if(userPassword.length <6){
-            requireContext().toast("Password should not be at least 6 characters")
-        }else{
+            if (isEmpty(userName) ||isEmpty(userMobileNo) ||isEmpty(userEmail) ||isEmpty(userAge) || (userGender=="-1")|| (userCountry=="-1") || (userState == "-1") ||isEmpty(userAddress) ||isEmpty(userPassword)){
+                context.let {it!!.toast("All the fields are required")}
+            }else if(userPassword.length <6){
+                requireContext().toast("Password should not be at least 6 characters")
+            }else{
 
-            val registerService = RetrofitConstant.retrofitWithJsonRes.create(LoginRegService::class.java)
-            registerService.registerRequest(
-                "victim_register",
-                userName,
-                userMobileNo,
-                userEmail,
-                userGender,
-                userAge,
-                userCountry,
-                userState,
-                userAddress,
-                userPassword
-            ).enqueue(object: Callback<ServerResponse> {
-                override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
-                    requireContext().toast("No internet connect!")
-                }
+                val registerService = RetrofitConstant.retrofitWithJsonRes.create(LoginRegService::class.java)
+                registerService.registerRequest(
+                    "victim_register",
+                    userName,
+                    userMobileNo,
+                    userEmail,
+                    userGender,
+                    userAge,
+                    userCountry,
+                    userState,
+                    userAddress,
+                    userPassword
+                ).enqueue(object: Callback<ServerResponse> {
+                    override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
+                        requireContext().toast("No internet connect!")
+                    }
 
-                override fun onResponse(call: Call<ServerResponse>,response: Response<ServerResponse>) {
-                    if (response.isSuccessful) {
-                        if (response.body() != null) {
+                    override fun onResponse(call: Call<ServerResponse>,response: Response<ServerResponse>) {
+                        if (response.isSuccessful) {
+                            if (response.body() != null) {
 
-                            val serverResponse = response.body()
+                                val serverResponse = response.body()
 
+                                try {
+                                    val obj = JSONObject(serverResponse!!.otherDetail!!)
+                                    if ((serverResponse.success as Boolean)){
+                                        if (serverResponse.respMessage == "ok") {
+                                            context!!.toast("Registration successful...")
 
-                            if (!(serverResponse!!.success as Boolean)){
-                                context!!.toast(serverResponse.respMessage!!)
-                            }else{
-                                //Redirect...
-                                coroutine.launch {
-                                    redirect()
+                                            val viewModelLoginActivity = ViewModelProvider(this@FragmentRegisterVictim).get(
+                                                ModelLoginActivity::class.java)
+
+                                            //Save and Redirect...
+                                            viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
+
+//                                                viewModelLoginActivity.setGotoMainActivity(true)
+                                        } else {
+                                            context!!.toast(serverResponse.respMessage!!)
+                                        }
+                                    }else{
+                                        context!!.toast(serverResponse.respMessage!!)
+                                    }
+
+                                } catch (e: JSONException) {
+                                    e.printStackTrace()
+                                    context!!.toast("Response Error! Try again...")
                                 }
                             }
+                        } else {
+                            context!!.toast("An error occurred, Try again")
                         }
-                    } else {
-                        context!!.toast("An error occurred, Try again")
                     }
-                }
 
-            })
-        }
+                })
+            }
+//        }
     }
 
-    suspend fun redirect(){
-        withContext(Dispatchers.Main) {
-            val viewModelLoginActivity = ViewModelProvider(this@FragmentRegisterVictim).get(ModelLoginActivity::class.java)
-            viewModelLoginActivity.setGotoMainActivity(true)
-        }
-    }
+
     private fun genderSpinnerInitialize(){
         val genderNameArray = arrayListOf("Gender", "Male", "Female")
         val genderIdArray = arrayListOf("-1", "1", "2")
@@ -163,40 +176,43 @@ class FragmentRegisterVictim : BaseFragment() {
     }
 
     private fun countrySpinnerInitialize(){
-        val countryList = databaseRoom.getCountryDao().getAllCountry()
-        val countryNameArray = arrayListOf<String>()
-        val countryIdArray = arrayListOf<String>()
+        launch {
+            val countryList = databaseRoom.getCountryDao().getAllCountry()
+            val countryNameArray = arrayListOf<String>()
+            val countryIdArray = arrayListOf<String>()
 
-        countryNameArray.add("Country")
-        countryIdArray.add("-1")
-        for (element in countryList) {
-            countryNameArray.add(element.name)
-            countryIdArray.add("${element.id}")
-
-        }
-        val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, countryNameArray)
-        //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.userCountry?.adapter = spinnerArrayAdapter
-
-        binding.userCountry?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+            countryNameArray.add("Country")
+            countryIdArray.add("-1")
+            for (element in countryList) {
+                countryNameArray.add(element.name)
+                countryIdArray.add("${element.id}")
 
             }
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedCountryId = countryIdArray[position]
+            val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, countryNameArray)
+            //selected item will look like a spinner set from XML
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.userCountry?.adapter = spinnerArrayAdapter
+
+            binding.userCountry?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    selectedCountryId = countryIdArray[position]
+                }
+
             }
 
         }
 
     }
 
-    private fun stateSpinnerInitialize(){
+    private suspend fun stateSpinnerInitialize(){
         val stateList = databaseRoom.getStateDao().getAllState()
         val stateNameArray = arrayListOf<String>()
         val stateIdArray = arrayListOf<String>()
 
-        stateNameArray.add("Country")
+        stateNameArray.add("State")
         stateIdArray.add("-1")
         for (element in stateList) {
             stateNameArray.add(element.name)
@@ -206,9 +222,9 @@ class FragmentRegisterVictim : BaseFragment() {
         val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, stateNameArray)
         //selected item will look like a spinner set from XML
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.userCountry?.adapter = spinnerArrayAdapter
+        binding.userState?.adapter = spinnerArrayAdapter
 
-        binding.userCountry?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.userState?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }

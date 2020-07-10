@@ -13,18 +13,18 @@ import com.ng.rapetracker.model.RapeSupportType
 
 class AdapterRapeSupportOrgType(private val clickListener: RapeSupportOrgClickListener) : RecyclerView.Adapter<AdapterRapeSupportOrgType.ViewHolder>() {
 
-    var rapeTypes: List<RapeSupportType> = emptyList()
+    var rapeSupportTypes: List<RapeSupportType> = emptyList()
         set(value) {
             field = value
 
             notifyDataSetChanged()
         }
 
-    override fun getItemCount(): Int = rapeTypes.size
+    override fun getItemCount(): Int = rapeSupportTypes.size
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val curItem = rapeTypes[position]
+        val curItem = rapeSupportTypes[position]
 
         holder.bind(clickListener, curItem)
     }

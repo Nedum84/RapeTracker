@@ -5,21 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.ng.rapetracker.R
+import com.ng.rapetracker.databinding.FragmentPromptToLoginBinding
 
 
 class FragmentPromptToLogin : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding:FragmentPromptToLoginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_prompt_to_login, container, false)
 
-//        this.findNavController().navigate(FragmentP)
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_prompt_to_login, container, false)
+        binding.gotoLoginBtn.setOnClickListener {
+            this.findNavController().navigate(FragmentPromptToLoginDirections.actionFragmentPromptToLoginToFragmentLogin())
+        }
+        binding.gotoRegBtn.setOnClickListener {
+            this.findNavController().navigate(FragmentPromptToLoginDirections.actionFragmentPromptToLoginToFragmentChooseRegType())
+        }
+        return binding.root
     }
 
 }

@@ -13,8 +13,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.happinesstonic.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.R
 import com.ng.rapetracker.databinding.FragmentRegisterOrgDetailBinding
 import com.ng.rapetracker.model.RapeSupportType
@@ -24,8 +22,12 @@ import com.ng.rapetracker.network.ServerResponse
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgDetailArgs.fromBundle
+import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
+import com.ng.rapetracker.viewmodel.ModelLoginActivity
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -108,14 +110,28 @@ class FragmentRegisterOrgDetail : BaseFragment() {
 
                             val serverResponse = response.body()
 
+                            try {
+                                val obj = JSONObject(serverResponse!!.otherDetail!!)
+                                if ((serverResponse.success as Boolean)){
+                                    if (serverResponse.respMessage == "ok") {
+                                        context!!.toast("Registration successful...")
 
-                            if (!(serverResponse!!.success as Boolean)){
-                                context!!.toast(serverResponse.respMessage!!)
-                            }else{
-                                //Redirect...
-                                val viewModelLoginActivity = ViewModelProvider(this@FragmentRegisterOrgDetail).get(
-                                    ModelLoginActivity::class.java)
-                                viewModelLoginActivity.setGotoMainActivity(true)
+                                        val viewModelLoginActivity = ViewModelProvider(this@FragmentRegisterOrgDetail).get(
+                                            ModelLoginActivity::class.java)
+
+                                        //Save and Redirect...
+                                        viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
+
+                                    } else {
+                                        context!!.toast(serverResponse.respMessage!!)
+                                    }
+                                }else{
+                                    context!!.toast(serverResponse.respMessage!!)
+                                }
+
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
+                                context!!.toast("Response Error! Try again...")
                             }
                         }
                     } else {
@@ -128,7 +144,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
     }
 
 
-    private fun countrySpinnerInitialize(){
+    private suspend fun countrySpinnerInitialize(){
         val countryList = databaseRoom.getCountryDao().getAllCountry()
         val countryNameArray = arrayListOf<String>()
         val countryIdArray = arrayListOf<String>()
@@ -157,7 +173,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
 
     }
 
-    private fun stateSpinnerInitialize(){
+    private suspend fun stateSpinnerInitialize(){
         val stateList = databaseRoom.getStateDao().getAllState()
         val stateNameArray = arrayListOf<String>()
         val stateIdArray = arrayListOf<String>()

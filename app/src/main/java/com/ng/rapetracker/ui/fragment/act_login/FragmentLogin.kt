@@ -1,51 +1,38 @@
 package com.ng.rapetracker.ui.fragment.act_login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.text.TextUtils.isEmpty
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
-import com.happinesstonic.viewmodel.ModelLoginActivity
-import com.ng.rapetracker.R
+import com.ng.rapetracker.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.databinding.FragmentLoginBinding
-import com.ng.rapetracker.databinding.FragmentRegisterVictimBinding
 import com.ng.rapetracker.network.*
 import com.ng.rapetracker.network.RetrofitConstant.Companion.retrofitWithJsonRes
 import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class FragmentLogin : BaseFragment() {
     lateinit var binding: FragmentLoginBinding
+    lateinit var thisContext:Activity
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,xsavedInstanceState: Bundle?): View? {
         binding = FragmentLoginBinding.inflate(inflater)
-
-        return binding.root
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        thisContext = requireActivity()
 
         binding.password.transformationMethod = PasswordTransformationMethod()
 
@@ -59,7 +46,12 @@ class FragmentLogin : BaseFragment() {
                 loginUser()
             }
         }
+
+
+        return binding.root
     }
+
+
 
     private fun loginUser(){
         val emailMobileNo = binding.emailMobileNo.text.trim().toString()
@@ -86,13 +78,27 @@ class FragmentLogin : BaseFragment() {
                             val serverResponse = response.body()
 
 
-                            if (!(serverResponse!!.success as Boolean)){
-                                context!!.toast(serverResponse.respMessage!!)
-                            }else{
-                                //Redirect...
-                                val viewModelLoginActivity = ViewModelProvider(this@FragmentLogin).get(
-                                    ModelLoginActivity::class.java)
-                                viewModelLoginActivity.setGotoMainActivity(true)
+                            try {
+                                val obj = JSONObject(serverResponse!!.otherDetail!!)
+                                if ((serverResponse.success as Boolean)){
+                                    if (serverResponse.respMessage == "ok") {
+                                        context!!.toast("Login successful...")
+
+                                        val viewModelLoginActivity = ViewModelProvider(this@FragmentLogin).get(ModelLoginActivity::class.java)
+
+                                        //Save and Redirect...
+                                        viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
+
+                                    } else {
+                                        context!!.toast(serverResponse.respMessage!!)
+                                    }
+                                }else{
+                                    context!!.toast(serverResponse.respMessage!!)
+                                }
+
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
+                                context!!.toast("Response Error! Try again...")
                             }
                         }
                     } else {

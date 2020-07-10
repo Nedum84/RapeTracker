@@ -57,9 +57,10 @@ dependencies {
     implementation "androidx.core:core-ktx:$version_core"
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"//support to use coroutine with room
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$version_room"
-    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"//lifecyle/viewmodel
 
     // Moshi
     implementation "com.squareup.moshi:moshi:$version_moshi"
@@ -90,4 +91,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     // WorkManager
     implementation "android.arch.work:work-runtime-ktx:1.0.1"
+    // Logging
+    implementation "com.jakewharton.timber:timber:4.7.1"
 }

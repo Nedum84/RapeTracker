@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.ng.rapetracker.model.RapeType
 import com.ng.rapetracker.model.State
 
 @Dao
@@ -11,7 +12,7 @@ interface StateDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upSertState(vararg state: State)
+    suspend fun upSertState(list: List<State>)
 
 
     @Query("SELECT * from ${TableNames.STATE} WHERE id = :id")
@@ -19,5 +20,5 @@ interface StateDao {
 
 
     @Query("SELECT * FROM ${TableNames.STATE} ORDER BY id DESC")
-    fun getAllState(): List<State>
+    suspend fun getAllState(): List<State>
 }

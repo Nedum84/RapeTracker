@@ -10,7 +10,7 @@ import com.ng.rapetracker.room.TableNames.Companion.RAPE_TYPE
 interface RapeTypeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllRapeType(vararg rapeType: RapeType)
+    suspend fun insertAllRapeType(list: List<RapeType>)
 
     @Update
     fun updateRapeType(rapeType: RapeType)

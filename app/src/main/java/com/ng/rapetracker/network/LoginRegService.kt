@@ -2,6 +2,7 @@ package com.ng.rapetracker.network
 
 import com.google.gson.annotations.SerializedName
 import com.ng.rapetracker.model.RapeDetail
+import kotlinx.coroutines.Deferred
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -13,6 +14,8 @@ class ServerResponse {
     val success:Boolean? = null
     @SerializedName("resp_message")
     val respMessage: String? = null
+    @SerializedName("other_detail")
+    val otherDetail: String? = null
 }
 
 data class ServerResponse2 (
@@ -25,6 +28,7 @@ data class ServerResponse2 (
 
 
 interface LoginRegService {
+    @Multipart
     @POST("login.php")
     fun loginRequest(
         @Part("request_type") request_type:String,
@@ -33,6 +37,7 @@ interface LoginRegService {
     ): Call<ServerResponse>
 
 
+    @Multipart
     @POST("login.php")
     fun registerRequest(
         @Part("request_type") request_type:String,
@@ -47,6 +52,7 @@ interface LoginRegService {
         @Part("user_password") user_password:String
     ): Call<ServerResponse>
 
+    @Multipart
     @POST("login.php")
     fun registerOrgRequest(
         @Part("request_type") request_type:String,
@@ -64,10 +70,20 @@ interface LoginRegService {
 }
 
 interface LogRapeComplainService {
+    @Multipart
     @POST("log_complain.php")
     fun rapeComplainRequest(
         @Part("request_type") request_type: String,
         @Part("rape_detail") rape_detail: String
     ): Call<ServerResponse>
 }
+
+interface GetDefaultListService {
+
+    @GET("get_default_lists.php")
+    fun getListRequest(@Query("filter") filter: String):
+            Call<ServerResponse>
+}
+
+
 

@@ -32,7 +32,7 @@ class FragmentLogComplainForm4SelectSupport : Fragment() {
         super.onActivityCreated(savedInstanceState)
         rapeComplainFormViewModel.allRapeSupportType.observe(viewLifecycleOwner, Observer {
             it?.apply {
-                ADAPTER?.rapeTypes = it
+                ADAPTER?.rapeSupportTypes = it
             }
         })
 

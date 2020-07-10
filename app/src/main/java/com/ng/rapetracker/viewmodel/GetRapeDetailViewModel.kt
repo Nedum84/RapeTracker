@@ -18,7 +18,7 @@ class GetRapeDetailViewModel(application: Application): AndroidViewModel(applica
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val database = DatabaseRoom.getDatabaseInstance(application)
-    private val getRapeDetailRepo = GetRapeDetailRepo(database)
+    private val getRapeDetailRepo = GetRapeDetailRepo(database, application)
 
     /**
      * init{} is called immediately when this ViewModel is created.

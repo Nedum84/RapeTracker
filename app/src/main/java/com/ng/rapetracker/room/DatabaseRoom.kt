@@ -15,7 +15,7 @@ import com.ng.rapetracker.room.TableNames.Companion.DATABASE_NAME
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [RapeType::class, RapeDetail::class, RapeSupportType::class, RapeTypeOfVictim::class, Country::class, State::class], version = 1, exportSchema = false)
+@Database(entities = [RapeType::class, RapeDetail::class, RapeSupportType::class, RapeTypeOfVictim::class, Country::class, State::class], version = 2, exportSchema = false)
 abstract class DatabaseRoom : RoomDatabase() {
 
     /**

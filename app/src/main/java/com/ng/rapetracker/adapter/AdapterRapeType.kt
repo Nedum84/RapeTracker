@@ -39,8 +39,6 @@ class AdapterRapeType(private val clickListener: RapeTypeClickListener) : Recycl
 
         fun bind(clickListener: RapeTypeClickListener, rapeType: RapeType) {
 
-            binding.textView.text = "Hellow World2!!! ${rapeType.id}"
-
             binding.rapeType = rapeType
             binding.clickListener = clickListener
             binding.executePendingBindings()

@@ -11,5 +11,7 @@ class RapeType (
     @PrimaryKey
     val  id:Int,
     @ColumnInfo(name = "rape_type")
-    val rapeType: String
+    val rapeType: String,
+    @ColumnInfo(name = "rape_description")
+    val rapeDescription:String
 )
