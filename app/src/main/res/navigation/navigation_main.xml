@@ -92,9 +92,8 @@
             android:name="updatedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />
         <action
-            android:id="@+id/action_fragmentLogComplainForm5RapeDetail_to_fragmentLogComplainForm1RapeVictim"
-            app:destination="@id/fragmentLogComplainForm1RapeVictim"
-            app:popUpTo="@id/fragmentMain" />
+            android:id="@+id/action_fragmentLogComplainForm5RapeDetail_to_fragmentMain"
+            app:destination="@id/fragmentMain" />
     </fragment>
     <fragment
         android:id="@+id/fragmentProfile"

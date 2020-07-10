@@ -31,13 +31,15 @@
             android:id="@+id/user_mobile_no"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Phone number" />
+            android:hint="Phone number"
+            android:inputType="phone"/>
 
         <EditText
             android:id="@+id/user_email"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Email" />
+            android:hint="Email"
+            android:inputType="textEmailAddress"/>
 
 
 
@@ -50,7 +52,8 @@
             android:id="@+id/user_age"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Age" />
+            android:hint="Age"
+            android:inputType="number"/>
 
         <Spinner
             android:id="@+id/user_country"

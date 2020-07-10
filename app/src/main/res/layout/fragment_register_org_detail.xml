@@ -22,6 +22,7 @@
             android:layout_marginBottom="40dp" />
 
         <TextView
+            android:id="@+id/support_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Litigation Support"
@@ -38,13 +39,15 @@
             android:id="@+id/org_mobile_no"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Telephone number" />
+            android:hint="Telephone number"
+            android:inputType="phone"/>
 
         <EditText
             android:id="@+id/org_email"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Email address" />
+            android:hint="Email address"
+            android:inputType="textEmailAddress" />
 
         <Spinner
             android:id="@+id/org_country"

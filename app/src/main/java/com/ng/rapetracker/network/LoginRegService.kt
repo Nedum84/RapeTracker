@@ -38,7 +38,7 @@ interface LoginRegService {
 
 
     @Multipart
-    @POST("login.php")
+    @POST("register_user.php")
     fun registerRequest(
         @Part("request_type") request_type:String,
         @Part("user_name") user_name:String,
@@ -53,7 +53,7 @@ interface LoginRegService {
     ): Call<ServerResponse>
 
     @Multipart
-    @POST("login.php")
+    @POST("register_org.php")
     fun registerOrgRequest(
         @Part("request_type") request_type:String,
         @Part("org_name") org_name:String,
@@ -71,15 +71,23 @@ interface LoginRegService {
 
 interface LogRapeComplainService {
     @Multipart
-    @POST("log_complain.php")
+    @POST("add_rape_detail.php")
     fun rapeComplainRequest(
         @Part("request_type") request_type: String,
-        @Part("rape_detail") rape_detail: String
+        @Part("rape_against_you") rape_against_you: String,
+        @Part("type_of_victim") type_of_victim: String,
+        @Part("type_of_rape") type_of_rape: String,
+        @Part("rape_support_type") rape_support_type: String,
+        @Part("rape_address") rape_address: String,
+        @Part("rape_description") rape_description: String,
+        @Part("user_id") user_id: String,
+        @Part("user_name") user_name: String,
+        @Part("user_age") user_age: String,
+        @Part("date_added") date_added: String
     ): Call<ServerResponse>
 }
 
 interface GetDefaultListService {
-
     @GET("get_default_lists.php")
     fun getListRequest(@Query("filter") filter: String):
             Call<ServerResponse>

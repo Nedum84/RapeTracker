@@ -1,10 +1,12 @@
 package com.ng.rapetracker.ui.fragment.act_login
 
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +16,8 @@ import com.ng.rapetracker.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.databinding.FragmentLoginBinding
 import com.ng.rapetracker.network.*
 import com.ng.rapetracker.network.RetrofitConstant.Companion.retrofitWithJsonRes
+import com.ng.rapetracker.room.DatabaseRoom
+import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
@@ -23,16 +27,24 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 
 class FragmentLogin : BaseFragment() {
     lateinit var binding: FragmentLoginBinding
     lateinit var thisContext:Activity
+    lateinit var appCtx: Application
+    lateinit var viewModelLoginActivity:ModelLoginActivity
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,xsavedInstanceState: Bundle?): View? {
         binding = FragmentLoginBinding.inflate(inflater)
         thisContext = requireActivity()
+        appCtx= requireNotNull(activity).application
+
+        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
+            ModelLoginActivity::class.java)
 
         binding.password.transformationMethod = PasswordTransformationMethod()
 
@@ -84,11 +96,12 @@ class FragmentLogin : BaseFragment() {
                                     if (serverResponse.respMessage == "ok") {
                                         context!!.toast("Login successful...")
 
-                                        val viewModelLoginActivity = ViewModelProvider(this@FragmentLogin).get(ModelLoginActivity::class.java)
 
                                         //Save and Redirect...
                                         viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
 
+                                        startActivity(Intent(activity!!, MainActivity::class.java))
+                                        activity!!.finish()
                                     } else {
                                         context!!.toast(serverResponse.respMessage!!)
                                     }
@@ -102,6 +115,7 @@ class FragmentLogin : BaseFragment() {
                             }
                         }
                     } else {
+                        Log.d("loggin__", "$response")
                         context!!.toast("An error occurred, Try again")
                     }
                 }

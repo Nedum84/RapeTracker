@@ -31,7 +31,7 @@ class AdapterRapeType(private val clickListener: RapeTypeClickListener) : Recycl
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 //        val binding = ItemRapeTypeFormBinding.inflate(layoutInflater, parent, false)
-        val binding: ItemRapeTypeFormBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_rape_detail, parent, false)
+        val binding: ItemRapeTypeFormBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_rape_type_form, parent, false)
         return ViewHolder(binding)
     }
 

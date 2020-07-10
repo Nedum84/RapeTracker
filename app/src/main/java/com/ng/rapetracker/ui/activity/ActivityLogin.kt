@@ -1,5 +1,6 @@
 package com.ng.rapetracker.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -30,9 +31,9 @@ import java.util.concurrent.TimeUnit
 
 
 class ActivityLogin : AppCompatActivity() {
-//    private lateinit var dataBinding: ActivityLoginBinding
     lateinit var viewModelLoginActivity: ModelLoginActivity
     lateinit var databaseRoom: DatabaseRoom
+    lateinit var prefs:ClassSharedPreferences
 
 
 
@@ -42,21 +43,20 @@ class ActivityLogin : AppCompatActivity() {
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         databaseRoom = DatabaseRoom.getDatabaseInstance(this)
+        prefs = ClassSharedPreferences(this)
 
-        viewModelLoginActivity = ViewModelProvider(this).get(ModelLoginActivity::class.java)
-
-        viewModelLoginActivity.gotoMainActivity.observe(this, Observer {
-            it.hasBeenHandled?.let {state ->
-                if (state){
-                    this.toast("Ready to move to another activity...")
-//                    startActivity(Intent(this, MainActivity::class.java))
-//                    finish()
-                }
-            }
-        })
+        val viewModelFactory = ModelLoginActivity.Factory(application)
+        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(ModelLoginActivity::class.java)
+        viewModelLoginActivity.setGotoMainActivity(false)
 
 
-        if(ClassSharedPreferences(this).getOpeningForTheFirstTime()) {
+
+        if (prefs.isLoggedIn()){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        if(prefs.getOpeningForTheFirstTime()) {
 //            getDefaultValues()
 
             CoroutineScope(IO).launch {
@@ -67,10 +67,24 @@ class ActivityLogin : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-        }else{
-
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModelLoginActivity.gotoMainActivity.observe(this, Observer {
+            it.hasBeenHandled?.let {state ->
+                if (state){
+//                    this.toast("Ready to move to another activity...")
+//                    startActivity(Intent(this, MainActivity::class.java))
+//                    finish()
+                }
+            }
+        })
+
+    }
+
+
 
 
     fun getDefaultValues(){
@@ -198,6 +212,6 @@ class ActivityLogin : AppCompatActivity() {
 
 
 
-//        ClassSharedPreferences(this).setOpeningForTheFirstTime(false)
+        ClassSharedPreferences(this).setOpeningForTheFirstTime(false)
     }
 }

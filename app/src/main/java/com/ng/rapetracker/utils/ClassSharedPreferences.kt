@@ -56,4 +56,18 @@ class  ClassSharedPreferences(val context: Context?){
         return  preference.getBoolean(PREFERENCE_OPENING_FOR_THE_FIRST_TIME,true)
     }
 
+    fun isLoggedIn():Boolean{
+        return if (getAccessLevel()==1)
+            getCurOrgDetail()!=""
+        else
+            getCurOrgDetail()!=""
+    }
+    fun logoutUser() : Boolean{
+        val userEditor = preference.edit()
+        userEditor.clear()
+        userEditor.apply()
+
+
+        return true
+    }
 }

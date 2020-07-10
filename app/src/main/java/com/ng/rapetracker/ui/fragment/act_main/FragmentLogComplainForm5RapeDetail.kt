@@ -49,13 +49,13 @@ class FragmentLogComplainForm5RapeDetail : BaseFragment() {
             it?.getContentIfNotHandled()?.let { data ->
                 if(data){
                     //redirect to home
-                    this.findNavController().navigate(FragmentLogComplainForm5RapeDetailDirections.actionFragmentLogComplainForm5RapeDetailToFragmentLogComplainForm1RapeVictim())
+                    this.findNavController().navigate(FragmentLogComplainForm5RapeDetailDirections.actionFragmentLogComplainForm5RapeDetailToFragmentMain())
                 }
             }
         })
 
         binding.rapeCancelLogBtn.setOnClickListener {
-            this.findNavController().navigate(FragmentLogComplainForm5RapeDetailDirections.actionFragmentLogComplainForm5RapeDetailToFragmentLogComplainForm1RapeVictim())
+            this.findNavController().navigate(FragmentLogComplainForm5RapeDetailDirections.actionFragmentLogComplainForm5RapeDetailToFragmentMain())
         }
     }
 
@@ -100,7 +100,16 @@ class FragmentLogComplainForm5RapeDetail : BaseFragment() {
             val logComplainService = retrofitWithJsonRes.create(LogRapeComplainService::class.java)
             logComplainService.rapeComplainRequest(
                 "log_rape_complain",
-                Gson().toJson(rapeDetail)
+                "${rapeDetail.rapeAgainstYou}",
+                "${rapeDetail.typeOfVictim}",
+                "${rapeDetail.typeOfRape}",
+                "${rapeDetail.rapeSupportType}",
+                "${rapeDetail.rapeAddress}",
+                "${rapeDetail.rapeDescription}",
+                "${rapeDetail.userId}",
+                "${rapeDetail.userName}",
+                "${rapeDetail.userAge}",
+                "${rapeDetail.dateAdded}"
             ).enqueue(object: Callback<ServerResponse> {
                 override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
                     requireContext().toast("No internet connect!")

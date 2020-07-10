@@ -1,6 +1,7 @@
 package com.ng.rapetracker.ui.fragment.act_login
 
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +22,7 @@ import com.ng.rapetracker.network.LoginRegService
 import com.ng.rapetracker.network.RetrofitConstant
 import com.ng.rapetracker.network.ServerResponse
 import com.ng.rapetracker.room.DatabaseRoom
+import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
@@ -37,6 +40,9 @@ class FragmentRegisterVictim : BaseFragment() {
     private var selectedGenderId: String = "-1"
     lateinit var binding: FragmentRegisterVictimBinding
     private lateinit var thisContext:Activity
+    lateinit var appCtx:Application
+    lateinit var viewModelLoginActivity:ModelLoginActivity
+    lateinit var regBtn:Button
 
     lateinit var databaseRoom: DatabaseRoom
 
@@ -44,10 +50,16 @@ class FragmentRegisterVictim : BaseFragment() {
         // Get a reference to the binding object and inflate the fragment views.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_victim, container, false)
         thisContext = requireActivity()
+        appCtx= requireNotNull(activity).application
         databaseRoom = DatabaseRoom.getDatabaseInstance(thisContext)
+
+        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
+            ModelLoginActivity::class.java)
 
 
         binding.userPassword.transformationMethod = PasswordTransformationMethod()
+        regBtn = binding.registerBtn
         genderSpinnerInitialize()
         countrySpinnerInitialize()
         launch {
@@ -62,17 +74,21 @@ class FragmentRegisterVictim : BaseFragment() {
         }
 
 
-        binding.registerBtn.setOnClickListener {
-            registerUser()
-        }
 
 
         return binding.root
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
+            ModelLoginActivity::class.java)
+        binding.registerBtn.setOnClickListener {
+
+            registerUser()
+        }
     }
 
     private fun registerUser(){
@@ -108,7 +124,8 @@ class FragmentRegisterVictim : BaseFragment() {
                     userPassword
                 ).enqueue(object: Callback<ServerResponse> {
                     override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
-                        requireContext().toast("No internet connect!")
+                        t.printStackTrace()
+                        requireContext().toast("No internet connection!")
                     }
 
                     override fun onResponse(call: Call<ServerResponse>,response: Response<ServerResponse>) {
@@ -117,30 +134,28 @@ class FragmentRegisterVictim : BaseFragment() {
 
                                 val serverResponse = response.body()
 
-                                try {
-                                    val obj = JSONObject(serverResponse!!.otherDetail!!)
-                                    if ((serverResponse.success as Boolean)){
-                                        if (serverResponse.respMessage == "ok") {
-                                            context!!.toast("Registration successful...")
+                                if ((serverResponse!!.success as Boolean)){
+                                    if (serverResponse.respMessage == "ok") {
+                                        context!!.toast("Registration successful...")
 
-                                            val viewModelLoginActivity = ViewModelProvider(this@FragmentRegisterVictim).get(
-                                                ModelLoginActivity::class.java)
-
+                                        try{
+                                            val obj = JSONObject(serverResponse!!.otherDetail!!)
                                             //Save and Redirect...
                                             viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
+                                            startActivity(Intent(activity!!, MainActivity::class.java))
+                                            activity!!.finish()
 
-//                                                viewModelLoginActivity.setGotoMainActivity(true)
-                                        } else {
-                                            context!!.toast(serverResponse.respMessage!!)
+                                        } catch (e: JSONException) {
+                                            e.printStackTrace()
+                                            context!!.toast("Response Error! Try again...")
                                         }
-                                    }else{
+                                    } else {
                                         context!!.toast(serverResponse.respMessage!!)
                                     }
-
-                                } catch (e: JSONException) {
-                                    e.printStackTrace()
-                                    context!!.toast("Response Error! Try again...")
+                                }else{
+                                    context!!.toast(serverResponse.respMessage!!)
                                 }
+
                             }
                         } else {
                             context!!.toast("An error occurred, Try again")
@@ -177,12 +192,15 @@ class FragmentRegisterVictim : BaseFragment() {
 
     private fun countrySpinnerInitialize(){
         launch {
-            val countryList = databaseRoom.getCountryDao().getAllCountry()
+            val countryList = databaseRoom.getCountryDao().getAllCountry().sortedBy { it.id }
             val countryNameArray = arrayListOf<String>()
             val countryIdArray = arrayListOf<String>()
 
             countryNameArray.add("Country")
             countryIdArray.add("-1")
+            countryNameArray.add(countryList[155].name)
+            countryIdArray.add("${countryList[155].id}")
+
             for (element in countryList) {
                 countryNameArray.add(element.name)
                 countryIdArray.add("${element.id}")
@@ -208,7 +226,7 @@ class FragmentRegisterVictim : BaseFragment() {
     }
 
     private suspend fun stateSpinnerInitialize(){
-        val stateList = databaseRoom.getStateDao().getAllState()
+        val stateList = databaseRoom.getStateDao().getAllState().sortedBy { it.id }
         val stateNameArray = arrayListOf<String>()
         val stateIdArray = arrayListOf<String>()
 

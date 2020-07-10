@@ -7,16 +7,21 @@ import com.happinesstonic.Event
 import com.ng.rapetracker.model.*
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.utils.ClassSharedPreferences
+import com.ng.rapetracker.utils.toast
 import org.json.JSONObject
 
 
 class ModelLoginActivity(application: Application) : AndroidViewModel(application) {
+    val appCtx = application
 
+    init {
 
+    }
     private val database = DatabaseRoom.getDatabaseInstance(application)
     val allRapeType: LiveData<List<RapeType>> = database.rapeTypeDao.getAllRapeType()
     val allRapeTypeOfVictim: LiveData<List<RapeTypeOfVictim>> = database.rapeTypeOfVictimDao.getAllRapeOfVictimType()
     val allRapeSupportType  = database.rapeSupportTypeDao.getAllRapeSupport()
+
 
     val gotoMainActivity: LiveData<Event<Boolean>> get() = _gotoMainActivity
     private val _gotoMainActivity = MutableLiveData<Event<Boolean>>()
@@ -32,39 +37,43 @@ class ModelLoginActivity(application: Application) : AndroidViewModel(applicatio
 
     //saving user's details
     fun saveUserDetails(other_detail: JSONObject?, prefs:ClassSharedPreferences) {
-        val details = other_detail!!.getJSONArray("userDetails").getJSONObject(0)
+        try {
+            val details = other_detail!!.getJSONArray("userDetails").getJSONObject(0)
 
-        if (details!!.getInt("access_level") == 1){
-            val user = User(
-                details.getInt("id"),
-                details.getString("user_name"),
-                details.getString("user_mobile_no"),
-                details.getString("user_email"),
-                details.getInt("user_gender"),
-                details.getInt("user_age"),
-                details.getInt("user_country"),
-                details.getInt("user_state"),
-                details.getString("user_address"),
-                details.getString("user_reg_date"),
-                details.getInt("access_level")
-            )
-            prefs.setCurUserDetail(Gson().toJson(user))
-        }else{
-            val org = Organization(
-                details.getInt("id"),
-                details.getString("org_name"),
-                details.getInt("org_type"),
-                details.getString("org_mobile_no"),
-                details.getString("org_email"),
-                details.getInt("org_country"),
-                details.getInt("org_state"),
-                details.getString("org_address"),
-                details.getString("org_reg_date"),
-                details.getInt("access_level")
-            )
-            prefs.setCurOrgDetail(Gson().toJson(org))
+            if (details!!.getInt("access_level") == 1){
+                val user = User(
+                    details.getInt("id"),
+                    details.getString("user_name"),
+                    details.getString("user_mobile_no"),
+                    details.getString("user_email"),
+                    details.getInt("user_gender"),
+                    details.getInt("user_age"),
+                    details.getInt("user_country"),
+                    details.getInt("user_state"),
+                    details.getString("user_address"),
+                    details.getString("user_reg_date"),
+                    details.getInt("access_level")
+                )
+                prefs.setCurUserDetail(Gson().toJson(user))
+            }else{
+                val org = Organization(
+                    details.getInt("id"),
+                    details.getString("org_name"),
+                    details.getInt("org_type"),
+                    details.getString("org_mobile_no"),
+                    details.getString("org_email"),
+                    details.getInt("org_country"),
+                    details.getInt("org_state"),
+                    details.getString("org_address"),
+                    details.getString("org_reg_date"),
+                    details.getInt("access_level")
+                )
+                prefs.setCurOrgDetail(Gson().toJson(org))
+            }
+            prefs.setAccessLevel(details.getInt("access_level"))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        prefs.setAccessLevel(details.getInt("access_level"))
 
 
 

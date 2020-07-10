@@ -23,7 +23,8 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
 //            it.asDomainModel()
 //        }
     val rapeDetails: LiveData<List<RapeDetail>> = database.rapeDetailDao.getAllRapeDetail()
-    private val lastInsertId = database.rapeDetailDao.getRecentRapeDetail()
+//    private val lastInsertId = database.rapeDetailDao.getRecentRapeDetail()
+    private val lastInsertId = "00"
 
     suspend fun getRapeDetails(){
         val retrofit = Retrofit.Builder()
@@ -45,7 +46,7 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
         }
         val rapeDetailService = retrofit
             .create(GetRapeDetailService::class.java)
-            .getRapeDetail("$type", "$user_id_org_type","${lastInsertId!!.id}")
+            .getRapeDetail("$type", "$user_id_org_type","${lastInsertId}")
 
         withContext(Dispatchers.IO) {
             try {

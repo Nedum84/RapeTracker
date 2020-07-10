@@ -1,6 +1,7 @@
 package com.ng.rapetracker.ui.fragment.act_login
 
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
@@ -20,6 +21,7 @@ import com.ng.rapetracker.network.LoginRegService
 import com.ng.rapetracker.network.RetrofitConstant
 import com.ng.rapetracker.network.ServerResponse
 import com.ng.rapetracker.room.DatabaseRoom
+import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgDetailArgs.fromBundle
 import com.ng.rapetracker.utils.ClassSharedPreferences
@@ -37,6 +39,8 @@ class FragmentRegisterOrgDetail : BaseFragment() {
     private lateinit var selectedCountryId: String
     lateinit var binding: FragmentRegisterOrgDetailBinding
     private lateinit var thisContext:Activity
+    lateinit var appCtx: Application
+    lateinit var viewModelLoginActivity:ModelLoginActivity
 
     lateinit var databaseRoom: DatabaseRoom
     lateinit var rapeSupportType: RapeSupportType
@@ -45,20 +49,18 @@ class FragmentRegisterOrgDetail : BaseFragment() {
         // Get a reference to the binding object and inflate the fragment views.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_org_detail, container, false)
         thisContext = requireActivity()
+        appCtx= requireNotNull(activity).application
         databaseRoom = DatabaseRoom.getDatabaseInstance(thisContext)
+
+        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
+            ModelLoginActivity::class.java)
 
         rapeSupportType = FragmentRegisterOrgDetailArgs.fromBundle(requireArguments()).rapeSupportType
 
 
-
-
-        return binding.root
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
         binding.orgPassword.transformationMethod = PasswordTransformationMethod()
+        binding.supportTypeTitle.text = rapeSupportType.rapeSupportType
         launch {
             countrySpinnerInitialize()
             stateSpinnerInitialize()
@@ -70,7 +72,11 @@ class FragmentRegisterOrgDetail : BaseFragment() {
                 registerOrg()
             }
         }
+
+
+        return binding.root
     }
+
 
     private suspend fun registerOrg(){
         val orgName = binding.orgName.text.trim().toString()
@@ -83,7 +89,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
         val orgPassword = binding.orgPassword.text.trim().toString()
 
         if (isEmpty(orgName) ||isEmpty(orgMobileNo) ||isEmpty(orgEmail) || (orgCountry=="-1")|| (orgState=="-1") ||isEmpty(orgAddress) ||isEmpty(orgPassword)){
-            context.let {it!!.toast("Enter all required")}
+            context.let {it!!.toast("All the fields are required...")}
         }else if(orgPassword.length <6){
             requireContext().toast("Password should not be at least 6 characters")
         }else{
@@ -116,12 +122,12 @@ class FragmentRegisterOrgDetail : BaseFragment() {
                                     if (serverResponse.respMessage == "ok") {
                                         context!!.toast("Registration successful...")
 
-                                        val viewModelLoginActivity = ViewModelProvider(this@FragmentRegisterOrgDetail).get(
-                                            ModelLoginActivity::class.java)
 
                                         //Save and Redirect...
                                         viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
 
+                                        startActivity(Intent(activity!!, MainActivity::class.java))
+                                        activity!!.finish()
                                     } else {
                                         context!!.toast(serverResponse.respMessage!!)
                                     }
@@ -145,12 +151,15 @@ class FragmentRegisterOrgDetail : BaseFragment() {
 
 
     private suspend fun countrySpinnerInitialize(){
-        val countryList = databaseRoom.getCountryDao().getAllCountry()
+        val countryList = databaseRoom.getCountryDao().getAllCountry().sortedBy { it.id }
         val countryNameArray = arrayListOf<String>()
         val countryIdArray = arrayListOf<String>()
 
         countryNameArray.add("Country")
         countryIdArray.add("-1")
+        countryNameArray.add(countryList[155].name)
+        countryIdArray.add("${countryList[155].id}")
+
         for (element in countryList) {
             countryNameArray.add(element.name)
             countryIdArray.add("${element.id}")
@@ -174,11 +183,11 @@ class FragmentRegisterOrgDetail : BaseFragment() {
     }
 
     private suspend fun stateSpinnerInitialize(){
-        val stateList = databaseRoom.getStateDao().getAllState()
+        val stateList = databaseRoom.getStateDao().getAllState().sortedBy { it.id }
         val stateNameArray = arrayListOf<String>()
         val stateIdArray = arrayListOf<String>()
 
-        stateNameArray.add("Country")
+        stateNameArray.add("Select State")
         stateIdArray.add("-1")
         for (element in stateList) {
             stateNameArray.add(element.name)

@@ -36,22 +36,12 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
         thisContext = requireActivity()
 
 
-
-
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
         val application = requireNotNull(activity).application
         binding.lifecycleOwner = this
 
 
         val viewModelFactory = ModelLoginActivity.Factory(application)
         val viewModelLoginActivity = ViewModelProvider(this,viewModelFactory).get(ModelLoginActivity::class.java)
-        viewModelLoginActivity.setGotoMainActivity(true)
 
 
         //OR
@@ -67,10 +57,14 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
 
         viewModelLoginActivity.allRapeSupportType.observe(viewLifecycleOwner, Observer {
             ADAPTER.apply {
-                rapeSupportTypes = it
+                rapeSupportTypes = it.sortedBy { it.id }
             }
         })
+
+
+        return binding.root
     }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

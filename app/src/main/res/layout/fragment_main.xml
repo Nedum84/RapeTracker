@@ -28,10 +28,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+
         <LinearLayout
             android:id="@+id/noComplainWrapper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -45,6 +47,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Log Complain" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/noComplainForSupport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You have not logged any sexual complain"
+                android:textSize="20sp"
+                android:gravity="center" />
+
         </LinearLayout>
 
 

@@ -32,7 +32,7 @@ class FragmentLogComplainForm1RapeVictim : Fragment() {
             rapeDetail.rapeAgainstYou = true
             this.findNavController().navigate(FragmentLogComplainForm1RapeVictimDirections.actionFragmentLogComplainForm1RapeVictimToFragmentLogComplainForm2TypeOfVictim(rapeDetail))
         }
-        binding.rapeAgainstYouBtn.setOnClickListener {
+        binding.againstSomeoneIKnowBtn.setOnClickListener {
             rapeDetail.rapeAgainstYou = false
             this.findNavController().navigate(FragmentLogComplainForm1RapeVictimDirections.actionFragmentLogComplainForm1RapeVictimToFragmentLogComplainForm2TypeOfVictim(rapeDetail))
         }

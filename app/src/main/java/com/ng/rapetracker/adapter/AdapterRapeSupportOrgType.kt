@@ -39,7 +39,7 @@ class AdapterRapeSupportOrgType(private val clickListener: RapeSupportOrgClickLi
 
         fun bind(clickListener: RapeSupportOrgClickListener, rapeSupportType: RapeSupportType) {
 
-//            binding.rapeSupport.text = rapeSupportType.rapeSupportType
+            binding.rapeSupport = rapeSupportType
 
             binding.clickListener = clickListener
             binding.executePendingBindings()
