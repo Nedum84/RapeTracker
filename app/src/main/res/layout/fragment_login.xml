@@ -12,41 +12,104 @@
         tools:context=".ui.fragment.act_login.FragmentLogin"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:background="@color/colorPrimaryDark2"
+        android:padding="30dp">
 
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:src="@drawable/app_logo_line1"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login to your account"
-            android:layout_marginBottom="40dp" />
+            android:text="Login"
+            android:layout_marginBottom="40dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textAllCaps="true"/>
+
 
         <EditText
             android:id="@+id/email_mobile_no"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Email or Phone" />
+            android:hint="Email or Phone"
+            android:textColor="@color/colorPrimaryDark"
+            android:theme="@style/editText"
+            android:layout_marginBottom="20dp"/>
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Password" />
-
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login" />
+            android:hint="Password"
+            android:textColor="@color/colorPrimaryDark"
+            android:theme="@style/editText" />
 
 
         <TextView
-            android:id="@+id/go_to_register"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? Register"
+            android:gravity="end"
+            android:text="Forgot Password?"
+            android:textColor="@color/colorWhite"
             android:layout_margin="12dp"
-            android:textSize="18sp" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            />
 
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/design_black_opacity"
+            android:layout_marginTop="20dp"
+            android:text="Login" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:background="#ccc"
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OR"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold|italic"
+                android:padding="4dp"
+                android:paddingRight="16dp"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingStart="16dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:background="#ccc"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/go_to_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRedDark"
+            android:padding="16dp"
+            android:text="Don't have an account? Register"
+            android:background="@color/colorWhite"
+            android:textSize="14sp"
+            android:gravity="center"
+            />
     </LinearLayout>
 </layout>

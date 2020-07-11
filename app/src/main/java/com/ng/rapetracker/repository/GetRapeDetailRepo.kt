@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.ng.rapetracker.model.Organization
 import com.ng.rapetracker.model.RapeDetail
+import com.ng.rapetracker.model.RapeSupportType
 import com.ng.rapetracker.model.User
 import com.ng.rapetracker.network.*
 import com.ng.rapetracker.room.DatabaseRoom
@@ -23,6 +24,7 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
 //            it.asDomainModel()
 //        }
     val rapeDetails: LiveData<List<RapeDetail>> = database.rapeDetailDao.getAllRapeDetail()
+    val rapeSupportType: LiveData<List<RapeSupportType>> = database.rapeSupportTypeDao.getAllRapeSupport()
 //    private val lastInsertId = database.rapeDetailDao.getRecentRapeDetail()
     private val lastInsertId = "00"
 

@@ -1,5 +1,6 @@
 package com.ng.rapetracker.ui.fragment.act_login
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -63,7 +65,7 @@ class FragmentRegisterVictim : BaseFragment() {
         genderSpinnerInitialize()
         countrySpinnerInitialize()
         launch {
-            stateSpinnerInitialize()
+            stateSpinnerInitialize(156)
         }
 
         binding.goToLogin.setOnClickListener {
@@ -173,23 +175,20 @@ class FragmentRegisterVictim : BaseFragment() {
         val genderIdArray = arrayListOf("-1", "1", "2")
 
 
-        val spinnerArrayAdapter = ArrayAdapter(thisContext, android.R.layout.simple_spinner_dropdown_item, genderNameArray)
-        //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.userGender?.adapter = spinnerArrayAdapter
+        binding.userGender?.setItem(genderNameArray)
 
         binding.userGender?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedGenderId = genderIdArray[position]
             }
 
         }
 
+
     }
 
+    @SuppressLint("DefaultLocale")
     private fun countrySpinnerInitialize(){
         launch {
             val countryList = databaseRoom.getCountryDao().getAllCountry().sortedBy { it.id }
@@ -198,18 +197,14 @@ class FragmentRegisterVictim : BaseFragment() {
 
             countryNameArray.add("Country")
             countryIdArray.add("-1")
-            countryNameArray.add(countryList[155].name)
+            countryNameArray.add(countryList[155].nicename.capitalize()+"(+${countryList[155].phonecode})")
             countryIdArray.add("${countryList[155].id}")
 
             for (element in countryList) {
-                countryNameArray.add(element.name)
+                countryNameArray.add(element.nicename.capitalize()+"(+${element.phonecode})")
                 countryIdArray.add("${element.id}")
-
             }
-            val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, countryNameArray)
-            //selected item will look like a spinner set from XML
-            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.userCountry?.adapter = spinnerArrayAdapter
+            binding.userCountry?.setItem(countryNameArray)
 
             binding.userCountry?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -217,6 +212,11 @@ class FragmentRegisterVictim : BaseFragment() {
                 }
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     selectedCountryId = countryIdArray[position]
+                    if (selectedCountryId!=="-1"){
+                        launch {
+                            stateSpinnerInitialize(selectedCountryId.toInt())
+                        }
+                    }
                 }
 
             }
@@ -225,27 +225,22 @@ class FragmentRegisterVictim : BaseFragment() {
 
     }
 
-    private suspend fun stateSpinnerInitialize(){
-        val stateList = databaseRoom.getStateDao().getAllState().sortedBy { it.id }
+    private suspend fun stateSpinnerInitialize(country_id:Int){
+        val stateList = databaseRoom.getStateDao().getStateByCountryId(country_id).sortedBy { it!!.id }
         val stateNameArray = arrayListOf<String>()
         val stateIdArray = arrayListOf<String>()
 
         stateNameArray.add("State")
         stateIdArray.add("-1")
         for (element in stateList) {
-            stateNameArray.add(element.name)
+            stateNameArray.add(element!!.name)
             stateIdArray.add("${element.id}")
 
         }
-        val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, stateNameArray)
-        //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.userState?.adapter = spinnerArrayAdapter
+        binding.userState?.setItem(stateNameArray)
 
         binding.userState?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedStateId = stateIdArray[position]
             }

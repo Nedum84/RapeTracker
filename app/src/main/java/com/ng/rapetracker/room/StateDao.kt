@@ -18,6 +18,9 @@ interface StateDao {
     @Query("SELECT * from ${TableNames.STATE} WHERE id = :id")
     fun getStateById(id: Long): State?
 
+    @Query("SELECT * from ${TableNames.STATE} WHERE country_id = :id ")
+    suspend fun getStateByCountryId(id: Int): List<State?>
+
 
     @Query("SELECT * FROM ${TableNames.STATE} ORDER BY id DESC")
     suspend fun getAllState(): List<State>

@@ -11,14 +11,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.ng.rapetracker.R
 import com.ng.rapetracker.adapter.AdapterRapeDetail
 import com.ng.rapetracker.adapter.RapeDetailClickListener
 import com.ng.rapetracker.databinding.FragmentMainBinding
+import com.ng.rapetracker.model.Organization
+import com.ng.rapetracker.model.RapeSupportType
+import com.ng.rapetracker.model.User
+import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.utils.ClassAlertDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.viewmodel.GetRapeDetailViewModel
 import com.ng.rapetracker.viewmodel.factory.GetRapeDetailViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 
 class FragmentMain : Fragment() {
@@ -28,6 +39,9 @@ class FragmentMain : Fragment() {
     lateinit var ADAPTER : AdapterRapeDetail
     lateinit var binding:FragmentMainBinding
     lateinit var getRapeViewModel:GetRapeDetailViewModel
+    lateinit var databaseRoom: DatabaseRoom
+    lateinit var orgDetail:Organization
+    lateinit var userDetail:User
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -40,7 +54,25 @@ class FragmentMain : Fragment() {
         thisContext = requireActivity()
         prefs = ClassSharedPreferences(thisContext)
 
+        databaseRoom = DatabaseRoom.getDatabaseInstance(application)
         binding.lifecycleOwner = this
+
+
+
+        if (prefs.getAccessLevel() == 1){
+            userDetail = Gson().fromJson(prefs.getCurUserDetail(), User::class.java)
+        }else if (prefs.getAccessLevel() == 2){
+            orgDetail = Gson().fromJson(prefs.getCurOrgDetail(), Organization::class.java)
+        }
+        
+        CoroutineScope((IO)).launch {
+            if (prefs.getAccessLevel() == 1){
+                val org = databaseRoom.rapeSupportTypeDao.getRapeSupportById(orgDetail.orgType)
+                withContext(Dispatchers.Main){
+                    binding.noComplainTitleShowSupport.text = "No complain Logged for ${org!!.rapeSupportType} at this Moment"
+                }
+            }
+        }
 
 
         ADAPTER = AdapterRapeDetail(RapeDetailClickListener {
@@ -61,20 +93,18 @@ class FragmentMain : Fragment() {
                 }else{
                     ADAPTER.addNewItems(it)
                 }
-                ClassAlertDialog(application).toast("refresh from Main Frag ... 1st observer...!!!")
             }
         })
 
 
-        getRapeViewModel.allRapeDetails2.observe(viewLifecycleOwner, Observer {
-            ClassAlertDialog(application).toast("refresh from Main Frag ... second observer...!!!")
+        getRapeViewModel.rapeSupportType.observe(viewLifecycleOwner, Observer {
+
         })
 
 
         binding.logComplainBtn.setOnClickListener {
             this.findNavController().navigate(FragmentMainDirections.actionFragmentMainToFragmentLogComplainForm1RapeVictim())
         }
-
 
 
 

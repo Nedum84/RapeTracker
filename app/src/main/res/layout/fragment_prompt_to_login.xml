@@ -11,52 +11,73 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.act_login.FragmentPromptToLogin"
         android:orientation="vertical"
+        android:background="@color/colorPrimary"
         android:gravity="center_horizontal"
         android:padding="20dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Are you a victim of Rape/Sexual Harassment or you are interested in helping the victims?"
+                android:textColor="#ececec"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="We are here for you!"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Are you a victim of Rape? \nAre you interested in helping rape victims?"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="We are here for you!"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Get started:"
-            android:layout_marginTop="200dp"
+            android:text="Get Started:"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/gotoLoginBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark2"
             android:text="Login" />
 
         <Button
             android:id="@+id/gotoRegBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register" />
+            android:padding="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorRedDark"
+            android:text="Create an Account"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="20dp"
-            android:textSize="18sp" />
+            android:textStyle="bold"
+            android:textSize="14sp" />
 
     </LinearLayout>
 </layout>

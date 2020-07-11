@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ng.rapetracker.R
@@ -42,6 +43,7 @@ class ActivityLogin : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark2)
         databaseRoom = DatabaseRoom.getDatabaseInstance(this)
         prefs = ClassSharedPreferences(this)
 

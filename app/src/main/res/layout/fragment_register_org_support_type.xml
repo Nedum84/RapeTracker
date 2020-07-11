@@ -12,24 +12,25 @@
         tools:context=".ui.fragment.act_login.FragmentLogin"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:padding="20dp"
+        android:background="@color/colorPrimaryDark2">
 
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:src="@drawable/app_logo_line1"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register as a Rape Support Organization"
+            android:text="Which support do you offer"
             android:layout_marginBottom="40dp"
-            android:textSize="22sp"
-            android:gravity="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Category"
-            android:layout_marginBottom="40dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:gravity="center"
             android:textSize="18sp"
-            android:gravity="center" />
+            android:textAllCaps="true"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rape_support_type_form_recycler"

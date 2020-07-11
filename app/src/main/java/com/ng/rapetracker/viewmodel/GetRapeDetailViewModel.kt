@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.ng.rapetracker.model.RapeDetail
+import com.ng.rapetracker.model.RapeSupportType
 import com.ng.rapetracker.repository.GetRapeDetailRepo
 import com.ng.rapetracker.room.DatabaseRoom
 import kotlinx.coroutines.CoroutineScope
@@ -30,7 +31,7 @@ class GetRapeDetailViewModel(application: Application): AndroidViewModel(applica
     }
 
     val allRapeDetails = getRapeDetailRepo.rapeDetails
-    val allRapeDetails2: LiveData<List<RapeDetail>> = database.rapeDetailDao.getAllRapeDetail()
+    val rapeSupportType: LiveData<List<RapeSupportType>> = getRapeDetailRepo.rapeSupportType
 
 
     override fun onCleared() {

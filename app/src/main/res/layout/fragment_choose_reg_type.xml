@@ -12,33 +12,41 @@
         tools:context=".ui.fragment.act_login.FragmentPromptToLogin"
         android:orientation="vertical"
         android:gravity="center"
+        android:background="@color/colorPrimaryDark2"
         android:padding="20dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@mipmap/ic_launcher" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register as:"
-            android:layout_marginTop="20dp"
-            android:textSize="24sp" />
+            android:text="Register As A:"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_margin="20dp"
+            android:textSize="20sp" />
 
 
         <Button
             android:id="@+id/regAsRapeVictimBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark2"
+            android:padding="20dp"
+            android:textSize="18sp"
             android:text="Rape Victim/Witness" />
 
         <Button
             android:id="@+id/regAsRapeSupportBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rape Support Organization" />
+            android:padding="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorRedDark"
+            android:text="Support Organization" />
 
     </LinearLayout>
 </layout>

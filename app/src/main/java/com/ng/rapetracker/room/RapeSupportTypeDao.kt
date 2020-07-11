@@ -18,7 +18,7 @@ interface RapeSupportTypeDao {
 
 
     @Query("SELECT * from $RAPE_SUPPORT_TYPE WHERE id = :id")
-    fun getRapeSupportById(id: Long): RapeSupportType?
+    suspend fun getRapeSupportById(id: Int): RapeSupportType?
 
 
     @Query("SELECT * FROM $RAPE_SUPPORT_TYPE ORDER BY id DESC")

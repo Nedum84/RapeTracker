@@ -25,4 +25,18 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="editText">
+        <item name="android:background">@drawable/design_border_bottom_edittext</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+        <item name="android:backgroundTint">@android:color/white</item>
+
+    </style>
+    <style name="fragTransition">
+        <item name="enterAnim">@anim/slide_in_right</item>
+        <item name="exitAnim">@anim/slide_out_left</item>
+        <item name="popEnterAnim">@anim/slide_in_left</item>
+        <item name="popExitAnim">@anim/slide_out_right</item>
+    </style>
+
 </resources>

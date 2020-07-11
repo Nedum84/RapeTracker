@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.core.content.ContextCompat
+import androidx.navigation.ActivityNavigator
 import com.ng.rapetracker.R
 import com.ng.rapetracker.utils.ClassSharedPreferences
 
 
-class ActivitySplash : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
 
 
@@ -29,4 +30,10 @@ class ActivitySplash : AppCompatActivity() {
             finish()
         }, 2000)
     }
+
+    override fun finish() {
+        super.finish()
+        ActivityNavigator.applyPopAnimationsToPendingTransition(this)
+    }
+
 }

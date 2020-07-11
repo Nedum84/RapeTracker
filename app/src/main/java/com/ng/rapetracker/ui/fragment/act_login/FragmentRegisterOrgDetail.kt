@@ -157,18 +157,14 @@ class FragmentRegisterOrgDetail : BaseFragment() {
 
         countryNameArray.add("Country")
         countryIdArray.add("-1")
-        countryNameArray.add(countryList[155].name)
+        countryNameArray.add(countryList[155].nicename.capitalize()+"(+${countryList[155].phonecode})")
         countryIdArray.add("${countryList[155].id}")
 
         for (element in countryList) {
-            countryNameArray.add(element.name)
+            countryNameArray.add(element.nicename.capitalize()+"(+${element.phonecode})")
             countryIdArray.add("${element.id}")
-
         }
-        val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, countryNameArray)
-        //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.orgCountry?.adapter = spinnerArrayAdapter
+        binding.orgCountry?.setItem(countryNameArray)
 
         binding.orgCountry?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -194,11 +190,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
             stateIdArray.add("${element.id}")
 
         }
-        val spinnerArrayAdapter = ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_dropdown_item, stateNameArray)
-        //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.orgState?.adapter = spinnerArrayAdapter
-
+        binding.orgState?.setItem(stateNameArray)
         binding.orgState?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
 

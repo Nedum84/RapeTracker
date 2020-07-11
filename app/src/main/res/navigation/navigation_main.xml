@@ -8,11 +8,13 @@
     <fragment
         android:id="@+id/fragmentMain"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentMain"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_fragmentMain_to_fragmentLogComplainForm1RapeVictim"
-            app:destination="@id/fragmentLogComplainForm1RapeVictim" />
+            app:destination="@id/fragmentLogComplainForm1RapeVictim"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_fragmentMain_to_fragmentProfile"
             app:destination="@id/fragmentProfile" />
@@ -23,8 +25,8 @@
     <fragment
         android:id="@+id/fragmentLogComplainForm1RapeVictim"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentLogComplainForm1RapeVictim"
-        android:label="fragment_log_complain_form1_rape_victim"
-        tools:layout="@layout/fragment_log_complain_form1_rape_victim" >
+        android:label="Log Rape Complain"
+        tools:layout="@layout/fragment_log_complain_form1_rape_victim">
         <action
             android:id="@+id/action_fragmentLogComplainForm1RapeVictim_to_fragmentLogComplainForm2TypeOfVictim"
             app:destination="@id/fragmentLogComplainForm2TypeOfVictim" />
@@ -38,8 +40,8 @@
     <fragment
         android:id="@+id/fragmentLogComplainForm2TypeOfVictim"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentLogComplainForm2TypeOfVictim"
-        android:label="fragment_log_complain_form2_type_of_victim"
-        tools:layout="@layout/fragment_log_complain_form2_type_of_victim" >
+        android:label="Log Rape Complain"
+        tools:layout="@layout/fragment_log_complain_form2_type_of_victim">
         <action
             android:id="@+id/action_fragmentLogComplainForm2TypeOfVictim_to_fragmentLogComplainForm3TypeOfRape"
             app:destination="@id/fragmentLogComplainForm3TypeOfRape" />
@@ -53,8 +55,8 @@
     <fragment
         android:id="@+id/fragmentLogComplainForm3TypeOfRape"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentLogComplainForm3TypeOfRape"
-        android:label="fragment_log_complain_form3_type_of_rape"
-        tools:layout="@layout/fragment_log_complain_form3_type_of_rape" >
+        android:label="Log Rape Complain"
+        tools:layout="@layout/fragment_log_complain_form3_type_of_rape">
         <action
             android:id="@+id/action_fragmentLogComplainForm3TypeOfRape_to_fragmentLogComplainForm4SelectSupport"
             app:destination="@id/fragmentLogComplainForm4SelectSupport" />
@@ -68,8 +70,8 @@
     <fragment
         android:id="@+id/fragmentLogComplainForm4SelectSupport"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentLogComplainForm4SelectSupport"
-        android:label="fragment_log_complain_form4_select_support"
-        tools:layout="@layout/fragment_log_complain_form4_select_support" >
+        android:label="Log Rape Complain"
+        tools:layout="@layout/fragment_log_complain_form4_select_support">
         <action
             android:id="@+id/action_fragmentLogComplainForm4SelectSupport_to_fragmentLogComplainForm5RapeDetail"
             app:destination="@id/fragmentLogComplainForm5RapeDetail" />
@@ -83,8 +85,8 @@
     <fragment
         android:id="@+id/fragmentLogComplainForm5RapeDetail"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentLogComplainForm5RapeDetail"
-        android:label="fragment_log_complain_form5_rape_detail"
-        tools:layout="@layout/fragment_log_complain_form5_rape_detail" >
+        android:label="Submit Complain"
+        tools:layout="@layout/fragment_log_complain_form5_rape_detail">
         <action
             android:id="@+id/action_fragmentLogComplainForm5RapeDetail_to_fragmentLogComplainForm4SelectSupport"
             app:destination="@id/fragmentLogComplainForm4SelectSupport" />
@@ -98,8 +100,8 @@
     <fragment
         android:id="@+id/fragmentProfile"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentProfile"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        android:label="My Profile"
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_fragmentProfile_to_fragmentMain"
             app:destination="@id/fragmentMain" />
@@ -107,8 +109,8 @@
     <fragment
         android:id="@+id/fragmentRapeDetail"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentRapeDetail"
-        android:label="fragment_rape_detail"
-        tools:layout="@layout/fragment_rape_detail" >
+        android:label="Details"
+        tools:layout="@layout/fragment_rape_detail">
         <action
             android:id="@+id/action_fragmentRapeDetail_to_fragmentMain"
             app:destination="@id/fragmentMain" />

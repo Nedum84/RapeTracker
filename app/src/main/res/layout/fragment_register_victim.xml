@@ -1,105 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.act_login.FragmentLogin"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="50dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
+        android:background="@color/colorPrimaryDark2"
+        android:padding="30dp"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register as a Rape Victim/Witness"
-            android:layout_marginBottom="40dp" />
+            tools:context=".ui.fragment.act_login.FragmentLogin"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/user_name"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Full name" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:src="@drawable/app_logo_line1"/>
 
-        <EditText
-            android:id="@+id/user_mobile_no"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Phone number"
-            android:inputType="phone"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textAllCaps="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  as a Rape Victim/Witness"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="italic"
+                    android:textSize="14sp"/>
 
-        <EditText
-            android:id="@+id/user_email"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"/>
+            </LinearLayout>
 
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Full name"
+                android:textColor="@color/colorPrimaryDark"
+                android:theme="@style/editText"/>
 
+            <EditText
+                android:id="@+id/user_mobile_no"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Phone number"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="phone"
+                android:theme="@style/editText"/>
 
-        <Spinner
-            android:id="@+id/user_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/user_age"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Age"
-            android:inputType="number"/>
-
-        <Spinner
-            android:id="@+id/user_country"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Spinner
-            android:id="@+id/user_state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-
-        <EditText
-            android:id="@+id/user_address"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Address" />
-
-        <EditText
-            android:id="@+id/user_password"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Password" />
-
-        <Button
-            android:id="@+id/register_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register" />
+            <EditText
+                android:id="@+id/user_email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Email"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textEmailAddress"
+                android:theme="@style/editText"/>
 
 
-        <TextView
-            android:id="@+id/reg_as_rape_support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register as Rape helping Organization"
-            android:textSize="18sp" />
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/user_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:smsp_floatingLabelColor="#fff"
+                app:smsp_floatingLabelText="Select Gender"
+                app:smsp_hint="Gender"
+                app:smsp_hintColor="@color/colorPrimaryDark"
+                app:smsp_arrowColor="@color/colorPrimaryDark"
+                app:smsp_underlineColor="@color/colorPrimaryDark"
+                app:smsp_underlineSize="1px"
+                app:smsp_hintSize="18sp"
+                android:spinnerMode="dialog"
+                app:smsp_arrowSize="18dp"
+                app:smsp_itemColor="#f2f2f2"
+                app:smsp_itemListColor="#555555"
+                app:smsp_enableErrorLabel="false"
+                app:smsp_itemListHintBackgroundColor="@color/colorPrimary"
+                app:smsp_itemListHintColor="#FFFFFF"
+                app:smsp_multilineError="false"
+                app:smsp_selectedItemListColor="#FF5252" />
 
-        <TextView
-            android:id="@+id/go_to_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Already have an account? Login"
-            android:layout_margin="12dp"
-            android:textSize="18sp" />
+            <EditText
+                android:id="@+id/user_age"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Age"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="number"
+                android:theme="@style/editText"/>
 
-    </LinearLayout>
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/user_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:smsp_floatingLabelColor="#fff"
+                app:smsp_floatingLabelText="Select Country"
+                app:smsp_hint="Country"
+                app:smsp_hintColor="@color/colorPrimaryDark"
+                app:smsp_arrowColor="@color/colorPrimaryDark"
+                app:smsp_underlineColor="@color/colorPrimaryDark"
+                app:smsp_underlineSize="1px"
+                app:smsp_hintSize="18sp"
+                android:spinnerMode="dialog"
+                app:smsp_isSearchable="true"
+                app:smsp_searchHeaderText="Select Country"
+                app:smsp_searchHeaderBackgroundColor="@color/colorPrimaryDark2"
+                app:smsp_searchHint="Search for country..."
+                app:smsp_searchHeaderTextColor="@color/colorPrimaryDark"
+                app:smsp_arrowSize="18dp"
+                app:smsp_itemColor="#f2f2f2"
+                app:smsp_enableErrorLabel="false"
+                app:smsp_itemListColor="@color/colorRedDark"
+                app:smsp_itemListHintBackgroundColor="@color/colorPrimary"
+                app:smsp_itemListHintColor="#FFFFFF"
+                app:smsp_multilineError="false"
+                app:smsp_selectedItemListColor="#FF5252" />
+
+
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/user_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:smsp_floatingLabelColor="#fff"
+                app:smsp_floatingLabelText="Select State"
+                app:smsp_hint="State"
+                app:smsp_hintColor="@color/colorPrimaryDark"
+                app:smsp_arrowColor="@color/colorPrimaryDark"
+                app:smsp_underlineColor="@color/colorPrimaryDark"
+                app:smsp_underlineSize="1px"
+                app:smsp_hintSize="18sp"
+                app:smsp_enableErrorLabel="false"
+                android:spinnerMode="dialog"
+                app:smsp_searchHeaderTextColor="@color/colorPrimaryDark"
+                app:smsp_arrowSize="18dp"
+                app:smsp_itemColor="#f2f2f2"
+                app:smsp_itemListColor="@color/colorRedDark"
+                app:smsp_itemListHintBackgroundColor="@color/colorPrimary"
+                app:smsp_itemListHintColor="#FFFFFF"
+                app:smsp_multilineError="false"
+                app:smsp_selectedItemListColor="#FF5252" />
+
+
+            <EditText
+                android:id="@+id/user_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/editText"
+                android:hint="Operational Address"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="text|textMultiLine"
+                android:minLines="2"
+                android:gravity="top"
+                android:maxLines="50"
+                android:textColor="@color/colorPrimaryDark"
+                android:scrollbars="vertical"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/user_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Password"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="text"
+                android:theme="@style/editText"
+                tools:ignore="TextFields" />
+            <TextView
+                android:id="@+id/go_to_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginTop="4dp"
+                android:text="Have an account? Login!"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                />
+
+
+            <Button
+                android:id="@+id/register_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/design_black_opacity"
+                android:layout_marginTop="20dp"
+                android:text="Register" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:background="#ccc"
+                    android:layout_weight="1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OR"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold|italic"
+                    android:padding="4dp"
+                    android:paddingRight="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:background="#ccc"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/reg_as_rape_support"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorRedDark"
+                android:padding="16dp"
+                android:text="Register as Rape Support Organization"
+                android:background="@color/colorWhite"
+                android:textSize="12sp"
+                android:gravity="center"
+                />
+
+
+
+        </LinearLayout>
+    </ScrollView>
 </layout>

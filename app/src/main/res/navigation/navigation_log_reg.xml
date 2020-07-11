@@ -12,10 +12,12 @@
         tools:layout="@layout/fragment_prompt_to_login" >
         <action
             android:id="@+id/action_fragmentPromptToLogin_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
+            app:destination="@id/fragmentLogin"
+            android:theme="@style/fragTransition" />
         <action
             android:id="@+id/action_fragmentPromptToLogin_to_fragmentChooseRegType"
-            app:destination="@id/fragmentChooseRegType" />
+            app:destination="@id/fragmentChooseRegType"
+            android:theme="@style/fragTransition"  />
     </fragment>
     <fragment
         android:id="@+id/fragmentLogin"
