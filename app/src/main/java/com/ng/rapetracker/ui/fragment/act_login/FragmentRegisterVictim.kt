@@ -171,8 +171,8 @@ class FragmentRegisterVictim : BaseFragment() {
 
 
     private fun genderSpinnerInitialize(){
-        val genderNameArray = arrayListOf("Gender", "Male", "Female")
-        val genderIdArray = arrayListOf("-1", "1", "2")
+        val genderNameArray = arrayListOf("Male", "Female")
+        val genderIdArray = arrayListOf( "1", "2")
 
 
         binding.userGender?.setItem(genderNameArray)
@@ -195,8 +195,8 @@ class FragmentRegisterVictim : BaseFragment() {
             val countryNameArray = arrayListOf<String>()
             val countryIdArray = arrayListOf<String>()
 
-            countryNameArray.add("Country")
-            countryIdArray.add("-1")
+//            countryNameArray.add("Country")
+//            countryIdArray.add("-1")
             countryNameArray.add(countryList[155].nicename.capitalize()+"(+${countryList[155].phonecode})")
             countryIdArray.add("${countryList[155].id}")
 
@@ -230,8 +230,8 @@ class FragmentRegisterVictim : BaseFragment() {
         val stateNameArray = arrayListOf<String>()
         val stateIdArray = arrayListOf<String>()
 
-        stateNameArray.add("State")
-        stateIdArray.add("-1")
+//        stateNameArray.add("State")
+//        stateIdArray.add("-1")
         for (element in stateList) {
             stateNameArray.add(element!!.name)
             stateIdArray.add("${element.id}")

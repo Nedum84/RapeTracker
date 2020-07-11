@@ -58,7 +58,7 @@ class  ClassSharedPreferences(val context: Context?){
 
     fun isLoggedIn():Boolean{
         return if (getAccessLevel()==1)
-            getCurOrgDetail()!=""
+            getCurUserDetail()!=""
         else
             getCurOrgDetail()!=""
     }

@@ -1,9 +1,11 @@
 package com.ng.rapetracker.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.ng.rapetracker.UrlHolder
 import com.ng.rapetracker.model.Organization
 import com.ng.rapetracker.model.RapeDetail
 import com.ng.rapetracker.model.RapeSupportType
@@ -11,10 +13,12 @@ import com.ng.rapetracker.model.User
 import com.ng.rapetracker.network.*
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.utils.ClassSharedPreferences
+import com.ng.rapetracker.utils.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class GetRapeDetailRepo(private val database: DatabaseRoom, val application: Application) {
 
@@ -30,9 +34,9 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
 
     suspend fun getRapeDetails(){
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-//            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .baseUrl(UrlHolder.URL_ROOT)
+//            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
@@ -57,6 +61,7 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
 //                _properties.value = listResult
                 database.rapeDetailDao.insertRapeDetail(listResult)
             } catch (e: Exception) {
+                e.printStackTrace()
 //                _status.value = MarsApiStatus.ERROR
 //                _properties.value = ArrayList()
             }

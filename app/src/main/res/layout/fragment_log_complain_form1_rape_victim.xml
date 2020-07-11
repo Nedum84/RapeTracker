@@ -12,7 +12,8 @@
         tools:context=".ui.fragment.act_login.FragmentLogin"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:padding="30dp"
+        android:background="@color/colorAshBg">
 
 
         <TextView
@@ -20,21 +21,76 @@
             android:layout_height="wrap_content"
             android:text="Log sexual abuse complain"
             android:layout_marginBottom="40dp"
-            android:textSize="22sp"
-            android:gravity="center" />
+            android:textSize="16sp"
+            android:gravity="center"
+            android:background="#B9FFFFFF"
+            android:padding="14dp"
+            android:textColor="@color/colorRedDark"
+            android:textAllCaps="true"/>
 
-
-        <Button
+        <LinearLayout
             android:id="@+id/rape_against_you_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rape against you" />
-
-        <Button
+            android:orientation="horizontal"
+            android:background="@drawable/design_border_grey"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+            <RelativeLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/design_border_yellow"
+                android:padding="6dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/v_pregnant_woman"/>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Rape against you"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/v_arrow_right"
+                android:tint="@color/colorRedDark"/>
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/against_someone_i_know_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Against someone you know" />
+            android:orientation="horizontal"
+            android:background="@drawable/design_border_grey"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+            <RelativeLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/design_border_yellow"
+                android:padding="6dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/v_baseline_rowing"/>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Against someone you know"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/v_arrow_right"
+                android:tint="@color/colorRedDark"/>
+        </LinearLayout>
 
 
     </LinearLayout>

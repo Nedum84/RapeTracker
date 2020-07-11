@@ -66,7 +66,7 @@ class FragmentMain : Fragment() {
         }
         
         CoroutineScope((IO)).launch {
-            if (prefs.getAccessLevel() == 1){
+            if (prefs.getAccessLevel() == 2){
                 val org = databaseRoom.rapeSupportTypeDao.getRapeSupportById(orgDetail.orgType)
                 withContext(Dispatchers.Main){
                     binding.noComplainTitleShowSupport.text = "No complain Logged for ${org!!.rapeSupportType} at this Moment"
@@ -97,10 +97,6 @@ class FragmentMain : Fragment() {
         })
 
 
-        getRapeViewModel.rapeSupportType.observe(viewLifecycleOwner, Observer {
-
-        })
-
 
         binding.logComplainBtn.setOnClickListener {
             this.findNavController().navigate(FragmentMainDirections.actionFragmentMainToFragmentLogComplainForm1RapeVictim())
@@ -111,5 +107,19 @@ class FragmentMain : Fragment() {
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        getRapeViewModel.allRapeDetails.observe(viewLifecycleOwner, Observer {
+            it?.apply {
+                ADAPTER.addNewItems(it)
+            }
+        })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getRapeViewModel.refreshRapeDetail()
+    }
 
 }

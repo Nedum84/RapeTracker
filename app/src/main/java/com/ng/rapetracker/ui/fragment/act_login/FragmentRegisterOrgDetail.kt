@@ -155,8 +155,8 @@ class FragmentRegisterOrgDetail : BaseFragment() {
         val countryNameArray = arrayListOf<String>()
         val countryIdArray = arrayListOf<String>()
 
-        countryNameArray.add("Country")
-        countryIdArray.add("-1")
+//        countryNameArray.add("Country")
+//        countryIdArray.add("-1")
         countryNameArray.add(countryList[155].nicename.capitalize()+"(+${countryList[155].phonecode})")
         countryIdArray.add("${countryList[155].id}")
 
@@ -183,8 +183,8 @@ class FragmentRegisterOrgDetail : BaseFragment() {
         val stateNameArray = arrayListOf<String>()
         val stateIdArray = arrayListOf<String>()
 
-        stateNameArray.add("Select State")
-        stateIdArray.add("-1")
+//        stateNameArray.add("Select State")
+//        stateIdArray.add("-1")
         for (element in stateList) {
             stateNameArray.add(element.name)
             stateIdArray.add("${element.id}")

@@ -2,6 +2,7 @@ package com.ng.rapetracker.network
 
 import com.google.gson.annotations.SerializedName
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.ng.rapetracker.UrlHolder
 import com.ng.rapetracker.model.RapeDetail
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -15,7 +16,6 @@ import retrofit2.http.*
 import com.ng.rapetracker.network.ServerResponse as ServerResponse1
 
 
-const val BASE_URL = "https://mars.udacity.com/"
 
 val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -29,12 +29,12 @@ val retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
 //    .addConverterFactory(MoshiConverterFactory.create(moshi))
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl(BASE_URL)
+    .baseUrl(UrlHolder.URL_ROOT)
     .build()
 
 //WITHOUT MOSHI
 private val retrofit2 = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(UrlHolder.URL_ROOT)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -47,7 +47,8 @@ interface GetRapeDetailService {
      * HTTP method
      */
     @GET("get_rape_detail.php")
-    fun getRapeDetail(@Query("type") type: String, @Query("user_id_org_type") user_id_org_type: String, @Query("last_id") last_inserted_id: String):
-    // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
-            Deferred<List<RapeDetail>>
+    fun getRapeDetail(@Query("type") type: String,
+                      @Query("user_id_org_type") user_id_org_type: String,
+                      @Query("last_id") last_inserted_id: String
+    ):Deferred<List<RapeDetail>>
 }

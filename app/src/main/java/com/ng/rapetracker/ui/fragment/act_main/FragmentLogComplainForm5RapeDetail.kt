@@ -127,6 +127,7 @@ class FragmentLogComplainForm5RapeDetail : BaseFragment() {
                             }else{
                                 //Redirect...
                                 rapeComplainFormViewModel.setRapeComplainLogSuccessful(true)
+                                context!!.toast("Complain logged Successfully...")
                             }
                         }
                     } else {

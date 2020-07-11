@@ -41,7 +41,8 @@ class AdapterRapeDetail(val clickListener: RapeDetailClickListener) : ListAdapte
     class ViewHolder private constructor(val binding: ItemRapeDetailBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: RapeDetailClickListener, rapeDetail: RapeDetail) {
 
-            binding.rapeDetailItem.text = "Hellow World!!! ${rapeDetail.id}"
+            binding.rapeVictim.text = if (rapeDetail.rapeAgainstYou)"Rape Victim" else "Rape witness"
+            binding.rapeDate.text = ""
 
             binding.rapeDetail = rapeDetail
             binding.clickListener = clickListener
