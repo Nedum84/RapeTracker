@@ -42,9 +42,9 @@ class FragmentLogin : BaseFragment() {
         thisContext = requireActivity()
         appCtx= requireNotNull(activity).application
 
-        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
-        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
-            ModelLoginActivity::class.java)
+//        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+//        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
+//            ModelLoginActivity::class.java)
 
         binding.password.transformationMethod = PasswordTransformationMethod()
 
@@ -61,6 +61,15 @@ class FragmentLogin : BaseFragment() {
 
 
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        viewModelLoginActivity = requireActivity().run{
+            ViewModelProvider(this, viewModelFactory).get(ModelLoginActivity::class.java)
+        }
     }
 
 
@@ -100,8 +109,10 @@ class FragmentLogin : BaseFragment() {
                                         //Save and Redirect...
                                         viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
 
-                                        startActivity(Intent(activity!!, MainActivity::class.java))
-                                        activity!!.finish()
+                                        activity!!.let {
+                                            startActivity(Intent(it, MainActivity::class.java))
+                                            it.finish()
+                                        }
                                     } else {
                                         context!!.toast(serverResponse.respMessage!!)
                                     }

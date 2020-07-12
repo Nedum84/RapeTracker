@@ -29,6 +29,7 @@ import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
 import com.ng.rapetracker.viewmodel.ModelLoginActivity
+import com.ng.rapetracker.viewmodel.ModelMainActivity
 import kotlinx.coroutines.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -55,9 +56,9 @@ class FragmentRegisterVictim : BaseFragment() {
         appCtx= requireNotNull(activity).application
         databaseRoom = DatabaseRoom.getDatabaseInstance(thisContext)
 
-        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
-        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
-            ModelLoginActivity::class.java)
+//        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+//        viewModelLoginActivity = ViewModelProvider(viewLifecycleOwner, viewModelFactory).get(
+//            ModelLoginActivity::class.java)
 
 
         binding.userPassword.transformationMethod = PasswordTransformationMethod()
@@ -85,8 +86,9 @@ class FragmentRegisterVictim : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         val viewModelFactory = ModelLoginActivity.Factory(appCtx)
-        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
-            ModelLoginActivity::class.java)
+        viewModelLoginActivity = requireActivity().run{
+            ViewModelProvider(this, viewModelFactory).get(ModelLoginActivity::class.java)
+        }
         binding.registerBtn.setOnClickListener {
 
             registerUser()
@@ -144,8 +146,10 @@ class FragmentRegisterVictim : BaseFragment() {
                                             val obj = JSONObject(serverResponse!!.otherDetail!!)
                                             //Save and Redirect...
                                             viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
-                                            startActivity(Intent(activity!!, MainActivity::class.java))
-                                            activity!!.finish()
+                                            activity?.let {
+                                                startActivity(Intent(it, MainActivity::class.java))
+                                                it.finish()
+                                            }
 
                                         } catch (e: JSONException) {
                                             e.printStackTrace()

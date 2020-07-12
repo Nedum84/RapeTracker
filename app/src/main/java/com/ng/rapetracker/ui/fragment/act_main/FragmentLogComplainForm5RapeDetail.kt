@@ -24,6 +24,7 @@ import com.ng.rapetracker.model.User
 import com.ng.rapetracker.network.*
 import com.ng.rapetracker.network.RetrofitConstant.Companion.retrofitWithJsonRes
 import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.ClassAlertDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
 import com.ng.rapetracker.viewmodel.RapeComplainFormViewModel
@@ -70,6 +71,11 @@ class FragmentLogComplainForm5RapeDetail : BaseFragment() {
             RapeComplainFormViewModel::class.java)
 
         binding.rapeLogComplainBtn.setOnClickListener {
+            if(ClassSharedPreferences(requireContext()).getAccessLevel()==2){
+                ClassAlertDialog(requireActivity()).alertMessage("You cannot Log Rape Complain because you are a Support Organization")
+                return@setOnClickListener
+            }
+
 
             launch {
                 logComplain()

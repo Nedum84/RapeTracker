@@ -1,14 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.act_main.FragmentRapeDetail">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.fragment.act_main.FragmentRapeDetail"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reported By"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginTop="15dp"
+                android:background="#40777777"
+                android:textColor="#777"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="8dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bdbdbd" />
+
+            <TextView
+                android:id="@+id/rape_reporter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Emeka Chidera / +234918932133"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorRedDark"
+                android:textIsSelectable="true"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rape victim"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginTop="15dp"
+                android:background="#40777777"
+                android:textColor="#777"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="8dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bdbdbd" />
+
+            <TextView
+                android:id="@+id/rape_victim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reporting By Myself/ Reporting for someone I know or as a Witness"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorRedDark" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Victim Involved"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginTop="15dp"
+                android:background="#40777777"
+                android:textColor="#777"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="8dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bdbdbd" />
+
+            <TextView
+                android:id="@+id/type_of_victim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Women under 18 years"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorRedDark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Form of Sexual Harassment"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginTop="15dp"
+                android:background="#40777777"
+                android:textColor="#777"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="8dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bdbdbd" />
+
+            <TextView
+                android:id="@+id/type_of_rape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gang Rape"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorRedDark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Support Needed"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginTop="15dp"
+                android:background="#40777777"
+                android:textColor="#777"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="8dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bdbdbd" />
+
+            <TextView
+                android:id="@+id/type_of_support"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Counselling"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorRedDark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address of Occurrence"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginTop="15dp"
+                android:background="#40777777"
+                android:textColor="#777"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="8dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bdbdbd" />
+
+            <TextView
+                android:id="@+id/address_of_occurrence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorRedDark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail of the Incident"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginTop="15dp"
+                android:background="#40777777"
+                android:textColor="#777"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="8dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bdbdbd" />
+
+            <TextView
+                android:id="@+id/rape_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorRedDark" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

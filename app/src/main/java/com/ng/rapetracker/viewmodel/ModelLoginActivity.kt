@@ -70,6 +70,7 @@ class ModelLoginActivity(application: Application) : AndroidViewModel(applicatio
                 )
                 prefs.setCurOrgDetail(Gson().toJson(org))
             }
+
             prefs.setAccessLevel(details.getInt("access_level"))
         } catch (e: Exception) {
             e.printStackTrace()

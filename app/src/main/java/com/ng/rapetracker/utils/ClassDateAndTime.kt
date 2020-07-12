@@ -1,4 +1,4 @@
-package com.happinesstonic.utils
+package com.ng.rapetracker.utils
 
 import android.text.format.DateUtils
 import java.text.SimpleDateFormat

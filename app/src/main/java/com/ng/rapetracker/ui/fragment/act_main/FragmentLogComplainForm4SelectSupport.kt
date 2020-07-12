@@ -10,10 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ng.rapetracker.R
-import com.ng.rapetracker.adapter.AdapterRapeSupportOrgType
-import com.ng.rapetracker.adapter.AdapterRapeType
-import com.ng.rapetracker.adapter.RapeSupportOrgClickListener
-import com.ng.rapetracker.adapter.RapeTypeClickListener
+import com.ng.rapetracker.adapter.*
 import com.ng.rapetracker.databinding.FragmentLogComplainForm3TypeOfRapeBinding
 import com.ng.rapetracker.databinding.FragmentLogComplainForm4SelectSupportBinding
 import com.ng.rapetracker.model.RapeDetail
@@ -22,7 +19,7 @@ import com.ng.rapetracker.viewmodel.RapeComplainFormViewModel
 class FragmentLogComplainForm4SelectSupport : Fragment() {
 
     lateinit var rapeComplainFormViewModel: RapeComplainFormViewModel
-    lateinit var ADAPTER : AdapterRapeSupportOrgType
+    lateinit var ADAPTER : AdapterRapeSupportOrgType_LogForm
     lateinit var binding: FragmentLogComplainForm4SelectSupportBinding
     lateinit var rapeDetail: RapeDetail
 
@@ -50,7 +47,7 @@ class FragmentLogComplainForm4SelectSupport : Fragment() {
 
 
 
-        ADAPTER = AdapterRapeSupportOrgType(RapeSupportOrgClickListener {
+        ADAPTER = AdapterRapeSupportOrgType_LogForm(RapeSupportOrgClickListener {
             rapeDetail.rapeSupportType = it.id
             this.findNavController().navigate(FragmentLogComplainForm4SelectSupportDirections.actionFragmentLogComplainForm4SelectSupportToFragmentLogComplainForm5RapeDetail(rapeDetail))
         })

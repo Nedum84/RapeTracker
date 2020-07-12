@@ -16,7 +16,7 @@ interface RapeTypeDao {
     fun updateRapeType(rapeType: RapeType)
 
     @Query("SELECT * from $RAPE_TYPE WHERE id = :id")
-    fun getRapeTypeById(id: Long): RapeType?
+    suspend fun getRapeTypeById(id: Long): RapeType?
 
 
     @Query("SELECT * FROM $RAPE_TYPE ORDER BY id DESC")

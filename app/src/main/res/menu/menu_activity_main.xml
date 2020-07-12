@@ -9,13 +9,19 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
     <item
+        android:id="@+id/log_complain2"
+        android:title="Log Complain"
+        android:icon="@drawable/v_plus"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/refresh_list"
         android:title="Refresh"
+        android:visible="false"
         android:icon="@drawable/v_refresh_360"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
     <item
-        android:id="@+id/refresh_app"
+        android:id="@+id/share_app"
         android:title="Share"
         android:icon="@drawable/v_share"
         app:showAsAction="always"

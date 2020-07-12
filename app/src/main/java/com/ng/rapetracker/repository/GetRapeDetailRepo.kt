@@ -23,14 +23,33 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 class GetRapeDetailRepo(private val database: DatabaseRoom, val application: Application) {
 
 
-//    val videos: LiveData<List<RapeDetail>> =
-//        Transformations.map(database.rapeDetailDao.getAllRapeDetail()) {
-//            it.asDomainModel()
-//        }
-    val rapeDetails: LiveData<List<RapeDetail>> = database.rapeDetailDao.getAllRapeDetail()
+    var type:Int = 0
+    var user_id_org_type = 0
+    val prefs = ClassSharedPreferences(application)
+    init {
+        if (prefs.getAccessLevel() == 1){
+            type = 1
+            user_id_org_type = Gson().fromJson(prefs.getCurUserDetail(), User::class.java).id
+        }else if (prefs.getAccessLevel() == 2){
+            type = 2
+            user_id_org_type = Gson().fromJson(prefs.getCurOrgDetail(), Organization::class.java).orgType
+        }
+    }
+
+
+
+//    val rapeDetails = database.rapeDetailDao.getAllRapeDetail()
+    val rapeDetails: LiveData<List<RapeDetail>> = if (prefs.getAccessLevel()==1){
+        database.rapeDetailDao.getUserRapeDetail(user_id_org_type.toLong())
+    }else if (prefs.getAccessLevel()==2){
+        database.rapeDetailDao.getSupportRapeDetail(user_id_org_type.toLong())
+    }else{
+        database.rapeDetailDao.getAllRapeDetail()
+    }
+
     val rapeSupportType: LiveData<List<RapeSupportType>> = database.rapeSupportTypeDao.getAllRapeSupport()
-//    private val lastInsertId = database.rapeDetailDao.getRecentRapeDetail()
-    private val lastInsertId = "00"
+    private val lastInsertId = database.rapeDetailDao.getRecentRapeDetail().value?.id ?: "0"
+//    private val lastInsertId = "00"
 
     suspend fun getRapeDetails(){
         val retrofit = Retrofit.Builder()
@@ -40,16 +59,6 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
-        var type:Int = 0
-        var user_id_org_type = 0
-        val prefs = ClassSharedPreferences(application)
-        if (prefs.getAccessLevel() == 1){
-            type = 1
-            user_id_org_type = Gson().fromJson(prefs.getCurUserDetail(), User::class.java).id
-        }else if (prefs.getAccessLevel() == 2){
-            type = 2
-            user_id_org_type = Gson().fromJson(prefs.getCurOrgDetail(), Organization::class.java).orgType
-        }
         val rapeDetailService = retrofit
             .create(GetRapeDetailService::class.java)
             .getRapeDetail("$type", "$user_id_org_type","${lastInsertId}")

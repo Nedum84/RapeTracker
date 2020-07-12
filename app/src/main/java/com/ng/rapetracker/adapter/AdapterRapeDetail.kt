@@ -1,6 +1,7 @@
 package com.ng.rapetracker.adapter
 
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,16 +9,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.rapetracker.databinding.ItemRapeDetailBinding
 import com.ng.rapetracker.model.RapeDetail
+import com.ng.rapetracker.room.DatabaseRoom
+import com.ng.rapetracker.utils.ClassDateAndTime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class AdapterRapeDetail(val clickListener: RapeDetailClickListener) : ListAdapter<RapeDetail,AdapterRapeDetail.ViewHolder>(RapeDetailDiffCallback()) {
+class AdapterRapeDetail(val app:Application, val clickListener: RapeDetailClickListener) : ListAdapter<RapeDetail,AdapterRapeDetail.ViewHolder>(RapeDetailDiffCallback()) {
 
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
+    var databaseRoom = DatabaseRoom.getDatabaseInstance(app)
 
     fun addNewItems(list: List<RapeDetail>?) {
         adapterScope.launch {
@@ -31,7 +35,7 @@ class AdapterRapeDetail(val clickListener: RapeDetailClickListener) : ListAdapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val curItem = getItem(position)
 
-        holder.bind(clickListener, curItem)
+        holder.bind(clickListener, curItem,databaseRoom)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,14 +43,22 @@ class AdapterRapeDetail(val clickListener: RapeDetailClickListener) : ListAdapte
     }
 
     class ViewHolder private constructor(val binding: ItemRapeDetailBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: RapeDetailClickListener, rapeDetail: RapeDetail) {
+        fun bind(clickListener: RapeDetailClickListener, rapeDetail: RapeDetail,databaseRoom:DatabaseRoom) {
 
             binding.rapeVictim.text = if (rapeDetail.rapeAgainstYou)"Rape Victim" else "Rape witness"
-            binding.rapeDate.text = ""
+            binding.rapeDate.text = ClassDateAndTime().checkDateTimeFirst(rapeDetail.dateAdded)
+            CoroutineScope(Dispatchers.Default).launch {
+                try {
+                    val rapeType = databaseRoom.rapeTypeDao.getRapeTypeById(rapeDetail.typeOfRape.toLong())
+                    binding.typeOfRape.text = rapeType!!.rapeType
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
 
             binding.rapeDetail = rapeDetail
             binding.clickListener = clickListener
-            binding.executePendingBindings()
+//            binding.executePendingBindings()
         }
 
         companion object {

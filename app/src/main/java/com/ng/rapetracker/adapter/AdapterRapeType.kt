@@ -1,6 +1,7 @@
 package com.ng.rapetracker.adapter
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ng.rapetracker.R
 import com.ng.rapetracker.databinding.ItemRapeTypeFormBinding
 import com.ng.rapetracker.model.RapeType
+import com.ng.rapetracker.utils.ClassAlertDialog
 
 
 class AdapterRapeType(private val clickListener: RapeTypeClickListener) : RecyclerView.Adapter<AdapterRapeType.ViewHolder>() {
 
+    var mCtx:Context? = null
     var rapeTypes: List<RapeType> = emptyList()
         set(value) {
             field = value
@@ -32,12 +35,19 @@ class AdapterRapeType(private val clickListener: RapeTypeClickListener) : Recycl
         val layoutInflater = LayoutInflater.from(parent.context)
 //        val binding = ItemRapeTypeFormBinding.inflate(layoutInflater, parent, false)
         val binding: ItemRapeTypeFormBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_rape_type_form, parent, false)
+        mCtx = parent.context
         return ViewHolder(binding)
     }
 
     inner class ViewHolder(val binding: ItemRapeTypeFormBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(clickListener: RapeTypeClickListener, rapeType: RapeType) {
+
+            binding.rapeTypeInfo.setOnClickListener {
+                mCtx?.let {
+                    ClassAlertDialog(it).alertMessage(rapeType.rapeDescription)
+                }
+            }
 
             binding.rapeType = rapeType
             binding.clickListener = clickListener

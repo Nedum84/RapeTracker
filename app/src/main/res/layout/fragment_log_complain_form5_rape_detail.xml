@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,44 +13,126 @@
         tools:context=".ui.fragment.act_login.FragmentLogin"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:padding="30dp"
+        android:background="@color/colorAshBg">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Describe the Incidence"
-            android:textSize="24sp"
-            android:layout_marginBottom="40dp" />
+            android:layout_marginBottom="30dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="#B9FFFFFF"
+            android:padding="14dp"
+            android:textColor="@color/colorRedDark"
+            android:textAllCaps="true"/>
 
-        <EditText
-            android:id="@+id/rape_address"
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Address of occurrence" />
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/rape_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address of occurrence"
+                    android:background="@drawable/design_border_white"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="text|textMultiLine"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:maxLines="50"
+                    android:padding="12dp"
+                    android:scrollbars="vertical"
+                    tools:ignore="Autofill"
+                    android:layout_marginBottom="20dp"/>
 
 
-        <EditText
-            android:id="@+id/rape_details"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Details of Sexual Abuse" />
+                <EditText
+                    android:id="@+id/rape_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Details of Sexual Abuse"
+                    android:background="@drawable/design_border_white"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:inputType="text|textMultiLine"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:maxLines="50"
+                    android:padding="12dp"
+                    android:layout_marginBottom="30dp"
+                    android:scrollbars="vertical"
+                    tools:ignore="Autofill"  />
 
 
-        <Button
-            android:id="@+id/rape_log_complain_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log Complain" />
+                <com.github.florent37.shapeofview.shapes.BubbleView
+                    android:id="@+id/rape_log_complain_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shape_bubble_arrowHeight="0dp"
+                    app:shape_bubble_arrowWidth="0dp"
+                    app:shape_bubble_arrowPosition="top"
+                    app:shape_bubble_borderRadius="60dp"
+                    android:layout_gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Log Complain"
+                            android:textAllCaps="true"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:padding="12dp" />
+
+                    </LinearLayout>
+
+                </com.github.florent37.shapeofview.shapes.BubbleView>
+                <com.github.florent37.shapeofview.shapes.BubbleView
+                    android:id="@+id/rape_cancel_log_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shape_bubble_arrowHeight="0dp"
+                    app:shape_bubble_arrowWidth="0dp"
+                    app:shape_bubble_arrowPosition="top"
+                    app:shape_bubble_borderRadius="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorWhite"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cancel"
+                            android:textAllCaps="true"
+                            android:textStyle="bold"
+                            android:textColor="#111"
+                            android:padding="12dp" />
+
+                    </LinearLayout>
+
+                </com.github.florent37.shapeofview.shapes.BubbleView>
 
 
-        <TextView
-            android:id="@+id/rape_cancel_log_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:layout_margin="12dp"
-            android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </layout>

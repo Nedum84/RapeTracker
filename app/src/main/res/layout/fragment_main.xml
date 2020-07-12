@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,15 +15,16 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/title_show"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rape Complains"
+            android:text="...My Rape Complains..."
             android:layout_marginBottom="10dp"
             android:textSize="16sp"
             android:textStyle="bold"
             android:gravity="center"
             android:background="#B4FFFFFF"
-            android:padding="14dp"
+            android:padding="8dp"
             android:textColor="@color/colorRedDark"
             android:textAllCaps="true"/>
 
