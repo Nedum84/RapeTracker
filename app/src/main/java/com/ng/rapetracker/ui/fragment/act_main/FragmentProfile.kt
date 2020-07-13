@@ -5,56 +5,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import com.ng.rapetracker.R
+import com.ng.rapetracker.databinding.FragmentProfileBinding
+import com.ng.rapetracker.databinding.FragmentRapeDetailBinding
+import com.ng.rapetracker.model.Organization
+import com.ng.rapetracker.model.RapeDetail
+import com.ng.rapetracker.model.User
+import com.ng.rapetracker.room.DatabaseRoom
+import com.ng.rapetracker.utils.ClassSharedPreferences
+import com.ng.rapetracker.viewmodel.GetRapeDetailViewModel
+import com.ng.rapetracker.viewmodel.factory.GetRapeDetailViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentProfile.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentProfile : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    lateinit var prefs: ClassSharedPreferences
+    lateinit var databaseRoom: DatabaseRoom
+    lateinit var binding: FragmentProfileBinding
+    lateinit var rapeDetail: RapeDetail
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var orgDetail:Organization
+    lateinit var userDetail:User
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentProfile.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentProfile().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+
+        prefs = ClassSharedPreferences(requireActivity())
+
+        val application = requireNotNull(this.activity).application
+        databaseRoom = DatabaseRoom.getDatabaseInstance(application)
+
+
+        if (prefs.getAccessLevel() == 1){
+            userDetail = Gson().fromJson(prefs.getCurUserDetail(), User::class.java)
+            binding.typeOfUser.text = "Registered as a Rape Victim/Witness"
+        }else if (prefs.getAccessLevel() == 2){
+            orgDetail = Gson().fromJson(prefs.getCurOrgDetail(), Organization::class.java)
+
+
+
+            CoroutineScope((Dispatchers.Default)).launch {
+                val org = databaseRoom.rapeSupportTypeDao.getRapeSupportById(orgDetail.orgType)
+                binding.typeOfUser.text = "Registered as Support Organization (\"${org!!.rapeSupportType}\")"
             }
+        }
+
+        return binding.root
     }
 }
