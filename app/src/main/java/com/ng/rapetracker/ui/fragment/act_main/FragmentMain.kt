@@ -2,8 +2,10 @@ package com.ng.rapetracker.ui.fragment.act_main
 
 import android.app.Activity
 import android.content.Context
+import android.content.Context.*
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -101,7 +103,13 @@ class FragmentMain : Fragment() {
                         }
                     }
                 }else{
-                    ADAPTER.addNewItems(it)
+
+                    activity?.let{act->
+                        act.runOnUiThread {
+                            ADAPTER.addNewItems(it)
+                        }
+                    }
+                    binding.noComplainWrapper.visibility = View.GONE
                 }
             }
         })
@@ -116,6 +124,7 @@ class FragmentMain : Fragment() {
 
         return binding.root
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

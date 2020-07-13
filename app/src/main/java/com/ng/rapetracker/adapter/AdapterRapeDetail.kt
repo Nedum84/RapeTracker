@@ -2,8 +2,11 @@ package com.ng.rapetracker.adapter
 
 
 import android.app.Application
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +34,6 @@ class AdapterRapeDetail(val app:Application, val clickListener: RapeDetailClickL
             }
         }
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val curItem = getItem(position)
 
@@ -45,20 +47,25 @@ class AdapterRapeDetail(val app:Application, val clickListener: RapeDetailClickL
     class ViewHolder private constructor(val binding: ItemRapeDetailBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: RapeDetailClickListener, rapeDetail: RapeDetail,databaseRoom:DatabaseRoom) {
 
-            binding.rapeVictim.text = if (rapeDetail.rapeAgainstYou)"Rape Victim" else "Rape witness"
-            binding.rapeDate.text = ClassDateAndTime().checkDateTimeFirst(rapeDetail.dateAdded)
-            CoroutineScope(Dispatchers.Default).launch {
-                try {
-                    val rapeType = databaseRoom.rapeTypeDao.getRapeTypeById(rapeDetail.typeOfRape.toLong())
-                    binding.typeOfRape.text = rapeType!!.rapeType
-                } catch (e: Exception) {
-                    e.printStackTrace()
+            try {
+                binding.rapeReporter?.text = rapeDetail.userName.split("/")[0].trim()
+                binding.rapeVictim?.text = if (rapeDetail.rapeAgainstYou)"Rape Victim" else "Rape witness"
+                binding.rapeDate?.text = ClassDateAndTime().checkDateTimeFirst(rapeDetail.dateAdded)
+                CoroutineScope(Dispatchers.Default).launch {
+                    try {
+                        val rapeType = databaseRoom.rapeTypeDao.getRapeTypeById(rapeDetail.typeOfRape.toLong())
+                        binding.typeOfRape?.text = rapeType!!.rapeType
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
-            }
 
-            binding.rapeDetail = rapeDetail
-            binding.clickListener = clickListener
-//            binding.executePendingBindings()
+                binding.rapeDetail = rapeDetail
+                binding.clickListener = clickListener
+                binding.executePendingBindings()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         companion object {

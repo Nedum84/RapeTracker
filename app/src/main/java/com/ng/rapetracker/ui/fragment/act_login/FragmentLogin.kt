@@ -19,6 +19,7 @@ import com.ng.rapetracker.network.RetrofitConstant.Companion.retrofitWithJsonRes
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.ClassProgressDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
 import kotlinx.coroutines.launch
@@ -81,6 +82,8 @@ class FragmentLogin : BaseFragment() {
         if (isEmpty(emailMobileNo) || isEmpty(password)){
             context.let {it!!.toast("Enter both fields")}
         }else{
+            val pDialog = ClassProgressDialog(thisContext, "Login you In...")
+            pDialog.createDialog()
 
             val loginService = retrofitWithJsonRes.create(LoginRegService::class.java)
             loginService.loginRequest(
@@ -89,10 +92,14 @@ class FragmentLogin : BaseFragment() {
                 password
             ).enqueue(object: Callback<ServerResponse> {
                 override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
+                    pDialog.dismissDialog()
+                    t.printStackTrace()
                     requireContext().toast("No internet connect!")
                 }
 
                 override fun onResponse(call: Call<ServerResponse>,response: Response<ServerResponse>) {
+                    pDialog.dismissDialog()
+
                     if (response.isSuccessful) {
                         if (response.body() != null) {
 

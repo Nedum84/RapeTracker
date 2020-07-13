@@ -19,14 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="...My Rape Complains..."
-            android:layout_marginBottom="10dp"
             android:textSize="16sp"
             android:textStyle="bold"
             android:gravity="center"
             android:background="#B4FFFFFF"
-            android:padding="8dp"
+            android:padding="12dp"
             android:textColor="@color/colorRedDark"
             android:textAllCaps="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#bdbdbd"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -37,8 +40,10 @@
 
         <LinearLayout
             android:id="@+id/noComplainWrapper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="40dp"
             android:visibility="gone"
             android:orientation="vertical">
             <TextView
@@ -49,11 +54,43 @@
                 android:textSize="20sp"
                 android:gravity="center" />
 
-            <Button
+            <com.github.florent37.shapeofview.shapes.BubbleView
                 android:id="@+id/logComplainBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Log Complain" />
+                app:shape_bubble_arrowHeight="0dp"
+                app:shape_bubble_arrowWidth="0dp"
+                app:shape_bubble_arrowPosition="top"
+                app:shape_bubble_borderRadius="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="4dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Log New Complain"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:padding="12dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/v_arrow_right"
+                        android:tint="@color/colorWhite"
+                        android:layout_marginStart="-8dp"/>
+
+                </LinearLayout>
+
+            </com.github.florent37.shapeofview.shapes.BubbleView>
+
+
         </LinearLayout>
 
 

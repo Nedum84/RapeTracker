@@ -24,6 +24,7 @@ import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgDetailArgs.fromBundle
+import com.ng.rapetracker.utils.ClassProgressDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
 import com.ng.rapetracker.viewmodel.ModelLoginActivity
@@ -93,6 +94,8 @@ class FragmentRegisterOrgDetail : BaseFragment() {
         }else if(orgPassword.length <6){
             requireContext().toast("Password should not be at least 6 characters")
         }else{
+            val pDialog = ClassProgressDialog(thisContext, "Processing Registration...")
+            pDialog.createDialog()
 
             val registerOrgService = RetrofitConstant.retrofitWithJsonRes.create(LoginRegService::class.java)
             registerOrgService.registerOrgRequest(
@@ -107,10 +110,13 @@ class FragmentRegisterOrgDetail : BaseFragment() {
                 orgPassword
             ).enqueue(object: Callback<ServerResponse> {
                 override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
+                    pDialog.dismissDialog()
+                    t.printStackTrace()
                     requireContext().toast("No internet connect!")
                 }
 
                 override fun onResponse(call: Call<ServerResponse>,response: Response<ServerResponse>) {
+                    pDialog.dismissDialog()
                     if (response.isSuccessful) {
                         if (response.body() != null) {
 
@@ -126,8 +132,11 @@ class FragmentRegisterOrgDetail : BaseFragment() {
                                         //Save and Redirect...
                                         viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
 
-                                        startActivity(Intent(activity!!, MainActivity::class.java))
-                                        activity!!.finish()
+                                        activity?.let {
+                                            startActivity(Intent(it, MainActivity::class.java))
+                                            it.finish()
+                                        }
+
                                     } else {
                                         context!!.toast(serverResponse.respMessage!!)
                                     }

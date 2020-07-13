@@ -13,11 +13,18 @@
         <action
             android:id="@+id/action_fragmentPromptToLogin_to_fragmentLogin"
             app:destination="@id/fragmentLogin"
-            android:theme="@style/fragTransition" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"  />
         <action
             android:id="@+id/action_fragmentPromptToLogin_to_fragmentChooseRegType"
             app:destination="@id/fragmentChooseRegType"
-            android:theme="@style/fragTransition"  />
+            android:theme="@style/fragTransition"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"  />
     </fragment>
     <fragment
         android:id="@+id/fragmentLogin"
@@ -26,13 +33,14 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_fragmentLogin_to_fragmentChooseRegType"
-            app:destination="@id/fragmentChooseRegType" />
-        <action
-            android:id="@+id/action_fragmentLogin_to_fragmentPromptToLogin"
-            app:destination="@id/fragmentPromptToLogin" />
-        <action
-            android:id="@+id/action_fragmentLogin_to_fragmentPromptToLogin2"
-            app:destination="@id/fragmentPromptToLogin" />
+            app:destination="@id/fragmentChooseRegType"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/fragmentChooseRegType"
+            app:popUpToInclusive="true" />
+
     </fragment>
     <fragment
         android:id="@+id/fragmentRegisterVictim"
@@ -41,10 +49,20 @@
         tools:layout="@layout/fragment_register_victim" >
         <action
             android:id="@+id/action_fragmentRegisterVictim_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
+            app:destination="@id/fragmentLogin"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/fragmentLogin"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_fragmentRegisterVictim_to_fragmentRegisterOrgSupportType"
-            app:destination="@id/fragmentRegisterOrgSupportType" />
+            app:destination="@id/fragmentRegisterOrgSupportType"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/fragmentRegisterOrgSupportType"
@@ -53,10 +71,16 @@
         tools:layout="@layout/fragment_register_org_support_type" >
         <action
             android:id="@+id/action_fragmentRegisterOrgSupportType_to_fragmentRegisterOrgDetail"
-            app:destination="@id/fragmentRegisterOrgDetail" />
+            app:destination="@id/fragmentRegisterOrgDetail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_fragmentRegisterOrgSupportType_to_fragmentChooseRegType"
-            app:destination="@id/fragmentChooseRegType" />
+            app:destination="@id/fragmentChooseRegType"
+            app:popUpTo="@id/fragmentChooseRegType"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentRegisterOrgDetail"
@@ -74,15 +98,22 @@
         tools:layout="@layout/fragment_choose_reg_type" >
         <action
             android:id="@+id/action_fragmentChooseRegType_to_fragmentRegisterOrgSupportType"
-            app:destination="@id/fragmentRegisterOrgSupportType" />
-        <action
-            android:id="@+id/action_fragmentChooseRegType_to_fragmentRegisterOrgSupportType2"
-            app:destination="@id/fragmentRegisterOrgSupportType" />
+            app:destination="@id/fragmentRegisterOrgSupportType"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_fragmentChooseRegType_to_fragmentRegisterVictim"
-            app:destination="@id/fragmentRegisterVictim" />
+            app:destination="@id/fragmentRegisterVictim"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_fragmentChooseRegType_to_fragmentPromptToLogin"
-            app:destination="@id/fragmentPromptToLogin" />
+            app:destination="@id/fragmentPromptToLogin"
+            app:popUpTo="@id/fragmentPromptToLogin"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

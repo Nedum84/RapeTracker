@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
+    android:label="Rape Report"
     app:startDestination="@id/fragmentMain">
 
     <fragment
@@ -13,14 +14,24 @@
         <action
             android:id="@+id/action_fragmentMain_to_fragmentLogComplainForm1RapeVictim"
             app:destination="@id/fragmentLogComplainForm1RapeVictim"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fragmentMain_to_fragmentProfile"
-            app:destination="@id/fragmentProfile" />
+            app:destination="@id/fragmentProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fragmentMain_to_fragmentRapeDetail"
-            app:destination="@id/fragmentRapeDetail" />
+            app:destination="@id/fragmentRapeDetail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"  />
     </fragment>
     <fragment
         android:id="@+id/fragmentLogComplainForm1RapeVictim"
@@ -29,13 +40,11 @@
         tools:layout="@layout/fragment_log_complain_form1_rape_victim">
         <action
             android:id="@+id/action_fragmentLogComplainForm1RapeVictim_to_fragmentLogComplainForm2TypeOfVictim"
-            app:destination="@id/fragmentLogComplainForm2TypeOfVictim" />
-        <action
-            android:id="@+id/action_fragmentLogComplainForm1RapeVictim_to_fragmentLogComplainForm2TypeOfVictim2"
-            app:destination="@id/fragmentLogComplainForm2TypeOfVictim" />
-        <action
-            android:id="@+id/action_fragmentLogComplainForm1RapeVictim_to_fragmentMain"
-            app:destination="@id/fragmentMain" />
+            app:destination="@id/fragmentLogComplainForm2TypeOfVictim"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/fragmentLogComplainForm2TypeOfVictim"
@@ -44,10 +53,11 @@
         tools:layout="@layout/fragment_log_complain_form2_type_of_victim">
         <action
             android:id="@+id/action_fragmentLogComplainForm2TypeOfVictim_to_fragmentLogComplainForm3TypeOfRape"
-            app:destination="@id/fragmentLogComplainForm3TypeOfRape" />
-        <action
-            android:id="@+id/action_fragmentLogComplainForm2TypeOfVictim_to_fragmentLogComplainForm1RapeVictim"
-            app:destination="@id/fragmentLogComplainForm1RapeVictim" />
+            app:destination="@id/fragmentLogComplainForm3TypeOfRape"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="updatedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />
@@ -59,10 +69,11 @@
         tools:layout="@layout/fragment_log_complain_form3_type_of_rape">
         <action
             android:id="@+id/action_fragmentLogComplainForm3TypeOfRape_to_fragmentLogComplainForm4SelectSupport"
-            app:destination="@id/fragmentLogComplainForm4SelectSupport" />
-        <action
-            android:id="@+id/action_fragmentLogComplainForm3TypeOfRape_to_fragmentLogComplainForm2TypeOfVictim"
-            app:destination="@id/fragmentLogComplainForm2TypeOfVictim" />
+            app:destination="@id/fragmentLogComplainForm4SelectSupport"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="updatedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />
@@ -74,10 +85,11 @@
         tools:layout="@layout/fragment_log_complain_form4_select_support">
         <action
             android:id="@+id/action_fragmentLogComplainForm4SelectSupport_to_fragmentLogComplainForm5RapeDetail"
-            app:destination="@id/fragmentLogComplainForm5RapeDetail" />
-        <action
-            android:id="@+id/action_fragmentLogComplainForm4SelectSupport_to_fragmentLogComplainForm3TypeOfRape"
-            app:destination="@id/fragmentLogComplainForm3TypeOfRape" />
+            app:destination="@id/fragmentLogComplainForm5RapeDetail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"  />
         <argument
             android:name="updatedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />
@@ -87,33 +99,25 @@
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentLogComplainForm5RapeDetail"
         android:label="Submit Complain"
         tools:layout="@layout/fragment_log_complain_form5_rape_detail">
-        <action
-            android:id="@+id/action_fragmentLogComplainForm5RapeDetail_to_fragmentLogComplainForm4SelectSupport"
-            app:destination="@id/fragmentLogComplainForm4SelectSupport" />
         <argument
             android:name="updatedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />
         <action
             android:id="@+id/action_fragmentLogComplainForm5RapeDetail_to_fragmentMain"
-            app:destination="@id/fragmentMain" />
+            app:destination="@id/fragmentMain"
+            app:popUpTo="@id/fragmentMain"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentProfile"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentProfile"
         android:label="My Profile"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_fragmentProfile_to_fragmentMain"
-            app:destination="@id/fragmentMain" />
-    </fragment>
+        tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/fragmentRapeDetail"
         android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentRapeDetail"
-        android:label="Details"
+        android:label="Rape Report Details"
         tools:layout="@layout/fragment_rape_detail">
-        <action
-            android:id="@+id/action_fragmentRapeDetail_to_fragmentMain"
-            app:destination="@id/fragmentMain" />
         <argument
             android:name="selectedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />

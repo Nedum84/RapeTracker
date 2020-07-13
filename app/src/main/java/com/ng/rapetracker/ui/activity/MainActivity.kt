@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.ng.rapetracker.R
 import com.ng.rapetracker.utils.ClassAlertDialog
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     lateinit var prefs:ClassSharedPreferences
     lateinit var modelMainActivity: ModelMainActivity
+    var firstTimeLaunch = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_main_activity)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
+//        if (findNavController().currentDestination?.id == R.id.currentFragment) {
+//            findNavController().navigate(R.id.action_current_next)
+//        }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             if(destination.id == R.id.fragmentMain||destination.id == R.id.fragmentProfile||destination.id == R.id.fragmentRapeDetail) {
 //                supportActionBar?.show()
@@ -50,10 +55,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            if (destination.id == R.id.fragmentMain){
-                showMenuItems()
-            }else{
-                hideMenuItems()
+            if (firstTimeLaunch !=0){
+                if (destination.id == R.id.fragmentMain){
+                    showMenuItems()
+                }else{
+                    hideMenuItems()
+                }
             }
         }
     }
@@ -89,8 +96,10 @@ class MainActivity : AppCompatActivity() {
     private var profile: MenuItem? = null
     private var logout: MenuItem? = null
     private fun showMenuItems(){
-        log_complain!!.isVisible = true
-        log_complain2!!.isVisible = true
+        if(prefs.getAccessLevel()==1){
+            log_complain!!.isVisible = true
+            log_complain2!!.isVisible = true
+        }
         profile!!.isVisible = true
         logout!!.isVisible = true
     }
@@ -108,6 +117,11 @@ class MainActivity : AppCompatActivity() {
         profile = menu.findItem(R.id.profile)
         logout = menu.findItem(R.id.logout)
 
+        if(prefs.getAccessLevel()==2){
+            menu.findItem(R.id.log_complain).isVisible = false
+            menu.findItem(R.id.log_complain2).isVisible = false
+        }
+        firstTimeLaunch++
         return true
     }
 

@@ -26,6 +26,7 @@ import com.ng.rapetracker.network.ServerResponse
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
+import com.ng.rapetracker.utils.ClassProgressDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
 import com.ng.rapetracker.viewmodel.ModelLoginActivity
@@ -113,6 +114,8 @@ class FragmentRegisterVictim : BaseFragment() {
             }else if(userPassword.length <6){
                 requireContext().toast("Password should not be at least 6 characters")
             }else{
+                val pDialog = ClassProgressDialog(thisContext, "Processing Registration...")
+                pDialog.createDialog()
 
                 val registerService = RetrofitConstant.retrofitWithJsonRes.create(LoginRegService::class.java)
                 registerService.registerRequest(
@@ -128,11 +131,14 @@ class FragmentRegisterVictim : BaseFragment() {
                     userPassword
                 ).enqueue(object: Callback<ServerResponse> {
                     override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
+                        pDialog.dismissDialog()
                         t.printStackTrace()
                         requireContext().toast("No internet connection!")
                     }
 
                     override fun onResponse(call: Call<ServerResponse>,response: Response<ServerResponse>) {
+                        pDialog.dismissDialog()
+
                         if (response.isSuccessful) {
                             if (response.body() != null) {
 
