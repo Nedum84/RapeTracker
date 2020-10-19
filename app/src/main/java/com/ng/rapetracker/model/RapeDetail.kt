@@ -54,5 +54,13 @@ class RapeDetail (
 
     @Json(name = "date_added")//for moshi
     @ColumnInfo(name = "date_added")
-    var dateAdded:Long = System.currentTimeMillis()
+    var dateAdded:Long = System.currentTimeMillis(),
+
+    @Json(name = "nysc_agent_id")//for moshi
+    @ColumnInfo(name = "nysc_agent_id")
+    var nyscAgentId:Int=0,
+
+    @Json(name = "is_case_resolved")//for moshi
+    @ColumnInfo(name = "is_case_resolved")
+    var isAaseResolved:Int = 0
 ):Parcelable

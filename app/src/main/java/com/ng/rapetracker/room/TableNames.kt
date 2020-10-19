@@ -10,6 +10,8 @@ class TableNames {
         const val RAPE_TYPE_OF_VICTIM = "rape_type_of_victim_table"
         const val COUNTRY = "country_table"
         const val STATE = "state_table"
+        const val SARC_SUPPORT = "sarc_support"
+        const val NYSC_AGENT = "nysc_agent"
 
 
 

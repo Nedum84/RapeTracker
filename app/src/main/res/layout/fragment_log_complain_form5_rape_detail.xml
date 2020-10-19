@@ -46,10 +46,10 @@
                     android:background="@drawable/design_border_white"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:inputType="text|textMultiLine"
-                    android:minLines="2"
+                    android:minLines="1"
                     android:gravity="top"
                     android:maxLines="50"
-                    android:padding="12dp"
+                    android:padding="16dp"
                     android:scrollbars="vertical"
                     tools:ignore="Autofill"
                     android:layout_marginBottom="20dp"/>
@@ -63,17 +63,52 @@
                     android:background="@drawable/design_border_white"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:inputType="text|textMultiLine"
-                    android:minLines="2"
+                    android:minLines="1"
                     android:gravity="top"
                     android:maxLines="50"
-                    android:padding="12dp"
+                    android:padding="16dp"
                     android:layout_marginBottom="30dp"
                     android:scrollbars="vertical"
                     tools:ignore="Autofill"  />
 
 
                 <com.github.florent37.shapeofview.shapes.BubbleView
-                    android:id="@+id/rape_log_complain_btn"
+                    android:id="@+id/select_nysc_agent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shape_bubble_arrowHeight="0dp"
+                    app:shape_bubble_arrowWidth="0dp"
+                    app:shape_bubble_arrowPosition="top"
+                    app:shape_bubble_borderRadius="60dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/design_border_white"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="4dp">
+                        <TextView
+                            android:id="@+id/nysc_agent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select closest NYSC agent"
+                            android:textAllCaps="true"
+                            android:textStyle="bold"
+                            android:padding="12dp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/v_arrow_right"
+                            android:tint="@color/colorRedDark"/>
+                    </LinearLayout>
+
+                </com.github.florent37.shapeofview.shapes.BubbleView>
+
+                <com.github.florent37.shapeofview.shapes.BubbleView
+                    android:id="@+id/next_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:shape_bubble_arrowHeight="0dp"
@@ -91,41 +126,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Log Complain"
+                            android:text="Next"
                             android:textAllCaps="true"
                             android:textStyle="bold"
                             android:textColor="#fff"
                             android:padding="12dp" />
 
-                    </LinearLayout>
-
-                </com.github.florent37.shapeofview.shapes.BubbleView>
-                <com.github.florent37.shapeofview.shapes.BubbleView
-                    android:id="@+id/rape_cancel_log_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:shape_bubble_arrowHeight="0dp"
-                    app:shape_bubble_arrowWidth="0dp"
-                    app:shape_bubble_arrowPosition="top"
-                    app:shape_bubble_borderRadius="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorWhite"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        android:padding="4dp">
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cancel"
-                            android:textAllCaps="true"
-                            android:textStyle="bold"
-                            android:textColor="#111"
-                            android:padding="12dp" />
-
+                            android:src="@drawable/v_arrow_right"
+                            android:tint="@color/colorWhite"/>
                     </LinearLayout>
 
                 </com.github.florent37.shapeofview.shapes.BubbleView>

@@ -1,6 +1,7 @@
 package com.ng.rapetracker.adapter
 
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
@@ -45,11 +46,12 @@ class AdapterRapeDetail(val app:Application, val clickListener: RapeDetailClickL
     }
 
     class ViewHolder private constructor(val binding: ItemRapeDetailBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: RapeDetailClickListener, rapeDetail: RapeDetail,databaseRoom:DatabaseRoom) {
+        @SuppressLint("SetTextI18n")
+        fun bind(clickListener: RapeDetailClickListener, rapeDetail: RapeDetail, databaseRoom:DatabaseRoom) {
 
             try {
-                binding.rapeReporter?.text = rapeDetail.userName.split("/")[0].trim()
-                binding.rapeVictim?.text = if (rapeDetail.rapeAgainstYou)"Rape Victim" else "Rape witness"
+                binding.rapeReporter?.text = "By: "+rapeDetail.userName.split("/")[0].trim()
+                binding.rapeVictim?.text = if (rapeDetail.rapeAgainstYou)"Victim" else "witness"
                 binding.rapeDate?.text = ClassDateAndTime().checkDateTimeFirst(rapeDetail.dateAdded)
                 CoroutineScope(Dispatchers.Default).launch {
                     try {
@@ -97,6 +99,7 @@ class RapeDetailDiffCallback : DiffUtil.ItemCallback<RapeDetail>() {
         return oldItem.id == newItem.id
     }
 
+    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: RapeDetail, newItem: RapeDetail): Boolean {
         return oldItem == newItem
     }

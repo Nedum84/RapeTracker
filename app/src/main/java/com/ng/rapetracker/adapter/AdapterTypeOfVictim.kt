@@ -3,14 +3,8 @@ package com.ng.rapetracker.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ng.rapetracker.R
-import com.ng.rapetracker.databinding.ItemRapeTypeFormBinding
 import com.ng.rapetracker.databinding.ItemRapeVictimFormBinding
-import com.ng.rapetracker.model.RapeType
 import com.ng.rapetracker.model.RapeTypeOfVictim
 
 

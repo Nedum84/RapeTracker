@@ -83,7 +83,8 @@ interface LogRapeComplainService {
         @Part("user_id") user_id: String,
         @Part("user_name") user_name: String,
         @Part("user_age") user_age: String,
-        @Part("date_added") date_added: String
+        @Part("date_added") date_added: String,
+        @Part("nysc_agent_id") nysc_agent_id: String
     ): Call<ServerResponse>
 }
 

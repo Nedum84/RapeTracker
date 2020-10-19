@@ -43,6 +43,10 @@ interface RapeDetailDao {
 
     @Query("SELECT * FROM $RAPE_DETAIL_TABLE  WHERE user_id = :id ORDER BY id DESC")
     fun getUserRapeDetail(id: Long): LiveData<List<RapeDetail>>
+
+    @Query("SELECT * FROM $RAPE_DETAIL_TABLE  WHERE nysc_agent_id = :id ORDER BY id DESC")
+    fun getNYSCAgentRapeDetail(id: Long): LiveData<List<RapeDetail>>
+
     @Query("SELECT * FROM $RAPE_DETAIL_TABLE  WHERE rape_support_type = :id ORDER BY id DESC")
     fun getSupportRapeDetail(id: Long): LiveData<List<RapeDetail>>
 

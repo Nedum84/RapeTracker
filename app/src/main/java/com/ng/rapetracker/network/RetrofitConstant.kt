@@ -15,7 +15,7 @@ class RetrofitConstant {
             .build()
 
         //    Retrofit with json response
-        val retrofitWithJsonRes: Retrofit = Retrofit.Builder()
+        val RetrofitConstantGET: Retrofit = Retrofit.Builder()
             .baseUrl(URL_ROOT)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())

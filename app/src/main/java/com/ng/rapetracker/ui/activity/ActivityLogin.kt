@@ -1,8 +1,9 @@
 package com.ng.rapetracker.ui.activity
 
+import android.content.Context
 import android.content.Intent
+import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -21,14 +22,11 @@ import com.ng.rapetracker.viewmodel.ModelLoginActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 class ActivityLogin : AppCompatActivity() {
@@ -50,8 +48,6 @@ class ActivityLogin : AppCompatActivity() {
         val viewModelFactory = ModelLoginActivity.Factory(application)
         viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(ModelLoginActivity::class.java)
         viewModelLoginActivity.setGotoMainActivity(false)
-
-
 
         if (prefs.isLoggedIn()){
             startActivity(Intent(this, MainActivity::class.java))
@@ -91,7 +87,7 @@ class ActivityLogin : AppCompatActivity() {
 
     fun getDefaultValues(){
 
-        val defaultListService = RetrofitConstant.retrofitWithJsonRes.create(GetDefaultListService::class.java)
+        val defaultListService = RetrofitConstant.RetrofitConstantGET.create(GetDefaultListService::class.java)
 
         defaultListService.getListRequest("all").enqueue(object: Callback<ServerResponse> {
             override fun onFailure(call: Call<ServerResponse>, t: Throwable) {

@@ -6,10 +6,7 @@ import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.ng.rapetracker.UrlHolder
-import com.ng.rapetracker.model.Organization
-import com.ng.rapetracker.model.RapeDetail
-import com.ng.rapetracker.model.RapeSupportType
-import com.ng.rapetracker.model.User
+import com.ng.rapetracker.model.*
 import com.ng.rapetracker.network.*
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.utils.ClassSharedPreferences
@@ -32,6 +29,9 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
             user_id_org_type = Gson().fromJson(prefs.getCurUserDetail(), User::class.java).id
         }else if (prefs.getAccessLevel() == 2){
             type = 2
+            user_id_org_type = Gson().fromJson(prefs.getCurNYSCAgent(), NYSCagent::class.java).agent_id
+        }else{
+            type = 3
             user_id_org_type = Gson().fromJson(prefs.getCurOrgDetail(), Organization::class.java).orgType
         }
     }
@@ -42,6 +42,8 @@ class GetRapeDetailRepo(private val database: DatabaseRoom, val application: App
     val rapeDetails: LiveData<List<RapeDetail>> = if (prefs.getAccessLevel()==1){
         database.rapeDetailDao.getUserRapeDetail(user_id_org_type.toLong())
     }else if (prefs.getAccessLevel()==2){
+        database.rapeDetailDao.getNYSCAgentRapeDetail(user_id_org_type.toLong())
+    }else if (prefs.getAccessLevel()==3){
         database.rapeDetailDao.getSupportRapeDetail(user_id_org_type.toLong())
     }else{
         database.rapeDetailDao.getAllRapeDetail()

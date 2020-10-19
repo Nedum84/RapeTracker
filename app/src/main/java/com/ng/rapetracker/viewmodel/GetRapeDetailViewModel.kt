@@ -3,8 +3,6 @@ package com.ng.rapetracker.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import com.ng.rapetracker.model.RapeDetail
 import com.ng.rapetracker.model.RapeSupportType
 import com.ng.rapetracker.repository.GetRapeDetailRepo
 import com.ng.rapetracker.room.DatabaseRoom

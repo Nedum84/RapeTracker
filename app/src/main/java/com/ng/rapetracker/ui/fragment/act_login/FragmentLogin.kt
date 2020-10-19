@@ -15,8 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.ng.rapetracker.viewmodel.ModelLoginActivity
 import com.ng.rapetracker.databinding.FragmentLoginBinding
 import com.ng.rapetracker.network.*
-import com.ng.rapetracker.network.RetrofitConstant.Companion.retrofitWithJsonRes
-import com.ng.rapetracker.room.DatabaseRoom
+import com.ng.rapetracker.network.RetrofitConstant.Companion.RetrofitConstantGET
 import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.utils.ClassProgressDialog
@@ -28,20 +27,15 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import timber.log.Timber
 
 
 class FragmentLogin : BaseFragment() {
     lateinit var binding: FragmentLoginBinding
-    lateinit var thisContext:Activity
-    lateinit var appCtx: Application
     lateinit var viewModelLoginActivity:ModelLoginActivity
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,xsavedInstanceState: Bundle?): View? {
         binding = FragmentLoginBinding.inflate(inflater)
-        thisContext = requireActivity()
-        appCtx= requireNotNull(activity).application
 
 //        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
 //        viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
@@ -50,7 +44,7 @@ class FragmentLogin : BaseFragment() {
         binding.password.transformationMethod = PasswordTransformationMethod()
 
         binding.goToRegister.setOnClickListener {
-            this.findNavController().navigate(FragmentLoginDirections.actionFragmentLoginToFragmentChooseRegType())
+//            this.findNavController().navigate(FragmentLoginDirections.actionFragmentLoginToFragmentChooseRegType())
         }
 
         binding.loginBtn.setOnClickListener {
@@ -67,7 +61,7 @@ class FragmentLogin : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        val viewModelFactory = ModelLoginActivity.Factory(application)
         viewModelLoginActivity = requireActivity().run{
             ViewModelProvider(this, viewModelFactory).get(ModelLoginActivity::class.java)
         }
@@ -85,7 +79,7 @@ class FragmentLogin : BaseFragment() {
             val pDialog = ClassProgressDialog(thisContext, "Login you In...")
             pDialog.createDialog()
 
-            val loginService = retrofitWithJsonRes.create(LoginRegService::class.java)
+            val loginService = RetrofitConstantGET.create(LoginRegService::class.java)
             loginService.loginRequest(
                 "login",
                 emailMobileNo,
@@ -114,7 +108,7 @@ class FragmentLogin : BaseFragment() {
 
 
                                         //Save and Redirect...
-                                        viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
+                                        viewModelLoginActivity.saveUserDetails(obj)
 
                                         activity!!.let {
                                             startActivity(Intent(it, MainActivity::class.java))

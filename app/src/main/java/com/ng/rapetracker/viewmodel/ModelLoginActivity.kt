@@ -3,17 +3,16 @@ package com.ng.rapetracker.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import com.google.gson.Gson
-import com.happinesstonic.Event
+import com.ng.rapetracker.Event
 import com.ng.rapetracker.model.*
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.utils.ClassSharedPreferences
-import com.ng.rapetracker.utils.toast
 import org.json.JSONObject
 
 
 class ModelLoginActivity(application: Application) : AndroidViewModel(application) {
     val appCtx = application
-
+    val prefs:ClassSharedPreferences by lazy { ClassSharedPreferences(application) }
     init {
 
     }
@@ -36,11 +35,12 @@ class ModelLoginActivity(application: Application) : AndroidViewModel(applicatio
 
 
     //saving user's details
-    fun saveUserDetails(other_detail: JSONObject?, prefs:ClassSharedPreferences) {
+    fun saveUserDetails(other_detail: JSONObject?) {
         try {
             val details = other_detail!!.getJSONArray("userDetails").getJSONObject(0)
 
-            if (details!!.getInt("access_level") == 1){
+            val accessLevel = details!!.getInt("access_level")
+            if (accessLevel == 1){
                 val user = User(
                     details.getInt("id"),
                     details.getString("user_name"),
@@ -52,10 +52,23 @@ class ModelLoginActivity(application: Application) : AndroidViewModel(applicatio
                     details.getInt("user_state"),
                     details.getString("user_address"),
                     details.getString("user_reg_date"),
-                    details.getInt("access_level")
+                    accessLevel
                 )
                 prefs.setCurUserDetail(Gson().toJson(user))
-            }else{
+            }else if (accessLevel == 2){//NYSC
+                val nyscA = NYSCagent(
+                    agent_id = details.getInt("agent_id"),
+                    name = details.getString("name"),
+                    state_code = details.getString("state_code"),
+                    address = details.getString("address"),
+                    latitude = details.getString("latitude"),
+                    longitude = details.getString("longitude"),
+                    mobile_no = details.getString("mobile_no"),
+                    email = details.getString("email"),
+                    cases_attended = details.getInt("cases_attended")
+                )
+                prefs.setCurNYSCAgent(Gson().toJson(nyscA))
+            }else{//Org
                 val org = Organization(
                     details.getInt("id"),
                     details.getString("org_name"),
@@ -71,7 +84,7 @@ class ModelLoginActivity(application: Application) : AndroidViewModel(applicatio
                 prefs.setCurOrgDetail(Gson().toJson(org))
             }
 
-            prefs.setAccessLevel(details.getInt("access_level"))
+            prefs.setAccessLevel(accessLevel)
         } catch (e: Exception) {
             e.printStackTrace()
         }

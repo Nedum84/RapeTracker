@@ -9,10 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.ng.rapetracker.R
 import com.ng.rapetracker.adapter.AdapterRapeDetail
 import com.ng.rapetracker.databinding.FragmentLogComplainForm1RapeVictimBinding
 import com.ng.rapetracker.model.RapeDetail
+import com.ng.rapetracker.model.User
+import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.viewmodel.GetRapeDetailViewModel
 import com.ng.rapetracker.viewmodel.factory.GetRapeDetailViewModelFactory
 
@@ -27,7 +30,10 @@ class FragmentLogComplainForm1RapeVictim : Fragment() {
 
         binding.lifecycleOwner = this
 
+        val userDetail = Gson().fromJson(ClassSharedPreferences(requireActivity()).getCurUserDetail(), User::class.java)
         val rapeDetail = RapeDetail(0, false,0,0,0,"","",0,"",0)
+        rapeDetail.userName = userDetail.userName
+
         binding.rapeAgainstYouBtn.setOnClickListener {
             rapeDetail.rapeAgainstYou = true
             this.findNavController().navigate(FragmentLogComplainForm1RapeVictimDirections.actionFragmentLogComplainForm1RapeVictimToFragmentLogComplainForm2TypeOfVictim(rapeDetail))

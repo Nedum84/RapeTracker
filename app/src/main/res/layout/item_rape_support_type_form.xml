@@ -38,6 +38,7 @@
             android:text="@{rapeSupport.rapeSupportType}"
             android:hint="Litigation Support"
             android:layout_weight="1"
+            android:textColor="@color/colorRedDark"
             android:layout_marginStart="6dp"/>
         <ImageView
             android:layout_width="wrap_content"

@@ -2,16 +2,11 @@ package com.ng.rapetracker.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.happinesstonic.Event
+import com.ng.rapetracker.Event
 import com.ng.rapetracker.model.RapeDetail
 import com.ng.rapetracker.model.RapeType
 import com.ng.rapetracker.model.RapeTypeOfVictim
 import com.ng.rapetracker.room.DatabaseRoom
-import com.ng.rapetracker.room.DatabaseRoom.Companion.getDatabaseInstance
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 
 class RapeComplainFormViewModel(rapeDetail: RapeDetail, application: Application) : AndroidViewModel(application) {
 

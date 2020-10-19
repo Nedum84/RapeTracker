@@ -19,8 +19,11 @@ class FragmentPromptToLogin : Fragment() {
         binding.gotoLoginBtn.setOnClickListener {
             this.findNavController().navigate(FragmentPromptToLoginDirections.actionFragmentPromptToLoginToFragmentLogin())
         }
-        binding.gotoRegBtn.setOnClickListener {
-            this.findNavController().navigate(FragmentPromptToLoginDirections.actionFragmentPromptToLoginToFragmentChooseRegType())
+        binding.nyscRegBtn.setOnClickListener {
+            this.findNavController().navigate(FragmentPromptToLoginDirections.actionFragmentPromptToLoginToFragmentRegisterNYSCAgent())
+        }
+        binding.victimRegBtn.setOnClickListener {
+            this.findNavController().navigate(FragmentPromptToLoginDirections.actionFragmentPromptToLoginToFragmentRegisterVictim())
         }
         return binding.root
     }

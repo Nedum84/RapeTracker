@@ -17,10 +17,12 @@ import com.ng.rapetracker.R
 import com.ng.rapetracker.adapter.AdapterRapeDetail
 import com.ng.rapetracker.adapter.RapeDetailClickListener
 import com.ng.rapetracker.databinding.FragmentMainBinding
+import com.ng.rapetracker.model.NYSCagent
 import com.ng.rapetracker.model.Organization
 import com.ng.rapetracker.model.RapeSupportType
 import com.ng.rapetracker.model.User
 import com.ng.rapetracker.room.DatabaseRoom
+import com.ng.rapetracker.ui.fragment.BaseFragment
 import com.ng.rapetracker.utils.ClassAlertDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.viewmodel.GetRapeDetailViewModel
@@ -34,17 +36,15 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 
-class FragmentMain : Fragment() {
-    lateinit var prefs:ClassSharedPreferences
-    lateinit var thisContext:Activity
-
+class FragmentMain : BaseFragment() {
     lateinit var ADAPTER : AdapterRapeDetail
     lateinit var binding:FragmentMainBinding
     lateinit var getRapeViewModel:GetRapeDetailViewModel
     lateinit var modelMainActivity: ModelMainActivity
-    lateinit var databaseRoom: DatabaseRoom
+    val databaseRoom: DatabaseRoom by lazy { DatabaseRoom.getDatabaseInstance(thisContext.application) }
     lateinit var orgDetail:Organization
     lateinit var userDetail:User
+    lateinit var nysCagent: NYSCagent
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -54,25 +54,25 @@ class FragmentMain : Fragment() {
         val application = requireNotNull(this.activity).application
         val viewModelFactory = GetRapeDetailViewModelFactory(application)
         getRapeViewModel = ViewModelProvider(this, viewModelFactory).get(GetRapeDetailViewModel::class.java)
-        thisContext = requireActivity()
-        prefs = ClassSharedPreferences(thisContext)
 
-        databaseRoom = DatabaseRoom.getDatabaseInstance(application)
         binding.lifecycleOwner = this
 
 
+        when (prefs.getAccessLevel()){
+             1 -> {
+                userDetail = Gson().fromJson(prefs.getCurUserDetail(), User::class.java)
+                binding.titleShow.text = "...My Rape Complains..."
+            }
+            2 -> {nysCagent = Gson().fromJson(prefs.getCurNYSCAgent(), NYSCagent::class.java)}
+            3 -> {
+                orgDetail = Gson().fromJson(prefs.getCurOrgDetail(), Organization::class.java)
 
-        if (prefs.getAccessLevel() == 1){
-            userDetail = Gson().fromJson(prefs.getCurUserDetail(), User::class.java)
-            binding.titleShow.text = "...My Rape Complains..."
-        }else if (prefs.getAccessLevel() == 2){
-            orgDetail = Gson().fromJson(prefs.getCurOrgDetail(), Organization::class.java)
 
 
-
-            CoroutineScope((Dispatchers.Default)).launch {
-                val org = databaseRoom.rapeSupportTypeDao.getRapeSupportById(orgDetail.orgType)
-                binding.titleShow.text = "\"${org!!.rapeSupportType}\" Complains"
+                CoroutineScope((Dispatchers.Default)).launch {
+                    val org = databaseRoom.rapeSupportTypeDao.getRapeSupportById(orgDetail.orgType)
+                    binding.titleShow.text = "\"${org!!.rapeSupportType}\" Complains"
+                }
             }
         }
 
@@ -93,12 +93,15 @@ class FragmentMain : Fragment() {
                 if (it.isEmpty()){
                     if (prefs.getAccessLevel()==1){
                         binding.noComplainWrapper.visibility = View.VISIBLE
+                    }else if (prefs.getAccessLevel()==2){
+                        binding.noComplainForSupport.visibility = View.VISIBLE
+                        binding.noComplainTitleShowSupport.text = "NYSC member login at this Moment ${nysCagent.name}"
                     }else{
                         binding.noComplainForSupport.visibility = View.VISIBLE
                         CoroutineScope((Dispatchers.Default)).launch {
                             val org = databaseRoom.rapeSupportTypeDao.getRapeSupportById(orgDetail.orgType)
                             withContext(Dispatchers.Main){
-                                binding.noComplainTitleShowSupport.text = "No complain Logged for ${org!!.rapeSupportType} at this Moment"
+//                                binding.noComplainTitleShowSupport.text = "No complain Logged for ${org!!.rapeSupportType} at this Moment"
                             }
                         }
                     }
@@ -106,10 +109,10 @@ class FragmentMain : Fragment() {
 
                     activity?.let{act->
                         act.runOnUiThread {
-                            ADAPTER.addNewItems(it)
+//                            ADAPTER.addNewItems(it)
                         }
                     }
-                    binding.noComplainWrapper.visibility = View.GONE
+//                    binding.noComplainWrapper.visibility = View.GONE
                 }
             }
         })

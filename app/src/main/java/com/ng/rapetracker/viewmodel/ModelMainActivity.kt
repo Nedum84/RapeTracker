@@ -3,7 +3,7 @@ package com.ng.rapetracker.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.happinesstonic.Event
+import com.ng.rapetracker.Event
 
 
 class ModelMainActivity: ViewModel() {

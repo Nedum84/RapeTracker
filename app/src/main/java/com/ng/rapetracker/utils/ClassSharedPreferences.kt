@@ -9,6 +9,7 @@ class  ClassSharedPreferences(val context: Context?){
     private val PREFERENCE_NAME = "rape_tracker_preference"
     private val PREFERENCE_USER_DETAIL = "cur_user_detail"
     private val PREFERENCE_ORG_DETAIL = "cur_org_detail"
+    private val PREFERENCE_NYSC_AGENT_DETAIL = "cur_nysc_agent"
     private val PREFERENCE_ACCESS_LEVEL= "access_level"
     private val PREFERENCE_OPENING_FOR_THE_FIRST_TIME= "opening_for_the_first_time"
 
@@ -35,6 +36,15 @@ class  ClassSharedPreferences(val context: Context?){
     fun getCurOrgDetail():String{
         return  preference.getString(PREFERENCE_ORG_DETAIL,"")!!
     }
+    //set Current nysc Detail
+    fun setCurNYSCAgent(data:String){
+        val editor = preference.edit()
+        editor.putString(PREFERENCE_NYSC_AGENT_DETAIL,data)
+        editor.apply()
+    }
+    fun getCurNYSCAgent():String{
+        return  preference.getString(PREFERENCE_NYSC_AGENT_DETAIL,"")!!
+    }
 
     //set access level
     fun setAccessLevel(data:Int){
@@ -59,6 +69,8 @@ class  ClassSharedPreferences(val context: Context?){
     fun isLoggedIn():Boolean{
         return if (getAccessLevel()==1)
             getCurUserDetail()!=""
+        else if (getAccessLevel()==2)
+            getCurNYSCAgent()!=""
         else
             getCurOrgDetail()!=""
     }

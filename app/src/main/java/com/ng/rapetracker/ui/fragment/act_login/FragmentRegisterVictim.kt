@@ -11,11 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ng.rapetracker.R
@@ -30,7 +27,6 @@ import com.ng.rapetracker.utils.ClassProgressDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
 import com.ng.rapetracker.viewmodel.ModelLoginActivity
-import com.ng.rapetracker.viewmodel.ModelMainActivity
 import kotlinx.coroutines.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -43,8 +39,6 @@ class FragmentRegisterVictim : BaseFragment() {
     private var selectedCountryId: String = "-1"
     private var selectedGenderId: String = "-1"
     lateinit var binding: FragmentRegisterVictimBinding
-    private lateinit var thisContext:Activity
-    lateinit var appCtx:Application
     lateinit var viewModelLoginActivity:ModelLoginActivity
     lateinit var regBtn:Button
 
@@ -53,8 +47,6 @@ class FragmentRegisterVictim : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Get a reference to the binding object and inflate the fragment views.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_victim, container, false)
-        thisContext = requireActivity()
-        appCtx= requireNotNull(activity).application
         databaseRoom = DatabaseRoom.getDatabaseInstance(thisContext)
 
 //        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
@@ -71,10 +63,10 @@ class FragmentRegisterVictim : BaseFragment() {
         }
 
         binding.goToLogin.setOnClickListener {
-            this.findNavController().navigate(FragmentRegisterVictimDirections.actionFragmentRegisterVictimToFragmentLogin())
+//            this.findNavController().navigate(FragmentRegisterVictimDirections.actionFragmentRegisterVictimToFragmentLogin())
         }
         binding.regAsRapeSupport.setOnClickListener {
-            this.findNavController().navigate(FragmentRegisterVictimDirections.actionFragmentRegisterVictimToFragmentRegisterOrgSupportType())
+//            this.findNavController().navigate(FragmentRegisterVictimDirections.actionFragmentRegisterVictimToFragmentRegisterOrgSupportType())
         }
 
 
@@ -86,7 +78,7 @@ class FragmentRegisterVictim : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        val viewModelFactory = ModelLoginActivity.Factory(application)
         viewModelLoginActivity = requireActivity().run{
             ViewModelProvider(this, viewModelFactory).get(ModelLoginActivity::class.java)
         }
@@ -97,7 +89,6 @@ class FragmentRegisterVictim : BaseFragment() {
     }
 
     private fun registerUser(){
-
             val userName = binding.userName.text.trim().toString()
             val userMobileNo = binding.userMobileNo.text.trim().toString()
             val userEmail = binding.userEmail.text.trim().toString()
@@ -117,7 +108,7 @@ class FragmentRegisterVictim : BaseFragment() {
                 val pDialog = ClassProgressDialog(thisContext, "Processing Registration...")
                 pDialog.createDialog()
 
-                val registerService = RetrofitConstant.retrofitWithJsonRes.create(LoginRegService::class.java)
+                val registerService = RetrofitConstant.RetrofitConstantGET.create(LoginRegService::class.java)
                 registerService.registerRequest(
                     "victim_register",
                     userName,
@@ -151,7 +142,7 @@ class FragmentRegisterVictim : BaseFragment() {
                                         try{
                                             val obj = JSONObject(serverResponse!!.otherDetail!!)
                                             //Save and Redirect...
-                                            viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
+                                            viewModelLoginActivity.saveUserDetails(obj)
                                             activity?.let {
                                                 startActivity(Intent(it, MainActivity::class.java))
                                                 it.finish()
@@ -222,7 +213,7 @@ class FragmentRegisterVictim : BaseFragment() {
                 }
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     selectedCountryId = countryIdArray[position]
-                    if (selectedCountryId!=="-1"){
+                    if (selectedCountryId!="-1"){
                         launch {
                             stateSpinnerInitialize(selectedCountryId.toInt())
                         }

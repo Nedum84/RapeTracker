@@ -103,10 +103,8 @@
             android:name="updatedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />
         <action
-            android:id="@+id/action_fragmentLogComplainForm5RapeDetail_to_fragmentMain"
-            app:destination="@id/fragmentMain"
-            app:popUpTo="@id/fragmentMain"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_fragmentLogComplainForm5RapeDetail_to_fragmentLogComplainForm7Details"
+            app:destination="@id/fragmentLogComplainForm7Details" />
     </fragment>
     <fragment
         android:id="@+id/fragmentProfile"
@@ -120,6 +118,19 @@
         tools:layout="@layout/fragment_rape_detail">
         <argument
             android:name="selectedRapeDetail"
+            app:argType="com.ng.rapetracker.model.RapeDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLogComplainForm7Details"
+        android:name="com.ng.rapetracker.ui.fragment.act_main.FragmentLogComplainForm7Details"
+        android:label="FragmentLogComplainForm7Details" >
+        <action
+            android:id="@+id/action_fragmentLogComplainForm7Details_to_fragmentMain"
+            app:destination="@id/fragmentMain"
+            app:popUpTo="@id/fragmentMain"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="updatedRapeDetail"
             app:argType="com.ng.rapetracker.model.RapeDetail" />
     </fragment>
 </navigation>

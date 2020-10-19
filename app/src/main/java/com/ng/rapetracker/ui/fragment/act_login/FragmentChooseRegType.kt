@@ -19,10 +19,10 @@ class FragmentChooseRegType : Fragment() {
         val binding: FragmentChooseRegTypeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_choose_reg_type, container, false)
 
         binding.regAsRapeVictimBtn.setOnClickListener {
-            this.findNavController().navigate(FragmentChooseRegTypeDirections.actionFragmentChooseRegTypeToFragmentRegisterVictim())
+//            this.findNavController().navigate(FragmentChooseRegTypeDirections.actionFragmentChooseRegTypeToFragmentRegisterVictim())
         }
         binding.regAsRapeSupportBtn.setOnClickListener {
-            this.findNavController().navigate(FragmentChooseRegTypeDirections.actionFragmentChooseRegTypeToFragmentRegisterOrgSupportType())
+//            this.findNavController().navigate(FragmentChooseRegTypeDirections.actionFragmentChooseRegTypeToFragmentRegisterOrgSupportType())
         }
         return binding.root
     }

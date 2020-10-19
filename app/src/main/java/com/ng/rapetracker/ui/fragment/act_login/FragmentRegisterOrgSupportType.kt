@@ -27,16 +27,14 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
     lateinit var ADAPTER : AdapterRapeSupportOrgType
 
     lateinit var binding: FragmentRegisterOrgSupportTypeBinding
-    private lateinit var thisContext: Activity
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Get a reference to the binding object and inflate the fragment views.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_org_support_type, container, false)
-        thisContext = requireActivity()
 
 
-        val application = requireNotNull(activity).application
+
         binding.lifecycleOwner = this
 
 
@@ -47,7 +45,7 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
         //OR
         ADAPTER = AdapterRapeSupportOrgType(RapeSupportOrgClickListener {
             // Must find the NavController from the Fragment
-            this.findNavController().navigate(FragmentRegisterOrgSupportTypeDirections.actionFragmentRegisterOrgSupportTypeToFragmentRegisterOrgDetail(it))
+//            this.findNavController().navigate(FragmentRegisterOrgSupportTypeDirections.actionFragmentRegisterOrgSupportTypeToFragmentRegisterOrgDetail(it))
         })
         binding.rapeSupportTypeFormRecycler.apply {
             adapter = ADAPTER
@@ -82,7 +80,7 @@ class FragmentRegisterOrgSupportType : BaseFragment() {
 
     }
     fun goBack(){
-        this@FragmentRegisterOrgSupportType.findNavController().navigate(FragmentRegisterOrgSupportTypeDirections.actionFragmentRegisterOrgSupportTypeToFragmentChooseRegType())
+//        this@FragmentRegisterOrgSupportType.findNavController().navigate(FragmentRegisterOrgSupportTypeDirections.actionFragmentRegisterOrgSupportTypeToFragmentChooseRegType())
     }
 
 }

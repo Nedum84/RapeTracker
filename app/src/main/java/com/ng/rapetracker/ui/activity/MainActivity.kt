@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         val steps: MutableList<String> = ArrayList()
         for (i in 0..4) {
-            steps.add("Step " + (i + 1))
+            steps.add("${i + 1}")
         }
 
         step_view.setSteps(steps)

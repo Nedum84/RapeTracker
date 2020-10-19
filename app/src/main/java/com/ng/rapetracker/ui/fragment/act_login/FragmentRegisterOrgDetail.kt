@@ -6,12 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
 import android.text.method.PasswordTransformationMethod
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.ng.rapetracker.R
@@ -23,7 +21,6 @@ import com.ng.rapetracker.network.ServerResponse
 import com.ng.rapetracker.room.DatabaseRoom
 import com.ng.rapetracker.ui.activity.MainActivity
 import com.ng.rapetracker.ui.fragment.BaseFragment
-import com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgDetailArgs.fromBundle
 import com.ng.rapetracker.utils.ClassProgressDialog
 import com.ng.rapetracker.utils.ClassSharedPreferences
 import com.ng.rapetracker.utils.toast
@@ -36,11 +33,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FragmentRegisterOrgDetail : BaseFragment() {
-    private lateinit var selectedStateId: String
-    private lateinit var selectedCountryId: String
+    private var selectedStateId: String = "-1"
+    private var selectedCountryId: String = "-1"
     lateinit var binding: FragmentRegisterOrgDetailBinding
-    private lateinit var thisContext:Activity
-    lateinit var appCtx: Application
     lateinit var viewModelLoginActivity:ModelLoginActivity
 
     lateinit var databaseRoom: DatabaseRoom
@@ -49,11 +44,9 @@ class FragmentRegisterOrgDetail : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Get a reference to the binding object and inflate the fragment views.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_org_detail, container, false)
-        thisContext = requireActivity()
-        appCtx= requireNotNull(activity).application
         databaseRoom = DatabaseRoom.getDatabaseInstance(thisContext)
 
-        val viewModelFactory = ModelLoginActivity.Factory(appCtx)
+        val viewModelFactory = ModelLoginActivity.Factory(application)
         viewModelLoginActivity = ViewModelProvider(this, viewModelFactory).get(
             ModelLoginActivity::class.java)
 
@@ -97,7 +90,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
             val pDialog = ClassProgressDialog(thisContext, "Processing Registration...")
             pDialog.createDialog()
 
-            val registerOrgService = RetrofitConstant.retrofitWithJsonRes.create(LoginRegService::class.java)
+            val registerOrgService = RetrofitConstant.RetrofitConstantGET.create(LoginRegService::class.java)
             registerOrgService.registerOrgRequest(
                 "org_register",
                 orgName,
@@ -130,7 +123,7 @@ class FragmentRegisterOrgDetail : BaseFragment() {
 
 
                                         //Save and Redirect...
-                                        viewModelLoginActivity.saveUserDetails(obj, ClassSharedPreferences(thisContext))
+                                        viewModelLoginActivity.saveUserDetails(obj)
 
                                         activity?.let {
                                             startActivity(Intent(it, MainActivity::class.java))
