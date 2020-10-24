@@ -12,23 +12,25 @@
         tools:context=".ui.fragment.act_login.FragmentLogin"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="30dp"
+        android:padding="20dp"
         android:background="@color/colorAshBg">
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="How can we help you?"
-            android:layout_marginBottom="30dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:background="#B9FFFFFF"
-            android:padding="14dp"
-            android:textColor="@color/colorRedDark"
-            android:textAllCaps="true"/>
-
+            android:layout_marginBottom="6dp"
+            android:textColor="@color/colorBlack"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What support do you need immediately?"
+            android:layout_marginBottom="30dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_rape_support"
             android:layout_width="match_parent"

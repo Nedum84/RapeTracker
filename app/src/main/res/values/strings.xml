@@ -6,4 +6,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="google_maps_key">AIzaSyBTmcShlRlbocOvmaYVWTxnrHsHD3H6xqM</string>
+    <string name="about_gbv">Gender Based Violence Tracker is a platform created to aid/assist those that are harassed, or molested violently against their will.
+    It makes it easy for you to report immediately to any nearby NYSC agent or contact nearest Sexual Assaults Referral Centers(SARCs). For immediate help, reach our support line
+        @ 08136845243
+    </string>
 </resources>

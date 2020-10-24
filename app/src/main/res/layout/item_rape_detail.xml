@@ -2,15 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
 
+
+
+    <data>
         <variable
             name="rape_detail"
-            type="com.ng.rapetracker.model.RapeDetail" />
-
+            type="com.ng.gbv_tracker.model.RapeDetail" />
         <variable
             name="clickListener"
-            type="com.ng.rapetracker.adapter.RapeDetailClickListener" />
+            type="com.ng.gbv_tracker.adapter.RapeDetailClickListener" />
     </data>
 
 
@@ -19,12 +20,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="6dp"
+        app:cardElevation="10dp"
+        android:elevation="8dp"
         android:backgroundTint="#eee"
+        android:layout_margin="8dp"
         android:onClick="@{() -> clickListener.onClick(rape_detail)}">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
+            <View
+                android:id="@+id/vertical_color"
+                android:layout_width="6dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center"/>
 
             <LinearLayout
                 android:layout_width="60dp"
@@ -35,7 +47,8 @@
                     android:id="@+id/rape_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12-Oct\n2020"
+                    android:hint="12-Oct\n2020"
+                    android:text="@{rape_detail.monthYr()}"
                     android:textStyle="bold"
                     android:padding="4dp"
                     android:maxLines="2"
@@ -44,7 +57,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12:32AM"
+                    android:hint="12:32AM"
+                    android:text="@{rape_detail.time_()}"
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -88,10 +102,11 @@
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorBlack"
                     android:hint="Molestation"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text=""
                     android:textStyle="bold"
                     android:padding="2dp"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,10 +114,11 @@
                     android:textColorHint="@color/blackLight"
                     android:text="@{rape_detail.rapeAddress}"
                     android:hint="ADDR: 12 Bode thomas Surulere"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:ellipsize="end"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:padding="2dp"/>
+
                 <TextView
                     android:id="@+id/rape_reporter"
                     android:layout_width="match_parent"
@@ -111,35 +127,30 @@
                     android:text="By: David Okoro"
                     android:padding="2dp"/>
 
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorAshBg"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
 
-                    <com.github.florent37.shapeofview.shapes.BubbleView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:shape_bubble_arrowHeight="8dp"
-                        app:shape_bubble_arrowWidth="8dp"
-                        app:shape_bubble_arrowPosition="right"
-                        app:shape_bubble_borderRadius="10dp"
+                        app:cardCornerRadius="40dp"
+                        android:layout_margin="6dp"
                         android:layout_marginTop="4dp"
                         android:layout_alignParentRight="true"
+                        app:cardElevation="6dp"
                         android:layout_alignParentEnd="true">
                         <LinearLayout
+                            android:id="@+id/view_details_btn"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/colorAccent"
                             android:orientation="horizontal"
+                            android:background="@color/colorAccent"
                             android:gravity="center"
                             android:paddingEnd="8dp">
                             <TextView
+                                android:id="@+id/view_details_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="View Details"
@@ -148,23 +159,19 @@
                                 android:padding="8dp" />
 
                             <ImageView
+                                android:id="@+id/view_details_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 app:srcCompat="@drawable/v_arrow_right"
                                 tools:ignore="ContentDescription"
-                                android:layout_marginStart="-6dp" />
+                                android:layout_marginStart="-6dp"
+                                app:tint="@color/colorWhite" />
                         </LinearLayout>
 
-                    </com.github.florent37.shapeofview.shapes.BubbleView>
+                    </com.google.android.material.card.MaterialCardView>
                 </RelativeLayout>
 
             </LinearLayout>
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:layout_gravity="center"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

@@ -4,11 +4,11 @@
     <data>
         <variable
             name="rape_detail"
-            type="com.ng.rapetracker.model.RapeDetail" />
+            type="com.ng.gbv_tracker.model.RapeDetail" />
 
         <variable
             name="clickListener"
-            type="com.ng.rapetracker.adapter.RapeDetailClickListener" />
+            type="com.ng.gbv_tracker.adapter.RapeDetailClickListener" />
     </data>
 
     <LinearLayout

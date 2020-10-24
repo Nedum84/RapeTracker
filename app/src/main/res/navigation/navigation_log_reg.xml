@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentPromptToLogin"
-        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentPromptToLogin"
+        android:name="com.ng.gbv_tracker.ui.fragment.act_login.FragmentPromptToLogin"
         android:label="fragment_prompt_to_login"
         tools:layout="@layout/fragment_prompt_to_login" >
         <action
@@ -26,35 +26,43 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentLogin"
-        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentLogin"
+        android:name="com.ng.gbv_tracker.ui.fragment.act_login.FragmentLogin"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/fragmentRegisterVictim"
-        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterVictim"
+        android:name="com.ng.gbv_tracker.ui.fragment.act_login.FragmentRegisterVictim"
         android:label="fragment_register_victim"
-        tools:layout="@layout/fragment_register_victim" />
+        tools:layout="@layout/fragment_register_victim" >
+        <action
+            android:id="@+id/action_fragmentRegisterVictim_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentRegisterOrgSupportType"
-        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgSupportType"
+        android:name="com.ng.gbv_tracker.ui.fragment.act_login.FragmentRegisterOrgSupportType"
         android:label="fragment_register_org_support_type"
         tools:layout="@layout/fragment_register_org_support_type" />
     <fragment
         android:id="@+id/fragmentRegisterOrgDetail"
-        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterOrgDetail"
+        android:name="com.ng.gbv_tracker.ui.fragment.act_login.FragmentRegisterOrgDetail"
         android:label="fragment_register_org_detail"
         tools:layout="@layout/fragment_register_org_detail" >
         <argument
             android:name="rapeSupportType"
-            app:argType="com.ng.rapetracker.model.RapeSupportType" />
+            app:argType="com.ng.gbv_tracker.model.RapeSupportType" />
     </fragment>
     <fragment
         android:id="@+id/fragmentChooseRegType"
-        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentChooseRegType"
+        android:name="com.ng.gbv_tracker.ui.fragment.act_login.FragmentChooseRegType"
         android:label="fragment_choose_reg_type"
         tools:layout="@layout/fragment_choose_reg_type" />
     <fragment
         android:id="@+id/fragmentRegisterNYSCAgent"
-        android:name="com.ng.rapetracker.ui.fragment.act_login.FragmentRegisterNYSCAgent"
-        android:label="FragmentRegisterNYSCAgent" />
+        android:name="com.ng.gbv_tracker.ui.fragment.act_login.FragmentRegisterNYSCAgent"
+        android:label="FragmentRegisterNYSCAgent" >
+        <action
+            android:id="@+id/action_fragmentRegisterNYSCAgent_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+    </fragment>
 </navigation>

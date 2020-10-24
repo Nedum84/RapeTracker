@@ -6,11 +6,11 @@
     <data>
         <variable
             name="agent"
-            type="com.ng.rapetracker.model.NYSCagent" />
+            type="com.ng.gbv_tracker.model.NYSCagent" />
 
         <variable
             name="clickListener"
-            type="com.ng.rapetracker.adapter.NYSCAgentClickListener" />
+            type="com.ng.gbv_tracker.adapter.NYSCAgentClickListener" />
     </data>
 
     <LinearLayout

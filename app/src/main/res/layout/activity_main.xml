@@ -20,7 +20,7 @@
         <com.shuhart.stepview.StepView
             android:id="@+id/step_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:padding="16dp"
             android:layout_alignParentBottom="true"
             app:sv_selectedCircleColor="@color/colorAccent"
@@ -43,13 +43,14 @@
             app:sv_animationType="All"/>
         
         <androidx.cardview.widget.CardView
+            android:id="@+id/logComplianHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="30dp"
             app:cardCornerRadius="20dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorYellow"
             android:layout_marginEnd="20dp">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -68,11 +69,11 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/v_plus"
+                    android:src="@drawable/v_arrow_right"
                     android:padding="4dp"
                     android:layout_marginEnd="2dp"
                     android:background="@drawable/design_border_white"
-                    app:tint="@color/colorPrimary"
+                    app:tint="@color/colorYellow"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

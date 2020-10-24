@@ -27,9 +27,10 @@
 
     <style name="editText">
         <item name="android:background">@drawable/design_border_bottom_edittext</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorRedDark</item>
+        <item name="android:textColorHint">@color/black_overlay</item>
         <item name="android:backgroundTint">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
 
     </style>
     <style name="fragTransition">

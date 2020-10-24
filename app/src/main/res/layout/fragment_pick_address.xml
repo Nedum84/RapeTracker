@@ -12,13 +12,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.act_login.FragmentPickAddress"
         android:orientation="vertical"
-        android:padding="2dp"
+        android:padding="20dp"
         android:gravity="center_horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:layout_marginTop="15dp"
             app:cardCornerRadius="6dp">
 
             <View
@@ -32,12 +33,15 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            app:cardCornerRadius="6dp">
+            app:cardCornerRadius="30dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CURRENT LOCATION" />
+                android:text="CURRENT LOCATION"
+                android:padding="8dp"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_baseline_location_on_24"/>
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -73,41 +77,60 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="250dp"
-            android:background="@color/colorAshBg"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/place_search"
-                android:hint="Search addres"
-                android:inputType="textPostalAddress"
-                android:padding="15dp"
-                android:layout_marginBottom="15dp"
-                android:drawableStart="@drawable/places_ic_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/places_recycler_view"
-                android:background="#FFF"
-                android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </androidx.recyclerview.widget.RecyclerView>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/continue_btn"
-            android:layout_width="250dp"
-            android:background="@color/colorAshBg"
-            android:layout_height="wrap_content">
-
-            <TextView
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="40dp">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CONTINUE" />
-        </androidx.cardview.widget.CardView>
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:paddingStart="18dp"
+                android:gravity="center_vertical">
 
+                <EditText
+                    android:id="@+id/place_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Search address"
+                    android:textColor="@color/colorRedDark"
+                    android:theme="@style/editText"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="250dp"
+            android:id="@+id/places_recycler_view"
+            android:background="#FFF"
+            android:elevation="20dp"
+            android:layout_marginTop="-8dp"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/continue_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="12dp"
+            android:backgroundTint="@color/colorYellow"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="60dp">
+            <TextView
+                android:id="@+id/loginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CONTINUE"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:drawableEnd="@drawable/v_arrow_right"
+                android:padding="10dp"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/black_overlay"/>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </layout>

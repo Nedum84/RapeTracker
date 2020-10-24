@@ -5,11 +5,11 @@
     <data>
         <variable
             name="sarcsSupport"
-            type="com.ng.rapetracker.model.SARCsSupport" />
+            type="com.ng.gbv_tracker.model.SARCsSupport" />
 
         <variable
             name="clickListener"
-            type="com.ng.rapetracker.adapter.SARCsSupportClickListener" />
+            type="com.ng.gbv_tracker.adapter.SARCsSupportClickListener" />
     </data>
 
     <LinearLayout
@@ -24,7 +24,7 @@
         android:gravity="center_vertical">
         <RelativeLayout
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@color/colorAccent"
             android:padding="6dp">
             <ImageView
@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="@{sarcsSupport.name}"
                 android:hint="Gender based violence"
                 android:textColor="@color/colorRedDark"
@@ -60,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/v_outline_info"
+            android:padding="8dp"
             android:tint="@color/colorRedDark"
             tools:ignore="ContentDescription" />
     </LinearLayout>

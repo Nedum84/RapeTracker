@@ -6,27 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.SplashActivity"
     android:gravity="center"
+    android:padding="32dp"
     android:orientation="vertical"
-    android:padding="12dp"
     android:background="@color/colorWhite">
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="0dp"
-        android:padding="40dp">
+        android:layout_height="0dp">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/app_logo"
-            android:layout_margin="30dp"
+            android:src="@drawable/logo5"
+            tools:ignore="ContentDescription" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@drawable/logo4"
+            android:layout_margin="16dp"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EnvironThrust Solution Nigeria"
+        android:text="EnvironThrust - ABUJA"
         android:layout_marginBottom="40dp"
         android:textSize="14sp"
         android:textAlignment="center"/>

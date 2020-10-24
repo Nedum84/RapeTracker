@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark2">#007A35</color>
     <color name="colorPrimaryLight">#9E0F588E</color>
     <color name="colorAccent">#F83718</color>EEB61C,
+    <color name="colorYellow">#EEB61C</color>
     <color name="colorAshBg">#DFE3E6</color>
     <color name="colorBrown">#A8A7A6</color>
 
@@ -13,4 +14,13 @@
     <color name="colorRedDark">#420707</color>
     <color name="colorBlack">#000000</color>
     <color name="blackLight">#90000000</color>
+
+
+<!--    profile-->
+
+    <color name="grey">#E9EAEE</color>
+    <color name="yellow">#F8BA0F</color>
+    <color name="goodgrey">#535353</color>
+    <color name="blue">#293859</color>
+    <color name="lightgrey">#EEEEEE</color>
 </resources>

@@ -7,164 +7,247 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.act_login.FragmentLogin"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         android:background="@color/colorWhite"
-        android:padding="16dp">
-
+        tools:context=".ui.fragment.act_login.FragmentLogin">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hi, Emeka Paul"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif-condensed"
-                android:layout_weight="1"/>
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorAshBg">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View SARCs"
-                    android:padding="6dp"
-                    android:textColor="@color/colorBlack"
-                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:drawableTint="@color/colorBlack"/>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/title_show"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome!"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:paddingStart="0dp"
-            android:textColor="@color/colorBlack"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/colorRedDark"
-            android:text="MY COMPLAINTS"
-            android:fontFamily="sans-serif-medium"
-            android:drawableEnd="@drawable/v_arrow_right"
-            android:drawableTint="@color/colorRedDark"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="#bdbdbd"/>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:visibility="gone"
-            android:id="@+id/rape_detail_list"
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
-
-
-        <LinearLayout
-            android:id="@+id/noComplainWrapper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="40dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Are you involved in any form of Gender based Violence?"
-                android:textSize="20sp"
-                android:gravity="center" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/z_you_are_not_alone"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="We are here to help you!"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log your complian and we'll get to you immediately"
-                android:textSize="15sp"
-                android:textColor="@color/black_overlay"
-                android:gravity="center" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/logComplainBtn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="40dp"
-                android:layout_gravity="center_horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorAccent"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:padding="4dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/name_of_logged_in_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hi, Emeka Paul"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:layout_weight="1"/>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/viewSarcs1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAshBg">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Log New Complain"
-                        android:textAllCaps="true"
-                        android:textStyle="bold"
-                        android:textColor="#fff"
-                        android:padding="12dp" />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/v_arrow_right"
-                        android:layout_marginStart="-8dp"
-                        app:tint="@color/colorWhite" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/noComplainForSupport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:visibility="gone"
-            android:orientation="vertical">
+                        android:text="View SARCs"
+                        android:padding="6dp"
+                        android:textColor="@color/colorBlack"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:drawableTint="@color/colorBlack"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
             <TextView
-                android:id="@+id/no_complain_title_show_support"
+                android:id="@+id/title_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome!"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:paddingStart="0dp"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/my_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_overlay"
+                android:text="5 Bariga Market Ogbomosho, Lagos"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+                app:drawableTint="@color/black_overlay" />
+            <TextView
+                android:id="@+id/my_complaint_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/colorRedDark"
+                android:text="MY COMPLAINTS"
+                android:fontFamily="sans-serif-medium"
+                android:drawableEnd="@drawable/v_arrow_right"
+                android:drawableTint="@color/colorRedDark"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#bdbdbd"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rape_detail_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:id="@+id/noComplainWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="20dp"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Are you involved in any form of Gender based Violence?"
+                    android:textSize="20sp"
+                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/z_you_are_not_alone"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We are here to help you!"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log your complian and we'll get to you immediately"
+                    android:textSize="15sp"
+                    android:textColor="@color/black_overlay"
+                    android:gravity="center" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/logComplainBtn"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="40dp"
+                    android:layout_gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Log New Complain"
+                            android:textAllCaps="true"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:padding="12dp" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/v_arrow_right"
+                            android:layout_marginStart="-8dp"
+                            app:tint="@color/colorWhite" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/noComplainForSupport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No complain Logged for the Police Support"
-                android:textSize="20sp"
-                android:gravity="center" />
+                android:padding="20dp"
+                android:visibility="gone"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You have 0 complains currently"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your duty here is to"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorRedDark"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/z_stop_violence"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By Reporting any case to SARCs!"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click on the button bellow to checkout the list of Sexual Assault Referral Centres(SARCs) in Nigeria"
+                    android:textSize="15sp"
+                    android:textColor="@color/black_overlay"
+                    android:gravity="center" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/viewSarcs2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="40dp"
+                    android:layout_gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View Sarcs"
+                            android:textAllCaps="true"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:padding="12dp" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:layout_marginStart="-8dp"
+                            app:tint="@color/colorWhite" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
-
-
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

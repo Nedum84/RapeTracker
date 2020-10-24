@@ -7,39 +7,97 @@
 
     </data>
 
-    <LinearLayout
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.act_main.FragmentNYSCToSupportReport"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="0dp"
-        android:background="@color/colorWhite">
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        tools:context=".ui.fragment.act_main.FragmentNYSCToSupportReport">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/border_toolbar"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:navigationIcon="@drawable/ic_baseline_close_24"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Video Gallery"
-            app:titleTextColor="@color/colorRedDark" />
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="0dp"
+            android:background="@color/colorWhite">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_support"
-            android:layout_width="match_parent"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/border_toolbar"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:navigationIcon="@drawable/ic_baseline_close_24"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="SARCs across NIG"
+                app:subtitle="Sexual Assaults Referrals Centers"
+                app:subtitleTextColor="@color/colorRedDark"
+                app:titleTextColor="@color/colorRedDark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Click Ꙩ icon to view more about each SARC"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="8dp"/>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:fillViewport="true"
+                android:layout_margin="12dp"
+                android:layout_weight="1">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_support"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            </androidx.core.widget.NestedScrollView>
+
+
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/click_to_assign"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"/>
-
-
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="80dp"
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/colorYellow"
+            android:layout_marginEnd="20dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select any SARCs to assign"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:padding="4dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/design_border_white"
+                    app:tint="@color/colorYellow"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </layout>

@@ -5,11 +5,11 @@
 
         <variable
             name="rape_type"
-            type="com.ng.rapetracker.model.RapeType" />
+            type="com.ng.gbv_tracker.model.RapeType" />
 
         <variable
             name="clickListener"
-            type="com.ng.rapetracker.adapter.RapeTypeClickListener" />
+            type="com.ng.gbv_tracker.adapter.RapeTypeClickListener" />
     </data>
 
     <LinearLayout
@@ -38,6 +38,7 @@
             android:textSize="16sp"
             android:hint="Molestation"
             android:text="@{rape_type.rapeType}"
+            android:textColor="@color/colorRedDark"
             android:layout_weight="1"
             android:layout_marginStart="6dp"/>
         <ImageView

@@ -10,108 +10,277 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark2"
+        android:background="@color/colorWhite"
         tools:context=".ui.fragment.act_login.FragmentRegisterNYSCAgent"
-        android:padding="30dp"
         android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:padding="15dp"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:src="@drawable/app_logo_line1"/>
+                android:layout_height="120dp"
+                android:src="@drawable/nysc_logo"
+                tools:ignore="ContentDescription" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:padding="10dp">
+                android:paddingStart="16dp"
+                android:paddingEnd="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Register"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBlack"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="24sp"
                     android:textAllCaps="true"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="  as NYSC agent"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black_overlay"
                     android:textStyle="italic"
                     android:textSize="14sp"/>
 
             </LinearLayout>
 
 
-            <EditText
-                android:id="@+id/agent_name"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="Full Name of copse member"
-                android:textColor="@color/colorPrimaryDark"
-                android:theme="@style/editText"/>
-            <EditText
-                android:id="@+id/agent_state_code"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="State code"
-                android:textColor="@color/colorPrimaryDark"
-                android:theme="@style/editText"/>
+                android:layout_height="wrap_content"
+                app:cardElevation="12dp"
+                app:strokeColor="@color/colorAshBg"
+                app:strokeWidth="1dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:paddingStart="18dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_person_24"
+                        tools:ignore="ContentDescription"
+                        app:tint="@color/black_overlay" />
 
-            <EditText
-                android:id="@+id/agent_mobile_no"
+                    <EditText
+                        android:id="@+id/agent_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Full name"
+                        android:textColor="@color/colorRedDark"
+                        android:theme="@style/editText"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="Telephone number"
-                android:inputType="phone"
-                android:textColor="@color/colorPrimaryDark"
-                android:theme="@style/editText"/>
+                android:layout_height="wrap_content"
+                app:cardElevation="12dp"
+                app:strokeColor="@color/colorAshBg"
+                app:strokeWidth="1dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:paddingStart="18dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_alternate_email_24"
+                        tools:ignore="ContentDescription"
+                        app:tint="@color/black_overlay" />
 
-            <EditText
-                android:id="@+id/agent_email"
+                    <EditText
+                        android:id="@+id/agent_state_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="State code (eg. AD/19B/2890)"
+                        android:textColor="@color/colorRedDark"
+                        android:theme="@style/editText"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="Email address"
-                android:textColor="@color/colorPrimaryDark"
-                android:inputType="textEmailAddress"
-                android:theme="@style/editText"/>
+                android:layout_height="wrap_content"
+                app:cardElevation="12dp"
+                app:strokeColor="@color/colorAshBg"
+                app:strokeWidth="1dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:paddingStart="18dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_phone_24"
+                        tools:ignore="ContentDescription"
+                        app:tint="@color/black_overlay" />
 
+                    <EditText
+                        android:id="@+id/agent_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone no"
+                        android:textColor="@color/colorRedDark"
+                        android:inputType="phone"
+                        android:theme="@style/editText"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="12dp"
+                app:strokeColor="@color/colorAshBg"
+                app:strokeWidth="1dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:paddingStart="18dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_round_email_24"
+                        tools:ignore="ContentDescription"
+                        app:tint="@color/black_overlay" />
+
+                    <EditText
+                        android:id="@+id/agent_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email address"
+                        android:textColor="@color/colorRedDark"
+                        android:inputType="textEmailAddress"
+                        android:theme="@style/editText"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="12dp"
+                app:strokeColor="@color/colorAshBg"
+                app:strokeWidth="1dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="40dp"
+                android:layout_marginBottom="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:paddingStart="18dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_location_on_24"
+                        tools:ignore="ContentDescription"
+                        app:tint="@color/black_overlay" />
+
+                    <TextView
+                        android:id="@+id/agent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Your address"
+                        android:padding="10dp"
+                        android:theme="@style/editText"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="12dp"
+                app:strokeColor="@color/colorAshBg"
+                app:strokeWidth="1dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:paddingStart="18dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_lock_24"
+                        tools:ignore="ContentDescription"
+                        app:tint="@color/black_overlay" />
+
+                    <EditText
+                        android:id="@+id/agent_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:textColor="@color/colorRedDark"
+                        android:theme="@style/editText"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/agent_address"
+                android:id="@+id/go_to_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/editText"
-                android:hint="Operational Address"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:minLines="2"
-                android:gravity="top"
-                android:maxLines="50"
-                android:scrollbars="vertical"
-                tools:ignore="Autofill" />
+                android:gravity="end"
+                android:text="Have an account? Login!"
+                android:layout_margin="12dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                />
 
-            <EditText
-                android:id="@+id/agent_password"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:hint="Setup Password"
-                android:theme="@style/editText"/>
 
-            <Button
-                android:id="@+id/agent_reg_btn"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/design_black_opacity"
-                android:layout_marginTop="20dp"
-                android:text="Register" />
+                app:cardElevation="12dp"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="60dp">
+                <TextView
+                    android:id="@+id/agent_reg_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CREATE ACCOUNT"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:padding="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/black_overlay"/>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
 
         </LinearLayout>
     </ScrollView>
